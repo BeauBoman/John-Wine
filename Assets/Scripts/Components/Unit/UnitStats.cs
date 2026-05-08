@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UnitStats", menuName = "Stats/UnitStats")]
+[CreateAssetMenu(fileName = "Unit", menuName = "Components/Units/Unit")]
 public class UnitStats : ScriptableObject
 {
     [Header("General")]
