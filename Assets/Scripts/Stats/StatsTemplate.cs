@@ -7,6 +7,12 @@ public class StatsTemplate : ScriptableObject
     [SerializeField] public MovementStats Movement;
 }
 [Serializable]
+public struct WeaponStats
+{
+    public float ShootingSpeed;
+    public float Range;
+}
+[Serializable]
 public struct MovementStats
 {
     public float MaxSpeed;

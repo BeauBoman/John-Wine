@@ -7,7 +7,7 @@ public class DefaultMover : Mover
     {
         MovementStats m = unit.Stats.Movement;
         bool moving = dir.sqrMagnitude > 0.001f;
-        CalculateSpeed(m, unit.State, moving, dt);
+        UpdateSpeed(m, unit.State, moving, dt);
 
         unit.transform.Translate(dt * unit.State.CurrentSpeed * dir);
     }

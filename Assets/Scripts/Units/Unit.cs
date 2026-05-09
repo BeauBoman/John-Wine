@@ -21,3 +21,11 @@ public struct References
     [SerializeField] public Rigidbody RB;
     [SerializeField] public CharacterController CC;
 }
+[Flags]
+public enum Tags
+{
+    None = 0,
+    Projectile = 1 << 0,
+    Invulnerable = 1 << 1,
+    Obsticle = 1 << 2
+}

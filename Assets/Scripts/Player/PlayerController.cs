@@ -1,12 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerController : Unit, IUpdatable
+public class PlayerController : MonoBehaviour, IUpdatable
 {
+    [SerializeField] private Unit Unit;
     public Transform CameraTransform;
     public float PushPower = 2;
 
-    private void Start() => Registerer.RegisterUpdatable(this);
+    private void Start()
+    {
+        Registerer.RegisterUpdatable(this);
+    }
 
     public void OnUpdate(float dt)
     {
@@ -17,21 +21,21 @@ public class PlayerController : Unit, IUpdatable
         HandleGravity(dt);
         HandleJump();
 
-        Components.Mover.Move(this, moveDir, dt);
+        Unit.Components.Mover.Move(Unit, moveDir, dt);
     }
     private void HandleGravity(float dt)
     {
-        if (Refs.CC.isGrounded && State.ExternalForcesVelocity.y < 0)
+        if (Unit.Refs.CC.isGrounded && Unit.State.ExternalForcesVelocity.y < 0)
         {
-            State.ExternalForcesVelocity.y = -2f;
+            Unit.State.ExternalForcesVelocity.y = -2f;
         }
-        State.ExternalForcesVelocity.y += Stats.Movement.Gravity * dt;
+        Unit.State.ExternalForcesVelocity.y += Unit.Stats.Movement.Gravity * dt;
     }
     private void HandleJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Refs.CC.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && Unit.Refs.CC.isGrounded)
         {
-            State.ExternalForcesVelocity.y = Mathf.Sqrt(Stats.Movement.JumpForce * -2f * Stats.Movement.Gravity);
+            Unit.State.ExternalForcesVelocity.y = Mathf.Sqrt(Unit.Stats.Movement.JumpForce * -2f * Unit.Stats.Movement.Gravity);
         }
     }
     private Vector3 ConvertToCameraSpace(Vector3 input)

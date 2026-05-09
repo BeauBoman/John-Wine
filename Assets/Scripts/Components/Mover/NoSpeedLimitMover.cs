@@ -6,10 +6,11 @@ public class NoSpeedLimitMover : Mover
     public override void Move(Unit unit, Vector3 dir, float dt)
     {
         MovementStats m = unit.Stats.Movement;
-        if (dir.magnitude > 0)
-            unit.State.CurrentSpeed = Mathf.MoveTowards(unit.State.CurrentSpeed, m.MaxSpeed, m.Acceleration * dt);
-        else
-            unit.State.CurrentSpeed = Mathf.MoveTowards(unit.State.CurrentSpeed, 0, m.Deceleration * dt);
+        bool hasInput = dir.sqrMagnitude > 0.001f;
+
+        float rate = hasInput ? m.Acceleration : m.Deceleration;
+
+        unit.State.CurrentSpeed = Mathf.MoveTowards(unit.State.CurrentSpeed, float.PositiveInfinity, rate * dt);
 
         unit.transform.Translate(dir * unit.State.CurrentSpeed * dt);
     }

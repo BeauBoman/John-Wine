@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class Rocket : Unit, IUpdatable
+public class Rocket : MonoBehaviour, IUpdatable
 {
+    [SerializeField] private Unit Unit;
+    private void Start()
+    {
+        Registerer.RegisterUpdatable(this);
+    }
     public void OnUpdate(float deltaTime)
     {
-        Components.Mover.Move(this, transform.forward, deltaTime);
+        Unit.Components.Mover.Move(Unit, -transform.forward, deltaTime);
     }
 }

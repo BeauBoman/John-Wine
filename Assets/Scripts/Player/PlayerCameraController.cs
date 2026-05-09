@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class PlayerCameraController : Unit, IUpdatable
+public class PlayerCameraController : MonoBehaviour, IUpdatable
 {
+    [SerializeField] Unit Unit;
     public Transform playerCamera;
     private Vector2 PlayerMouseInput;
     private void Start()
@@ -12,6 +13,6 @@ public class PlayerCameraController : Unit, IUpdatable
     public void OnUpdate(float deltaTime)
     {
         PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        Components.Mover.Move(this, PlayerMouseInput, deltaTime);
+        Unit.Components.Mover.Move(Unit, PlayerMouseInput, deltaTime);
     }
 }
