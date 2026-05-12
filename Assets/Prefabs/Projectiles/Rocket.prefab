@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167404324694086596}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.69, y: -0.225, z: -9.57}
   m_LocalScale: {x: 0.3, y: 0.30881163, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6442516753997952154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,24 +49,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908b7dff137590640873c8c7278f4718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  Components: {fileID: 11400000, guid: 260fbfbcdccd4964295f8348d80a4bf3, type: 2}
+  UnitStats: {fileID: 11400000, guid: 260fbfbcdccd4964295f8348d80a4bf3, type: 2}
   StatsTemplate: {fileID: 11400000, guid: 6171dde949a3e894ead674cb939f8790, type: 2}
   Stats:
+    MoveState:
+      CurrentSpeed: 0
+      CurrentAcceleration: 0
+      CurrentDeceleration: 0
+      ExternalForcesVelocity: {x: 0, y: 0, z: 0}
+      CurrentMoveDirection: {x: 0, y: 0, z: 0}
+      Pitch: 0
+      Yaw: 0
+      Roll: 0
+    HealthState:
+      CurrentHealth: 0
     MovementBuffs:
       MaxSpeed: 0
       Acceleration: 0
       Deceleration: 0
       JumpForce: 0
       Gravity: 0
-  State:
-    CurrentSpeed: 0
-    CurrentAcceleration: 0
-    CurrentDeceleration: 0
-    ExternalForcesVelocity: {x: 0, y: 0, z: 0}
-    CurrentMoveDirection: {x: 0, y: 0, z: 0}
-    Pitch: 0
-    Yaw: 0
-    Roll: 0
+    HealthBuffs:
+      MaxHealth: 0
+      Armor: 0
+      Regeneration: 0
+      RegenerationDelay: 0
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}

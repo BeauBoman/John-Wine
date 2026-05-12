@@ -6,4 +6,8 @@ public class Registerer : MonoBehaviour
     {
         UpdateManager.RegisterUpdate(upd);
     }    
+    public static void UnregisterUpdatable(IUpdatable upd)
+    {
+        UpdateManager.UnregisterUpdate(upd);
+    }
 }
