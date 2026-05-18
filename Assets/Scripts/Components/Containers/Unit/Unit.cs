@@ -3,19 +3,21 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] internal DefaultUnit UnitStats;
-    [SerializeField] internal StatsTemplate StatsTemplate;
+    [SerializeField] internal UnitComponent UnitComponent;
+    [SerializeField] internal References Refs;
     [SerializeField] public Stats Stats;
     [SerializeField] public WeaponStats WeaponStats;
-    [SerializeField] internal References Refs;
+    [HideInInspector] public Unit Owner;
 
     public event Action OnTakeDamage;
-    private void Awake()
+    public event Action OnHealthIsZero;
+
+    public void OnStart()
     {
-        if (StatsTemplate != null)
-            Stats = new(StatsTemplate);
-        if (UnitStats.Weapon != null)
-            WeaponStats = new(UnitStats.Weapon.StatsTemplate);
+        if (UnitComponent.StatsTemplate != null)
+            Stats = new(UnitComponent.StatsTemplate);
+        if (UnitComponent.Weapon != null)
+            WeaponStats = new(UnitComponent.Weapon.StatsTemplate);
     }
 
     public void TakeDamage(float amount)
@@ -29,6 +31,10 @@ public class Unit : MonoBehaviour
         Stats.HealthState.CurrentHealth -= finalAmount;
 
         OnTakeDamage?.Invoke();
+        if(Stats.HealthState.CurrentHealth <= 0)
+        {
+            OnHealthIsZero?.Invoke();
+        }
     }
 }
 [Serializable]
@@ -43,7 +49,8 @@ public enum Tags
 {
     None = 0,
     Projectile = 1 << 0,
-    Invulnerable = 1 << 1,
-    Obsticle = 1 << 2,
-    Hidden = 1 << 3
+    Entity = 1 << 1,
+    Invulnerable = 1 << 2,
+    Obsticle = 1 << 3,
+    Hidden = 1 << 4
 }

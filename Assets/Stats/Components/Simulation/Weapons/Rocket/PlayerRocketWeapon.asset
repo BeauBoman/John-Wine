@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909d6c7051297147bd4bef3672e183f, type: 3}
   m_Name: PlayerRocketWeapon
   m_EditorClassIdentifier: Assembly-CSharp::DefaultWeapon
-  Stats:
-    ReloadSpeed: 0
-    Range: 0
+  StatsTemplate: {fileID: 11400000, guid: e02eb4201e2b584429ef283f739645f4, type: 2}
   LaunchComponents:
     Mover: {fileID: 0}
     Effect: {fileID: 0}
@@ -24,7 +22,7 @@ MonoBehaviour:
     Raycaster: {fileID: 0}
   ImpactComponents:
     Mover: {fileID: 0}
-    Effect: {fileID: 0}
+    Effect: {fileID: 11400000, guid: 8a7eb9b100acc9949a31b39f176324b8, type: 2}
     Behaviour: {fileID: 0}
     UnitSpawner: {fileID: 0}
     AreaSearcher: {fileID: 0}

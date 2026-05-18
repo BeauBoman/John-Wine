@@ -9,6 +9,6 @@ public class DefaultMover : Mover
         bool moving = dir.sqrMagnitude > 0.001f;
         UpdateSpeed(m, unit.Stats.MoveState, moving, dt);
 
-        unit.transform.Translate(dt * unit.Stats.MoveState.CurrentSpeed * dir);
+        unit.transform.position += dt * unit.Stats.MoveState.CurrentSpeed * dir;
     }
 }

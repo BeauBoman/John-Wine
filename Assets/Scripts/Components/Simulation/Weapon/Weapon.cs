@@ -8,6 +8,6 @@ public abstract class Weapon : ScriptableObject
     [SerializeField] internal SimulationComponentsPack LaunchComponents;
     [Header("Impact")]
     [SerializeField] internal SimulationComponentsPack ImpactComponents;
-    public abstract void Fire(PositionArgs positionArgs);
+    public abstract void Fire(PositionArgs positionArgs, Unit owner = null);
     public abstract void OnHit();
 }

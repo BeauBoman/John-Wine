@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitSpawner
   _prefab: {fileID: 6442516753997952154, guid: 25a11e8d469754c4aa8dad6fad61995b, type: 3}
   PositionOffset: {x: 0, y: 0, z: 0}
-  RotationOffset: {x: 90, y: 0, z: 0, w: 0}

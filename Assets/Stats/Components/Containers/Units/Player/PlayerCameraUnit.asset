@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267cb8bb610db1d428b6303be1f041a2, type: 3}
   m_Name: PlayerCameraUnit
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
+  StatsTemplate: {fileID: 11400000, guid: ffe6be05facf8de4082a3a244011a3da, type: 2}
   SimComponents:
     Mover: {fileID: 11400000, guid: 887bef14637359a4599f4c1e76701b22, type: 2}
     Effect: {fileID: 0}

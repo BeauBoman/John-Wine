@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 267cb8bb610db1d428b6303be1f041a2, type: 3}
-  m_Name: PlayerUnit
-  m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  StatsTemplate: {fileID: 11400000, guid: 5d4b616ab7208a242a3e33e1d72919fe, type: 2}
+  m_Name: DummyUnit
+  m_EditorClassIdentifier: Assembly-CSharp::UnitComponent
+  StatsTemplate: {fileID: 11400000, guid: 3f3ca5fe0462f16468b203547dbe087d, type: 2}
   SimComponents:
-    Mover: {fileID: 11400000, guid: ab5bb72bb7a6a3642b6809ca72b97e83, type: 2}
+    Mover: {fileID: 0}
     Effect: {fileID: 0}
     Behaviour: {fileID: 0}
     UnitSpawner: {fileID: 0}
     Sensor: {fileID: 0}
     AreaSearcher: {fileID: 0}
     Raycaster: {fileID: 0}
-  Weapon: {fileID: 11400000, guid: 914f291329183a64f9452f968b430af1, type: 2}
+  Weapon: {fileID: 0}
   Tags: 2

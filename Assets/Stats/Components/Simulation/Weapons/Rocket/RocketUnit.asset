@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267cb8bb610db1d428b6303be1f041a2, type: 3}
   m_Name: RocketUnit
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
+  StatsTemplate: {fileID: 11400000, guid: 6171dde949a3e894ead674cb939f8790, type: 2}
   SimComponents:
     Mover: {fileID: 11400000, guid: 126dd149032c63a4ba9b95dc4ac97300, type: 2}
     Effect: {fileID: 0}
     Behaviour: {fileID: 0}
     UnitSpawner: {fileID: 0}
+    Sensor: {fileID: 11400000, guid: 261310776a55bfe48b55bc56417ba758, type: 2}
     AreaSearcher: {fileID: 0}
     Raycaster: {fileID: 0}
   Weapon: {fileID: 0}
-  Tags: 0
+  Tags: 1

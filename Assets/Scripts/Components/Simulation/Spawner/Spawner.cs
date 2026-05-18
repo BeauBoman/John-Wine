@@ -5,8 +5,7 @@ public abstract class Spawner<T> : ScriptableObject
 {
     [SerializeField] protected T _prefab;
     [SerializeField] protected Vector3 PositionOffset;
-    [SerializeField] protected Quaternion RotationOffset;
-    public abstract T Spawn(PositionArgs args);
+    public abstract T Spawn(PositionArgs args, T owner = default);
 }
 public struct PositionArgs
 {

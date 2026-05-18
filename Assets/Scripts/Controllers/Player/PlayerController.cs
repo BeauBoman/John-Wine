@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IUpdatable
 
     private void Start()
     {
+        Unit.OnStart();
         Registerer.RegisterUpdatable(this);
     }
 
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour, IUpdatable
         HandleJump();
         HandleWeapon();
 
-        Unit.UnitStats.SimComponents.Mover.Move(Unit, moveDir, dt);
+        Unit.UnitComponent.SimComponents.Mover.Move(Unit, moveDir, dt);
     }
     private void HandleGravity(float dt)
     {
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour, IUpdatable
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Unit.UnitStats.Weapon.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation));
+            Unit.UnitComponent.Weapon.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), Unit);
         }
     }
     private Vector3 ConvertToCameraSpace(Vector3 input)

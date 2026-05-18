@@ -4,11 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="Unit Spawner", menuName ="Components/Simulation/Spawner/Unit Spawner")]
 public class UnitSpawner : Spawner<Unit>
 {
-    public event Action<Unit> OnSpawn;
-    public override Unit Spawn(PositionArgs args)
+    public override Unit Spawn(PositionArgs args, Unit owner)
     {
-        Unit spawned = Instantiate(_prefab, args.position + PositionOffset, args.rotation * RotationOffset);
-        OnSpawn?.Invoke(spawned);
+        Vector3 spawnPos = args.position + (args.rotation * PositionOffset);
+        Unit spawned = Instantiate(_prefab, spawnPos, args.rotation);
+        spawned.Owner = owner;
+        spawned.OnStart();
         return spawned;
     }
 }

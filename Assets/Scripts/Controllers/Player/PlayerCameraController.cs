@@ -7,12 +7,13 @@ public class PlayerCameraController : MonoBehaviour, IUpdatable
     private Vector2 PlayerMouseInput;
     private void Start()
     {
+        Unit.OnStart();
         Registerer.RegisterUpdatable(this);
         Cursor.lockState = CursorLockMode.Locked;
     }
     public void OnUpdate(float deltaTime)
     {
         PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        Unit.UnitStats.SimComponents.Mover.Move(Unit, PlayerMouseInput, deltaTime);
+        Unit.UnitComponent.SimComponents.Mover.Move(Unit, PlayerMouseInput, deltaTime);
     }
 }

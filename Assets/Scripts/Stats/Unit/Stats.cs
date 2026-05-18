@@ -18,6 +18,8 @@ public class Stats
     {
         _originHealth = template.Health;
         _originMovement = template.Movement;
+
+        HealthState.CurrentHealth = _originHealth.HealthOnStart;
     }
 }
 [Serializable]

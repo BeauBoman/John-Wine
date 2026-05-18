@@ -32,6 +32,7 @@ public struct MovementStats
 public struct HealthStats
 {
     public float MaxHealth;
+    public float HealthOnStart;
     public float Armor;
     public float Regeneration;
     public float RegenerationDelay;

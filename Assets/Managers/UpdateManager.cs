@@ -24,7 +24,7 @@ public class UpdateManager : MonoBehaviour
     
     public static void RegisterUpdate(IUpdatable upd)
     {
-        if (Instance == null) Debug.LogError("Update manager instance is null. Register method was called too early.");
+        if (Instance == null) { Debug.LogError("Update manager instance is null. Register method was called too early." + upd.GetType()); return; }
         if (Instance.RegisteredUpdates.Contains(upd)) return;
 
         Instance.Updates.Add(upd);
