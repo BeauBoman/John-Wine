@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49cff5918beae7e48bbae0dbd7a2d5c9, type: 3}
-  m_Name: RocketWeaponStats
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponStatsTemplate
-  Stats:
-    ReloadSpeed: 0
-    Range: 0
+  m_Script: {fileID: 11500000, guid: 4fd0b7dc23eb4f8499ef21d855ebde4e, type: 3}
+  m_Name: RocketSensor
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultSensor
+  _filter:
+    TagFilter: 2
+    DetectOwner: 0

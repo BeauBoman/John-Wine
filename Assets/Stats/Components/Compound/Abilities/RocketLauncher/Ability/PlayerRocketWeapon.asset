@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909d6c7051297147bd4bef3672e183f, type: 3}
   m_Name: PlayerRocketWeapon
   m_EditorClassIdentifier: Assembly-CSharp::DefaultWeapon
-  StatsTemplate: {fileID: 11400000, guid: e02eb4201e2b584429ef283f739645f4, type: 2}
+  StatsTemplate: {fileID: 11400000, guid: 0b1e9d9da20739f4faa3e6821733880a, type: 2}
   LaunchComponents:
     Mover: {fileID: 0}
     Effect: {fileID: 0}
     Behaviour: {fileID: 0}
     UnitSpawner: {fileID: 11400000, guid: cbc1fdc40e983a149820bd0d5d208c0d, type: 2}
+    Sensor: {fileID: 0}
     AreaSearcher: {fileID: 0}
     Raycaster: {fileID: 0}
   ImpactComponents:
@@ -25,5 +26,6 @@ MonoBehaviour:
     Effect: {fileID: 11400000, guid: 8a7eb9b100acc9949a31b39f176324b8, type: 2}
     Behaviour: {fileID: 0}
     UnitSpawner: {fileID: 0}
-    AreaSearcher: {fileID: 0}
+    Sensor: {fileID: 0}
+    AreaSearcher: {fileID: 11400000, guid: 7a1a504a1d23cf441bc1f8126ada3ecb, type: 2}
     Raycaster: {fileID: 0}

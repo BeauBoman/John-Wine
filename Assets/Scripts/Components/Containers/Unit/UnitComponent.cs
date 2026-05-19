@@ -7,7 +7,7 @@ public class UnitComponent : ScriptableObject
     [Header("General")]
     [SerializeReference] public StatsTemplate StatsTemplate;
     [SerializeField] public SimulationComponentsPack SimComponents;
-    [SerializeReference] public Weapon Weapon;
+    [SerializeReference] public Ability Ability;
     [SerializeReference] public Tags Tags;
 }
 [Serializable]

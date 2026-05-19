@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] internal UnitComponent UnitComponent;
+    [SerializeField] public UnitComponent UnitComponent;
     [SerializeField] internal References Refs;
     [SerializeField] public Stats Stats;
-    [SerializeField] public WeaponStats WeaponStats;
     [HideInInspector] public Unit Owner;
+    public StatsContext StatsContext = new();
 
+    public event Action OnStartEvent;
     public event Action OnTakeDamage;
     public event Action OnHealthIsZero;
 
@@ -16,8 +17,10 @@ public class Unit : MonoBehaviour
     {
         if (UnitComponent.StatsTemplate != null)
             Stats = new(UnitComponent.StatsTemplate);
-        if (UnitComponent.Weapon != null)
-            WeaponStats = new(UnitComponent.Weapon.StatsTemplate);
+        OnStartEvent?.Invoke();
+
+        if(UnitComponent.Ability != null)
+        StatsContext.AbilityStats = (new AbilityStats(UnitComponent.Ability.StatsTemplate));
     }
 
     public void TakeDamage(float amount)

@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class Sensor : ScriptableObject
 {
-    [SerializeField] protected Tags CollisionFilter;
-    [SerializeField] protected bool CollideWithOwner;
-
+    [SerializeField] private CollisionFilter _filter;
     internal virtual bool IsHitViable(Unit hitUnit, Unit sourceUnit)
     {
         if (hitUnit == null) return false;
 
-        if (CollideWithOwner == false && sourceUnit.Owner == hitUnit) return false;
-        if ((hitUnit.UnitComponent.Tags & CollisionFilter) == 0) return false;
+        if (_filter.DetectOwner == false && sourceUnit.Owner == hitUnit) return false;
+        if ((hitUnit.UnitComponent.Tags & _filter.TagFilter) == 0) return false;
 
         return true;
     }
+}
+[Serializable]
+public struct CollisionFilter
+{
+    public Tags TagFilter;
+    public bool DetectOwner;
 }

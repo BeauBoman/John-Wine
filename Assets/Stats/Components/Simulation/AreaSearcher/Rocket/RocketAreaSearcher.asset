@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a1251cdbb9bf04098778ba1164a74a, type: 3}
-  m_Name: RocketTriggerEnter
-  m_EditorClassIdentifier: Assembly-CSharp::TriggerEnterSensor
-  CollisionFilter: 2
-  CollideWithOwner: 0
+  m_Script: {fileID: 11500000, guid: 72b1639224953fe48a1d885c7c0fb4c2, type: 3}
+  m_Name: RocketAreaSearcher
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultAreaSearch
+  _filter:
+    TagFilter: 2
+    DetectOwner: 0
+  _layer:
+    serializedVersion: 2
+    m_Bits: 64

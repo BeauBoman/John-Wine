@@ -8,10 +8,16 @@ public class PlayerController : MonoBehaviour, IUpdatable
     public Transform FirePoint;
     public float PushPower = 2;
 
+    private AbilityStats _weaponStats;
     private void Start()
     {
         Unit.OnStart();
         Registerer.RegisterUpdatable(this);
+        if (Unit.UnitComponent.Ability != null)
+        {
+            _weaponStats = Unit.StatsContext.AbilityStats;
+        }
+
     }
 
     public void OnUpdate(float dt)
@@ -43,9 +49,12 @@ public class PlayerController : MonoBehaviour, IUpdatable
     }
     private void HandleWeapon()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            Unit.UnitComponent.Weapon.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), Unit);
+            if (_weaponStats.ShootingState.ReloadProgress < 1) return;
+
+            Unit.UnitComponent.Ability.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), Unit);
+            _weaponStats.ResetReloadProgress();
         }
     }
     private Vector3 ConvertToCameraSpace(Vector3 input)

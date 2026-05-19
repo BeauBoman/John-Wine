@@ -1,12 +1,12 @@
 ﻿using System;
 
-public class WeaponStats : IUpdatable
+public class AbilityStats : IUpdatable
 {
     public ShootingStats StatsBuffs;
-    public ShootingStats Stats { get { return origStats + StatsBuffs; } }
+    public ShootingStats Stats { get { return _origStats + StatsBuffs; } }
+    private ShootingStats _origStats;
 
-    private ShootingStats origStats;
-    public ShootingState ShootingState;
+    public ShootingState ShootingState = new  ShootingState();
 
     public void OnUpdate(float dt)
     {
@@ -18,14 +18,18 @@ public class WeaponStats : IUpdatable
                 ShootingState.ReloadProgress = 1.0f;
         }
     }
-    public WeaponStats(WeaponStatsTemplate t)
+    public void ResetReloadProgress()
+    {
+        ShootingState.ReloadProgress = 0;
+    }
+    public AbilityStats(AbilityStatsTemplate t)
     {
         Registerer.RegisterUpdatable(this);
-        origStats = t.Stats;
+        _origStats = t.Stats;
     }
 }
 [Serializable]
-public struct ShootingState
+public class ShootingState
 {
     public float ReloadProgress;
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 public class EffectComposite : Effect
 {
     [SerializeField] private Effect[] Effects;
-    public override Unit Execute(Unit targetUnit)
+    public override Unit Affect(Unit targetUnit)
     {
         for(int i = 0; i < Effects.Length; i++)
         {
-            Effects[i].Execute(targetUnit);
+            Effects[i].Affect(targetUnit);
         }
         return targetUnit;
     }

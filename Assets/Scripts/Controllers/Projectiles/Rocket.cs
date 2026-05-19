@@ -1,24 +1,24 @@
+
 using UnityEngine;
 
 public class Rocket : MonoBehaviour, IUpdatable
 {
     public Unit Unit;
+    private Ability _referencedAbility;
+    private StatsContext _referencedContext;
     private void Awake()
     {
-  
+        Unit.OnStartEvent += OnSpawn;
     }
-    private void Start()
+    private void OnSpawn()
     {
-        Unit.OnStart();
+        _referencedAbility = Unit.Owner.UnitComponent.Ability;
+        _referencedContext = Unit.Owner.StatsContext;
         Registerer.RegisterUpdatable(this);
     }
     public void OnHit(Unit hitUnit)
     {
-        if(hitUnit != null)
-        {
-            Debug.Log(hitUnit);
-            hitUnit.TakeDamage(50);
-        }
+        _referencedAbility.OnHit(new PositionArgs(transform.position, Quaternion.identity), hitUnit, _referencedContext, Unit.Owner);
         Death();
     }
     private void OnTriggerEnter(Collider other)
@@ -41,7 +41,7 @@ public class Rocket : MonoBehaviour, IUpdatable
     }
     public void Death()
     {
-    
+        Unit.OnStartEvent -= OnSpawn;
         Registerer.UnregisterUpdatable(this);
 
         Destroy(gameObject);
