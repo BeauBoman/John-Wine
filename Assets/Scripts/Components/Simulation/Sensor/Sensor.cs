@@ -9,7 +9,7 @@ public class Sensor : ScriptableObject
         if (hitUnit == null) return false;
 
         if (_filter.DetectOwner == false && sourceUnit.Owner == hitUnit) return false;
-        if ((hitUnit.UnitComponent.Tags & _filter.TagFilter) == 0) return false;
+        if ((hitUnit.UnitSO.Tags & _filter.TagFilter) == 0) return false;
 
         return true;
     }

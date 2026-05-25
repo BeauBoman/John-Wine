@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class DummyController : MonoBehaviour
+public sealed class DummyController : Controller
 {
     public Unit Unit;
-    private void Start()
+    private void Start() => Unit.OnSpawn();
+    public override void OnStart()
     {
-        Unit.OnStart();
         Unit.OnHealthIsZero += Death;
+        Debug.Log(Unit.State.HealthState.CurrentHealth);
     }
     public void Death()
     {

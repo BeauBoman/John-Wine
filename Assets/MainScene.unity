@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2356d7fc7cce4a64f8bbcb52f7223f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  Unit: {fileID: 654515839}
+  _unit: {fileID: 654515839}
   CameraTransform: {fileID: 879862612}
   FirePoint: {fileID: 1159256593}
   PushPower: 2
@@ -540,34 +540,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908b7dff137590640873c8c7278f4718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  UnitComponent: {fileID: 11400000, guid: 1ec9649f03d00cf48b643d9b5a687f58, type: 2}
+  UnitSO: {fileID: 11400000, guid: 1ec9649f03d00cf48b643d9b5a687f58, type: 2}
+  ControllerScript: {fileID: 654515838}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 654515834}
-  Stats:
-    MoveState:
-      CurrentSpeed: 0
-      CurrentAcceleration: 0
-      CurrentDeceleration: 0
-      ExternalForcesVelocity: {x: 0, y: 0, z: 0}
-      CurrentMoveDirection: {x: 0, y: 0, z: 0}
-      Pitch: 0
-      Yaw: 0
-      Roll: 0
-    HealthState:
-      CurrentHealth: 0
-    MovementBuffs:
-      MaxSpeed: 0
-      Acceleration: 0
-      Deceleration: 0
-      JumpForce: 0
-      Gravity: 0
-    HealthBuffs:
-      MaxHealth: 0
-      HealthOnStart: 0
-      Armor: 0
-      Regeneration: 0
-      RegenerationDelay: 0
   Owner: {fileID: 0}
 --- !u!1 &678222694
 GameObject:
@@ -885,34 +862,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908b7dff137590640873c8c7278f4718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  UnitComponent: {fileID: 11400000, guid: cb4144af54420ff46a521ffe061715ee, type: 2}
+  UnitSO: {fileID: 11400000, guid: cb4144af54420ff46a521ffe061715ee, type: 2}
+  ControllerScript: {fileID: 879862613}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
-  Stats:
-    MoveState:
-      CurrentSpeed: 0
-      CurrentAcceleration: 0
-      CurrentDeceleration: 0
-      ExternalForcesVelocity: {x: 0, y: 0, z: 0}
-      CurrentMoveDirection: {x: 0, y: 0, z: 0}
-      Pitch: 0
-      Yaw: 0
-      Roll: 0
-    HealthState:
-      CurrentHealth: 0
-    MovementBuffs:
-      MaxSpeed: 0
-      Acceleration: 0
-      Deceleration: 0
-      JumpForce: 0
-      Gravity: 0
-    HealthBuffs:
-      MaxHealth: 0
-      HealthOnStart: 0
-      Armor: 0
-      Regeneration: 0
-      RegenerationDelay: 0
   Owner: {fileID: 0}
 --- !u!1 &939175577
 GameObject:
@@ -1370,8 +1324,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1589428126}
   - component: {fileID: 1589428127}
-  - component: {fileID: 1589428125}
   - component: {fileID: 1589428128}
+  - component: {fileID: 1589428125}
   m_Layer: 6
   m_Name: Dummy
   m_TagString: Untagged
@@ -1430,34 +1384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908b7dff137590640873c8c7278f4718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  UnitComponent: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
+  UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
+  ControllerScript: {fileID: 1589428128}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
-  Stats:
-    MoveState:
-      CurrentSpeed: 0
-      CurrentAcceleration: 0
-      CurrentDeceleration: 0
-      ExternalForcesVelocity: {x: 0, y: 0, z: 0}
-      CurrentMoveDirection: {x: 0, y: 0, z: 0}
-      Pitch: 0
-      Yaw: 0
-      Roll: 0
-    HealthState:
-      CurrentHealth: 0
-    MovementBuffs:
-      MaxSpeed: 0
-      Acceleration: 0
-      Deceleration: 0
-      JumpForce: 0
-      Gravity: 0
-    HealthBuffs:
-      MaxHealth: 0
-      HealthOnStart: 0
-      Armor: 0
-      Regeneration: 0
-      RegenerationDelay: 0
   Owner: {fileID: 0}
 --- !u!114 &1589428128
 MonoBehaviour:

@@ -1,14 +1,14 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Default Mover", menuName = "Components/Simulation/Mover/Default Mover", order = 1)]
-public class DefaultMover : Mover
+public class DefaultMover : MoverSO
 {
     public override void Move(Unit unit, Vector3 dir, float dt)
     {
-        MovementStats m = unit.Stats.Movement;
+        MovementStats m = unit.Stats.GetStats(this);
         bool moving = dir.sqrMagnitude > 0.001f;
-        UpdateSpeed(m, unit.Stats.MoveState, moving, dt);
+        UpdateSpeed(m, unit.State.MoveState, moving, dt);
 
-        unit.transform.position += dt * unit.Stats.MoveState.CurrentSpeed * dir;
+        unit.transform.position += dt * unit.State.MoveState.CurrentSpeed * dir;
     }
 }

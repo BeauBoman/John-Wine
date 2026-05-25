@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class Initializer : MonoBehaviour
+public static class Initializer
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static void InitializeUnit(Unit unit)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    public static void DestroyUnit(Unit unit)
     {
-        
+
     }
 }

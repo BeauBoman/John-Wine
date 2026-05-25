@@ -1,25 +1,19 @@
-
 using UnityEngine;
 
-public class Rocket : MonoBehaviour, IUpdatable
+public sealed class Rocket : Controller, IUpdatable
 {
     public Unit Unit;
-    private Ability _referencedAbility;
-    private StatsContext _referencedContext;
-    private void Awake()
+
+    private AbilitySO _abilityConfig;
+    private ComponentRuntimeStats _impactStats;
+    public sealed override void OnStart()
     {
-        Unit.OnStartEvent += OnSpawn;
-    }
-    private void OnSpawn()
-    {
-        _referencedAbility = Unit.Owner.UnitComponent.Ability;
-        _referencedContext = Unit.Owner.StatsContext;
+        _impactStats = Unit.Owner.State.CurrentAbility.GetImpactComponentsForProjectile();
         Registerer.RegisterUpdatable(this);
     }
-    public void OnHit(Unit hitUnit)
+    public void OnUpdate(float deltaTime)
     {
-        _referencedAbility.OnHit(new PositionArgs(transform.position, Quaternion.identity), hitUnit, _referencedContext, Unit.Owner);
-        Death();
+        Unit.UnitSO.SimComponents.Mover.Move(Unit, transform.forward, deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -30,18 +24,18 @@ public class Rocket : MonoBehaviour, IUpdatable
         }
         if (other.TryGetComponent(out Unit u))
         {
-            if (Unit.UnitComponent.SimComponents.Sensor.IsHitViable(u, Unit) == false) return;
+            if (Unit.UnitSO.SimComponents.Sensor.IsHitViable(u, Unit) == false) return;
 
             OnHit(u);
         }
     }
-    public void OnUpdate(float deltaTime)
+    public void OnHit(Unit hitUnit)
     {
-        Unit.UnitComponent.SimComponents.Mover.Move(Unit, transform.forward, deltaTime);
+        _abilityConfig.OnHit(new PositionArgs(transform.position, Quaternion.identity), hitUnit, _impactStats, Unit.Owner);
+        Death();
     }
     public void Death()
     {
-        Unit.OnStartEvent -= OnSpawn;
         Registerer.UnregisterUpdatable(this);
 
         Destroy(gameObject);

@@ -1,23 +1,20 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IUpdatable
+public sealed class PlayerController : Controller, IUpdatable
 {
-    [SerializeField] private Unit Unit;
+    [SerializeField] private Unit _unit;
     public Transform CameraTransform;
     public Transform FirePoint;
     public float PushPower = 2;
 
-    private AbilityStats _weaponStats;
-    private void Start()
+    private Ability _ability;
+    private void Start() => _unit.OnSpawn();
+    public override void OnStart()
     {
-        Unit.OnStart();
+        _ability = _unit.State.CurrentAbility;
+        _unit.OnHealthIsZero += Death;
         Registerer.RegisterUpdatable(this);
-        if (Unit.UnitComponent.Ability != null)
-        {
-            _weaponStats = Unit.StatsContext.AbilityStats;
-        }
-
     }
 
     public void OnUpdate(float dt)
@@ -30,31 +27,36 @@ public class PlayerController : MonoBehaviour, IUpdatable
         HandleJump();
         HandleWeapon();
 
-        Unit.UnitComponent.SimComponents.Mover.Move(Unit, moveDir, dt);
+        _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
+
+        if(_ability != null)
+        {
+            _ability.ReloadProgress(dt);
+        }
     }
     private void HandleGravity(float dt)
     {
-        if (Unit.Refs.CC.isGrounded && Unit.Stats.MoveState.ExternalForcesVelocity.y < 0)
+        if (_unit.Refs.CC.isGrounded && _unit.State.MoveState.ExternalForcesVelocity.y < 0)
         {
-            Unit.Stats.MoveState.ExternalForcesVelocity.y = -2f;
+            _unit.State.MoveState.ExternalForcesVelocity.y = -2f;
         }
-        Unit.Stats.MoveState.ExternalForcesVelocity.y += Unit.Stats.Movement.Gravity * dt;
+        _unit.State.MoveState.ExternalForcesVelocity.y += _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity * dt;
     }
     private void HandleJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Unit.Refs.CC.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && _unit.Refs.CC.isGrounded)
         {
-            Unit.Stats.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(Unit.Stats.Movement.JumpForce * -2f * Unit.Stats.Movement.Gravity);
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
         }
     }
     private void HandleWeapon()
     {
         if (Input.GetMouseButton(0))
         {
-            if (_weaponStats.ShootingState.ReloadProgress < 1) return;
+            if (_ability.CanShoot == false) return;
 
-            Unit.UnitComponent.Ability.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), Unit);
-            _weaponStats.ResetReloadProgress();
+            _unit.UnitSO.SimComponents.Ability.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), _unit);
+            _ability.ResetReloadProgress();
         }
     }
     private Vector3 ConvertToCameraSpace(Vector3 input)
@@ -65,7 +67,12 @@ public class PlayerController : MonoBehaviour, IUpdatable
         return (forward.normalized * input.z + right.normalized * input.x).normalized;
     }
 
-
+    public void Death()
+    {
+        _unit.OnHealthIsZero -= Death;
+        Registerer.UnregisterUpdatable(this);
+        Destroy(gameObject);
+    }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
