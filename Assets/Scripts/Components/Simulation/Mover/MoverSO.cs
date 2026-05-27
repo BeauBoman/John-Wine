@@ -8,6 +8,7 @@ public abstract class MoverSO : ScriptableObject
 
     protected void UpdateSpeed(MovementStats m, MovementState cm, bool accelerating, float dt)
     {
+
         float rate = accelerating ? m.Acceleration : m.Deceleration;
         float target = accelerating ? m.MaxSpeed : 0f;
 

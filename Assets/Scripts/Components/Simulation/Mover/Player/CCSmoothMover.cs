@@ -6,7 +6,6 @@ public class CCSmoothMover : MoverSO
     public override void Move(Unit unit, Vector3 moveDir, float dt)
     {
         MovementStats stats = unit.Stats.GetStats(this);
-
         bool hasInput = moveDir.sqrMagnitude > 0.001f;
 
         if (hasInput)
@@ -15,9 +14,12 @@ public class CCSmoothMover : MoverSO
         }
 
         UpdateSpeed(stats, unit.State.MoveState, hasInput, dt);
-        Vector3 horizontalVelocity = unit.State.MoveState.CurrentMoveDirection * unit.State.MoveState.CurrentSpeed;
-        Vector3 finalVelocity = horizontalVelocity + unit.State.MoveState.ExternalForcesVelocity;
 
+        Vector3 targetVelocity = hasInput ? unit.State.MoveState.CurrentMoveDirection * stats.MaxSpeed : Vector3.zero;
+        float rate = hasInput ? stats.Acceleration : stats.Deceleration;
+
+        unit.State.MoveState.MovementVelocity = Vector3.MoveTowards(unit.State.MoveState.MovementVelocity, targetVelocity, rate * dt);
+        Vector3 finalVelocity = unit.State.MoveState.MovementVelocity + unit.State.MoveState.ExternalForcesVelocity;
         unit.Refs.CC.Move(finalVelocity * dt);
     }
 }
