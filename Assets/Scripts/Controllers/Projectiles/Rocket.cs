@@ -9,6 +9,7 @@ public sealed class Rocket : Controller, IUpdatable
     public sealed override void OnStart()
     {
         _impactStats = Unit.Owner.State.CurrentAbility.GetImpactComponentsForProjectile();
+        _abilityConfig = Unit.Owner.State.CurrentAbility.config;
         Registerer.RegisterUpdatable(this);
     }
     public void OnUpdate(float deltaTime)
