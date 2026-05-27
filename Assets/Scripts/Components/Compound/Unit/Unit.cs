@@ -92,6 +92,7 @@ public class MovementState
     public float Pitch;
     public float Yaw;
     public float Roll;
+    public Vector3 MovementVelocity;
 }
 [Serializable]
 public class HealthState

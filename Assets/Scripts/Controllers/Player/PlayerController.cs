@@ -7,14 +7,18 @@ public sealed class PlayerController : Controller, IUpdatable
     public Transform CameraTransform;
     public Transform FirePoint;
     public float PushPower = 2;
-
     private Ability _ability;
+
+    private float _coyoteTime;
+    private float _jumpBufferTime;
+    private ModifiableStats<MovementStats> moveStats;
     private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {
         _ability = _unit.State.CurrentAbility;
         _unit.OnHealthIsZero += Death;
         Registerer.RegisterUpdatable(this);
+        moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
     }
 
     public void OnUpdate(float dt)
@@ -24,14 +28,24 @@ public sealed class PlayerController : Controller, IUpdatable
         Vector3 moveDir = ConvertToCameraSpace(input);
 
         HandleGravity(dt);
-        HandleJump();
+        HandleJump(dt);
         HandleWeapon();
+        HandleDeceleration();
 
         _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
 
-        if(_ability != null)
+        if (_ability != null)
         {
             _ability.ReloadProgress(dt);
+        }
+
+
+    }
+    private void HandleDeceleration()
+    {
+        if (_unit.Refs.CC.isGrounded == false)
+        {
+            moveStats.BuffMultiply(0.5f);
         }
     }
     private void HandleGravity(float dt)
@@ -42,9 +56,27 @@ public sealed class PlayerController : Controller, IUpdatable
         }
         _unit.State.MoveState.ExternalForcesVelocity.y += _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity * dt;
     }
-    private void HandleJump()
+    private void HandleJump(float dt)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _unit.Refs.CC.isGrounded)
+        if (_unit.Refs.CC.isGrounded == true)
+            _coyoteTime = 0.2f;
+        else
+            _coyoteTime -= dt;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _jumpBufferTime = 0.2f;
+        }
+
+        if (_jumpBufferTime > 0)
+            _jumpBufferTime -= dt;
+
+        if (_jumpBufferTime > 0 && _unit.Refs.CC.isGrounded == true)
+        {
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && _coyoteTime > 0)
         {
             _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
         }
@@ -64,7 +96,11 @@ public sealed class PlayerController : Controller, IUpdatable
         Vector3 forward = CameraTransform.forward;
         Vector3 right = CameraTransform.right;
         forward.y = 0; right.y = 0;
-        return (forward.normalized * input.z + right.normalized * input.x).normalized;
+
+        forward.Normalize();
+        right.Normalize();
+
+        return Vector3.ClampMagnitude(forward * input.z + right * input.x, 1f);
     }
 
     public void Death()
