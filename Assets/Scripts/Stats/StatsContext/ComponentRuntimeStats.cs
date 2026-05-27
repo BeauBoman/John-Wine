@@ -10,6 +10,7 @@ public class ComponentRuntimeStats
     Dictionary<MoverSO, ModifiableStats<MovementStats>> MoverStats = new();
     Dictionary<EffectSO, ModifiableStats<EffectStats>> EffectStats = new();
     Dictionary<AreaSearchSO, ModifiableStats<AreaSearchStats>> AreaSearchStats = new();
+    Dictionary<SensorSO, ModifiableStats<SensorStats>> SensorStats = new();
     //Dictionary<TemporaryBehaviorSO, ModifiableStats<TemporaryBehaviorStats>> TemporaryBehaviorStats;
     //Dictionary<PeriodicBehaviorSO, ModifiableStats<PeriodicBehaviorStats>> PeriodicBehaviorStats;
 
@@ -19,11 +20,13 @@ public class ComponentRuntimeStats
         if (pack.Mover != null) AddStats(pack.Mover);
         if (pack.Effect != null) AddStats(pack.Effect);
         if (pack.AreaSearcher != null) AddStats(pack.AreaSearcher);
+        if (pack.Sensor != null) AddStats(pack.Sensor);
     }
     public ref readonly AbilityStats GetStats(AbilitySO config) => ref AbilityStats[config].Value;
     public ref readonly MovementStats GetStats(MoverSO config) => ref MoverStats[config].Value;
     public ref readonly EffectStats GetStats(EffectSO config) => ref EffectStats[config].Value;
     public ref readonly AreaSearchStats GetStats(AreaSearchSO config) => ref AreaSearchStats[config].Value;
+    public ref readonly SensorStats GetStats(SensorSO config) => ref SensorStats[config].Value;
     //public TemporaryBehaviorStats GetStats(TemporaryBehaviorSO config) => TemporaryBehaviorStats[config].Value;
     //public PeriodicBehaviorStats GetStats(PeriodicBehaviorSO config) => PeriodicBehaviorStats[config].Value;
     public ModifiableStats<AbilityStats> GetStatsModifiable(AbilitySO config) => AbilityStats[config];
@@ -51,6 +54,12 @@ public class ComponentRuntimeStats
         if (AreaSearchStats.ContainsKey(config)) return;
 
         AreaSearchStats.Add(config, new ModifiableStats<AreaSearchStats>(config.Stats));
+    }
+    public void AddStats(SensorSO config)
+    {
+        if (SensorStats.ContainsKey(config)) return;
+
+        SensorStats.Add(config, new ModifiableStats<SensorStats>(config.Stats));
     }
 
 }

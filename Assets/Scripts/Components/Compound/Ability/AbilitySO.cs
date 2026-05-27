@@ -9,7 +9,7 @@ public abstract class AbilitySO : ScriptableObject
     [Header("Impact")]
     [SerializeField] internal SimulationComponentsPack ImpactComponents;
     public abstract void Fire(PositionArgs positionArgs, Unit owner = null);
-    public abstract void OnHit(PositionArgs hitPos, Unit hitUnit, ComponentRuntimeStats statsContext, Unit owner);
+    public abstract void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit);
 }
 public class Ability
 {

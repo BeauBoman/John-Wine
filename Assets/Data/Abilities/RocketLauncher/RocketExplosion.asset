@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultAreaSearch
   <Stats>k__BackingField:
     Size: {x: 2, y: 0, z: 0}
-    Filter:
-      TagFilter: 2
-      DetectOwner: 1
-    Layer:
-      serializedVersion: 2
-      m_Bits: 64
+    Components:
+      Mover: {fileID: 0}
+      Effect: {fileID: 11400000, guid: 7dd0d076d145ed94080baca48b3b656a, type: 2}
+      Behaviour: {fileID: 0}
+      UnitSpawner: {fileID: 0}
+      Sensor: {fileID: 11400000, guid: 475ddf4c659f1504d9120378fb1aa9bb, type: 2}
+      AreaSearcher: {fileID: 0}
+      Raycaster: {fileID: 0}
+      Ability: {fileID: 0}

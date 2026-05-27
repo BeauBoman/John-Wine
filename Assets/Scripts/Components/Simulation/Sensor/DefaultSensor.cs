@@ -1,10 +1,16 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Default Sensor", menuName = "Components/Simulation/Sensor/Default Sensor", order = 1)]
-public sealed class DefaultSensor : Sensor
+public sealed class DefaultSensor : SensorSO
 {
-    internal sealed override bool IsHitViable(Unit hitUnit, Unit sourceUnit)
+    internal override bool IsDetectionViable(ComponentRuntimeStats statsCarrier, Unit hitUnit, Unit sourceUnit)
     {
-        return base.IsHitViable (hitUnit, sourceUnit);
+        if (hitUnit == null) return false;
+
+        SensorStats s = statsCarrier.GetStats(this);
+        if (s.DetectOwner == false && sourceUnit.Owner == hitUnit) return false;
+        if ((hitUnit.UnitSO.Tags & s.TagFilter) == 0) return false;
+
+        return true;
     }
 }

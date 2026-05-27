@@ -25,14 +25,14 @@ public sealed class Rocket : Controller, IUpdatable
         }
         if (other.TryGetComponent(out Unit u))
         {
-            if (Unit.UnitSO.SimComponents.Sensor.IsHitViable(u, Unit) == false) return;
+            if (Unit.UnitSO.SimComponents.Sensor.IsDetectionViable(Unit.Stats, u, Unit) == false) return;
 
             OnHit(u);
         }
     }
     public void OnHit(Unit hitUnit)
     {
-        _abilityConfig.OnHit(new PositionArgs(transform.position, Quaternion.identity), hitUnit, _impactStats, Unit.Owner);
+        _abilityConfig.OnHit(_impactStats, new PositionArgs(transform.position, Quaternion.identity), Unit, hitUnit);
         Death();
     }
     public void Death()

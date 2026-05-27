@@ -18,7 +18,7 @@ public struct SimulationComponentsPack
 
     [SerializeReference] public Spawner<Unit> UnitSpawner;
 
-    [SerializeReference] public Sensor Sensor;
+    [SerializeReference] public SensorSO Sensor;
     [SerializeReference] public AreaSearchSO AreaSearcher;
     [SerializeReference] public Raycaster Raycaster;
 
