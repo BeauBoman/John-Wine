@@ -9,6 +9,10 @@ public sealed class PlayerController : Controller, IUpdatable
     public float PushPower = 2;
 
     private Ability _ability;
+
+    private float _coyoteTime;
+    private bool _jumpBuffer;
+    private float _jumpBufferTime;
     private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {
@@ -24,7 +28,7 @@ public sealed class PlayerController : Controller, IUpdatable
         Vector3 moveDir = ConvertToCameraSpace(input);
 
         HandleGravity(dt);
-        HandleJump();
+        HandleJump(dt);
         HandleWeapon();
 
         _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
@@ -33,6 +37,8 @@ public sealed class PlayerController : Controller, IUpdatable
         {
             _ability.ReloadProgress(dt);
         }
+
+        
     }
     private void HandleGravity(float dt)
     {
@@ -42,9 +48,29 @@ public sealed class PlayerController : Controller, IUpdatable
         }
         _unit.State.MoveState.ExternalForcesVelocity.y += _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity * dt;
     }
-    private void HandleJump()
+    private void HandleJump(float dt)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _unit.Refs.CC.isGrounded)
+        if (_unit.Refs.CC.isGrounded == true)
+            _coyoteTime = 0.2f;
+        else
+            _coyoteTime -= dt;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _jumpBuffer = true;
+            _jumpBufferTime = 0.2f;
+        }
+
+        if (_jumpBufferTime > 0)
+            _jumpBufferTime -= dt;
+
+        if (_jumpBufferTime > 0 && _unit.Refs.CC.isGrounded == true)
+        {
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
+            _jumpBuffer = false;
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && _coyoteTime > 0)
         {
             _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
         }
