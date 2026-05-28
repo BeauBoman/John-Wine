@@ -12,10 +12,10 @@ public abstract class Behavior
     {
         durationProgress = 0;
     }
-    public Behavior(Unit targetUnit, ComponentRuntimeStats stats)
+    public Behavior(Unit targetUnit, ComponentRuntimeStats statsCarrier)
     {
         target = targetUnit;
-        this.stats = stats;
+        this.stats = statsCarrier;
     }
 }
 public class TemporaryBehavior : Behavior

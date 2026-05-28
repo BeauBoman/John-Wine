@@ -4,12 +4,11 @@ public sealed class Rocket : Controller, IUpdatable
 {
     public Unit Unit;
 
-    private AbilitySO _abilityConfig;
-    private ComponentRuntimeStats _impactStats;
+    private Ability _ability;
     public sealed override void OnStart()
     {
-        _impactStats = Unit.Owner.State.CurrentAbility.GetImpactComponentsForProjectile();
-        _abilityConfig = Unit.Owner.State.CurrentAbility.config;
+        _ability = Unit.Owner.State.CurrentAbility;
+        Unit.Stats.SetComponentsStats(_ability.config.ImpactComponents);
         Registerer.RegisterUpdatable(this);
     }
     public void OnUpdate(float deltaTime)
@@ -32,7 +31,7 @@ public sealed class Rocket : Controller, IUpdatable
     }
     public void OnHit(Unit hitUnit)
     {
-        _abilityConfig.OnHit(_impactStats, new PositionArgs(transform.position, Quaternion.identity), Unit, hitUnit);
+        _ability.OnHit(Unit.Stats, new PositionArgs(transform.position, Quaternion.identity), Unit, hitUnit);
         Death();
     }
     public void Death()

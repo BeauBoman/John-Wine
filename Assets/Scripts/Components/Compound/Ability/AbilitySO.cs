@@ -15,14 +15,20 @@ public class Ability
 {
     public AbilitySO config;
     protected ComponentRuntimeStats RuntimeStats;
-    protected ComponentRuntimeStats LaunchComponentsStats = new();
-    protected ComponentRuntimeStats ImpactComponentsStats = new();
     protected Unit owner;
 
     public bool CanShoot;
 
     private float _reloadProgress = 0;
     private ModifiableStats<AbilityStats> _stats;
+    public void Fire(PositionArgs firePoint, Unit whoFired)
+    {
+        config.Fire(firePoint, whoFired);
+    }
+    public void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
+    {
+        config.OnHit(statsCarrier, hitPos, sourceUnit, hitUnit);
+    }
     public void ReloadProgress(float dt)
     {
         if (_reloadProgress < 1.0f)
@@ -36,10 +42,6 @@ public class Ability
             }
         }
     }
-    public ComponentRuntimeStats GetImpactComponentsForProjectile()
-    {
-        return ImpactComponentsStats;
-    }
     public void ResetReloadProgress()
     {
         CanShoot = false;
@@ -49,8 +51,6 @@ public class Ability
     {
         config = c;
         RuntimeStats = s;
-        LaunchComponentsStats.SetComponentsStats(config.LaunchComponents);
-        ImpactComponentsStats.SetComponentsStats(config.ImpactComponents);
 
         _stats = s.GetStatsModifiable(config);
     }

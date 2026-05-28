@@ -16,11 +16,20 @@ public class ComponentRuntimeStats
 
     public void SetComponentsStats(SimulationComponentsPack pack)
     {
-        if (pack.Ability != null) AddStats(pack.Ability);
+        for (int i = pack.Abilities.Count - 1; i >= 0; i--)
+        {
+            if (pack.Abilities[i] != null) AddStats(pack.Abilities[i]);
+        }
         if (pack.Mover != null) AddStats(pack.Mover);
         if (pack.Effect != null) AddStats(pack.Effect);
-        if (pack.AreaSearcher != null) AddStats(pack.AreaSearcher);
         if (pack.Sensor != null) AddStats(pack.Sensor);
+
+        if (pack.AreaSearcher != null)
+        {
+            AddStats(pack.AreaSearcher);
+            if (pack.AreaSearcher.Stats.Components.Sensor != null) AddStats(pack.AreaSearcher.Stats.Components.Sensor);
+            if (pack.AreaSearcher.Stats.Components.Effect != null) AddStats(pack.AreaSearcher.Stats.Components.Effect);
+        }
     }
     public ref readonly AbilityStats GetStats(AbilitySO config) => ref AbilityStats[config].Value;
     public ref readonly MovementStats GetStats(MoverSO config) => ref MoverStats[config].Value;

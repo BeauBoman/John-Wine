@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -8,6 +9,7 @@ public class Unit : MonoBehaviour
     [SerializeField] internal References Refs;
     [HideInInspector] public Unit Owner;
     [HideInInspector] public BehaviorMachine BehaviorMachine;
+    private List<Ability> Abilities = new List<Ability>();
     public ComponentRuntimeStats Stats = new();
     public ModifiableStats<HealthStats> Health;
     public UnitState State = new();
@@ -27,14 +29,26 @@ public class Unit : MonoBehaviour
         BehaviorMachine = new BehaviorMachine(this);
 
         Stats.SetComponentsStats(UnitSO.SimComponents);
-        if (UnitSO.SimComponents.Ability != null)
-            State.CurrentAbility = new Ability(UnitSO.SimComponents.Ability, Stats);
+
+        for (int i = 0; i < UnitSO.SimComponents.Abilities.Count; i++)
+        {
+            Abilities.Add(new Ability(UnitSO.SimComponents.Abilities[i], Stats));
+        }
+
 
         State.HealthState.CurrentHealth = Health.Value.HealthOnStart;
 
         if (ControllerScript != null)
             ControllerScript.OnStart();
         //OnStartEvent?.Invoke();
+    }
+    public void OnUpdate(float dt)
+    {
+        BehaviorMachine.OnUpdate(dt);
+    }
+    public void ChangeAbility(int abilityIndex)
+    {
+        State.CurrentAbility = Abilities[abilityIndex];
     }
     public void TakeDamage(float amount)
     {
@@ -56,7 +70,6 @@ public class Unit : MonoBehaviour
 public class UnitState
 {
     public Ability CurrentAbility;
-
     public HealthState HealthState = new();
     public MovementState MoveState = new();
 }

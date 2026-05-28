@@ -21,5 +21,6 @@ MonoBehaviour:
     Sensor: {fileID: 0}
     AreaSearcher: {fileID: 0}
     Raycaster: {fileID: 0}
-    Ability: {fileID: 11400000, guid: 914f291329183a64f9452f968b430af1, type: 2}
+    Abilities:
+    - {fileID: 11400000, guid: 914f291329183a64f9452f968b430af1, type: 2}
   Tags: 2

@@ -7,7 +7,6 @@ public sealed class PlayerController : Controller, IUpdatable
     public Transform CameraTransform;
     public Transform FirePoint;
     public float PushPower = 2;
-    private Ability _ability;
 
     private float _coyoteTime;
     private float _jumpBufferTime;
@@ -15,10 +14,10 @@ public sealed class PlayerController : Controller, IUpdatable
     private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {
-        _ability = _unit.State.CurrentAbility;
         _unit.OnHealthIsZero += Death;
         Registerer.RegisterUpdatable(this);
         moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
+        _unit.ChangeAbility(0);
     }
 
     public void OnUpdate(float dt)
@@ -34,19 +33,14 @@ public sealed class PlayerController : Controller, IUpdatable
 
         _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
 
-        if (_ability != null)
-        {
-            _ability.ReloadProgress(dt);
-        }
-
-
+        _unit.State.CurrentAbility.ReloadProgress(dt);
     }
     private void HandleDeceleration()
     {
-        if (_unit.Refs.CC.isGrounded == false)
-        {
-            moveStats.BuffMultiply(0.5f);
-        }
+        //if (_unit.Refs.CC.isGrounded == false)
+        //{
+        //    moveStats.BuffMultiply(0.5f); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //}
     }
     private void HandleGravity(float dt)
     {
@@ -73,22 +67,22 @@ public sealed class PlayerController : Controller, IUpdatable
 
         if (_jumpBufferTime > 0 && _unit.Refs.CC.isGrounded == true)
         {
-            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(moveStats.Value.JumpForce * -2f * moveStats.Value.Gravity);
             return;
         }
         if (Input.GetKeyDown(KeyCode.Space) && _coyoteTime > 0)
         {
-            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).JumpForce * -2f * _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity);
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(moveStats.Value.JumpForce * -2f * moveStats.Value.Gravity);
         }
     }
     private void HandleWeapon()
     {
         if (Input.GetMouseButton(0))
         {
-            if (_ability.CanShoot == false) return;
+            if (_unit.State.CurrentAbility.CanShoot == false) return;
 
-            _unit.UnitSO.SimComponents.Ability.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), _unit);
-            _ability.ResetReloadProgress();
+            _unit.State.CurrentAbility.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), _unit);
+            _unit.State.CurrentAbility.ResetReloadProgress();
         }
     }
     private Vector3 ConvertToCameraSpace(Vector3 input)

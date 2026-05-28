@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 
@@ -22,5 +23,5 @@ public struct SimulationComponentsPack
     [SerializeReference] public AreaSearchSO AreaSearcher;
     [SerializeReference] public Raycaster Raycaster;
 
-    [SerializeReference] public AbilitySO Ability;
+    [SerializeReference] public List<AbilitySO> Abilities;
 }
