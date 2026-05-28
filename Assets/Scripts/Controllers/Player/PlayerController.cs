@@ -30,22 +30,12 @@ public sealed class PlayerController : Controller, IUpdatable
         HandleGravity(dt);
         HandleJump(dt);
         HandleWeapon();
-        HandleDeceleration();
 
         _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
 
         if (_ability != null)
         {
             _ability.ReloadProgress(dt);
-        }
-
-
-    }
-    private void HandleDeceleration()
-    {
-        if (_unit.Refs.CC.isGrounded == false)
-        {
-            moveStats.BuffMultiply(0.5f);
         }
     }
     private void HandleGravity(float dt)

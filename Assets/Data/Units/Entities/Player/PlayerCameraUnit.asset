@@ -20,6 +20,6 @@ MonoBehaviour:
     UnitSpawner: {fileID: 0}
     Sensor: {fileID: 0}
     AreaSearcher: {fileID: 0}
-    Raycaster: {fileID: 0}
+    Raycaster: {fileID: 11400000, guid: a1fb6a2e68a31514c8f105af705b59ed, type: 2}
     Ability: {fileID: 0}
   Tags: 16

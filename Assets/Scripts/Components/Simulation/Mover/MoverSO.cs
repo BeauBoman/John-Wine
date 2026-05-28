@@ -21,6 +21,7 @@ public struct MovementStats
     public float MaxSpeed;
     public float Acceleration;
     public float Deceleration;
+    public float AirDeceleration;
     public float Gravity;
     public float JumpForce;
 
