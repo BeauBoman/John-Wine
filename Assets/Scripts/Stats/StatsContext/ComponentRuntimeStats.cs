@@ -27,6 +27,7 @@ public class ComponentRuntimeStats
     //public TemporaryBehaviorStats GetStats(TemporaryBehaviorSO config) => TemporaryBehaviorStats[config].Value;
     //public PeriodicBehaviorStats GetStats(PeriodicBehaviorSO config) => PeriodicBehaviorStats[config].Value;
     public ModifiableStats<AbilityStats> GetStatsModifiable(AbilitySO config) => AbilityStats[config];
+    public ModifiableStats<MovementStats> GetStatsModifiable(MoverSO config) => MoverStats[config];
 
     public void AddStats(AbilitySO config)
     {
