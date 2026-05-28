@@ -14,14 +14,11 @@ public class UnitSO : ScriptableObject
 public struct SimulationComponentsPack
 {
     [SerializeReference] public MoverSO Mover;
+    [SerializeReference] public SensorSO Sensor;
+    [SerializeReference] public Raycaster Raycaster;
+    [SerializeReference] public AreaSearchSO AreaSearcher;
+    [SerializeReference] public List<AbilitySO> Abilities;
+    [SerializeReference] public Spawner<Unit> UnitSpawner;
     [SerializeReference] public EffectSO Effect;
     [SerializeReference] public BehaviorSO Behaviour;
-
-    [SerializeReference] public Spawner<Unit> UnitSpawner;
-
-    [SerializeReference] public SensorSO Sensor;
-    [SerializeReference] public AreaSearchSO AreaSearcher;
-    [SerializeReference] public Raycaster Raycaster;
-
-    [SerializeReference] public List<AbilitySO> Abilities;
 }

@@ -15,11 +15,11 @@ MonoBehaviour:
   StatsTemplate: {fileID: 11400000, guid: 3f3ca5fe0462f16468b203547dbe087d, type: 2}
   SimComponents:
     Mover: {fileID: 0}
+    Sensor: {fileID: 0}
+    Raycaster: {fileID: 0}
+    AreaSearcher: {fileID: 0}
+    Abilities: []
+    UnitSpawner: {fileID: 0}
     Effect: {fileID: 0}
     Behaviour: {fileID: 0}
-    UnitSpawner: {fileID: 0}
-    Sensor: {fileID: 0}
-    AreaSearcher: {fileID: 0}
-    Raycaster: {fileID: 0}
-  Weapon: {fileID: 0}
   Tags: 2
