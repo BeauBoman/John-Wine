@@ -1,15 +1,20 @@
+using TMPro;
 using UnityEngine;
 
 public class ItemSys : Controller, IUpdatable
 {
     public GameObject[] heldItems;
+    public GameObject[] itemsDisplayed;
+
+    public GameObject imagePrefab;
+    public Transform itemDisplay;
     public override void OnStart()
     {
     
     }
     public void OnUpdate(float dt)
     {
-
+        ItemDisplay();
     }
     public bool GetKey(InteractiveBaseEnviroment target)
     {
@@ -21,6 +26,7 @@ public class ItemSys : Controller, IUpdatable
             if (heldItems[i] != null && target.CheckKey(heldItems[i]))
             {
                 heldItems[i] = null;
+                Destroy(itemDisplay.GetChild(0).gameObject);
                 return true;
             }
         }
@@ -34,8 +40,13 @@ public class ItemSys : Controller, IUpdatable
             {
                 heldItems[i] = item;
                 item.SetActive(false);
+                ItemDisplay();
                 return;
             }
         }
+    }
+    private void ItemDisplay()
+    {
+        Instantiate(imagePrefab, itemDisplay);
     }
 }
