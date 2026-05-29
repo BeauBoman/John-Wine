@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayerCameraMover
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraMover
   <Stats>k__BackingField:
-    MaxSpeed: 2
-    Acceleration: 0
-    Deceleration: 0
+    MaxSpeed: 500
+    Acceleration: 10000
+    Deceleration: 10000
+    AirDeceleration: 0
     Gravity: 0
     JumpForce: 0
