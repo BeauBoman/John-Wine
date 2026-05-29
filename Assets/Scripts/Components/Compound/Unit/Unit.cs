@@ -76,7 +76,7 @@ public enum Tags
     Invulnerable = 1 << 2,
     Obsticle = 1 << 3,
     Hidden = 1 << 4,
-    Melee = 1 << 5
+    Key = 1 << 5
 }
 public abstract class Controller : MonoBehaviour
 {

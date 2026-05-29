@@ -26,19 +26,22 @@ public sealed class PlayerCameraController : Controller, IUpdatable
         {
             if (Unit.UnitSO.SimComponents.Raycaster.Raycast(transform.position, transform.forward, 3f).collider != null)
             {
-                Collider torget = Unit.UnitSO.SimComponents.Raycaster.Raycast(transform.position, transform.forward, 3f).collider;
-                if (torget.CompareTag("KeyItem"))
+                Collider target = Unit.UnitSO.SimComponents.Raycaster.Raycast(transform.position, transform.forward, 3f).collider;
+                if (target.TryGetComponent(out Unit u))
                 {
-                    itemSys.AddItem(torget.gameObject);
-                    torget.gameObject.SetActive(false);
+                    if (u.UnitSO.Tags.HasFlag(Tags.Key))
+                    {
+                        itemSys.AddItem(target.gameObject);
+                        target.gameObject.SetActive(false);
+                    }                    
                 } else
                 {
-                    InteractiveBaseEnviroment target = torget.GetComponent<InteractiveBaseEnviroment>();
+                    InteractiveBaseEnviroment enviromentTarget = target.GetComponent<InteractiveBaseEnviroment>();
                     if (target != null)
                     {
-                        if (itemSys.GetKey(target) == true)
+                        if (itemSys.GetKey(enviromentTarget) == true)
                         {
-                            target.Interact();
+                            enviromentTarget.Interact();
                         }
                     }
                 }
