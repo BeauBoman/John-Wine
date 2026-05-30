@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 267cb8bb610db1d428b6303be1f041a2, type: 3}
-  m_Name: PlayerCameraUnit
-  m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  StatsTemplate: {fileID: 11400000, guid: ffe6be05facf8de4082a3a244011a3da, type: 2}
+  m_Name: Key
+  m_EditorClassIdentifier: Assembly-CSharp::UnitSO
+  StatsTemplate: {fileID: 0}
   SimComponents:
-    Mover: {fileID: 11400000, guid: 887bef14637359a4599f4c1e76701b22, type: 2}
+    Mover: {fileID: 0}
     Effect: {fileID: 0}
     Behaviour: {fileID: 0}
     UnitSpawner: {fileID: 0}
     Sensor: {fileID: 0}
     AreaSearcher: {fileID: 0}
-    Raycaster: {fileID: 11400000, guid: a1fb6a2e68a31514c8f105af705b59ed, type: 2}
+    Raycaster: {fileID: 0}
     Ability: {fileID: 0}
-  Tags: 16
+  Tags: 32

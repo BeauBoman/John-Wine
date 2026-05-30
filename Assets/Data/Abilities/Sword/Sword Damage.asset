@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ca6506c5bb7ab94897bf1ad77c1562b, type: 3}
-  m_Name: PlayerCameraMover
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraMover
+  m_Script: {fileID: 11500000, guid: e46bf532046347d46b4e45533ad442a3, type: 3}
+  m_Name: Sword Damage
+  m_EditorClassIdentifier: Assembly-CSharp::DealDamageEffect
   <Stats>k__BackingField:
-    MaxSpeed: 500
-    Acceleration: 10000
-    Deceleration: 10000
-    AirDeceleration: 0
-    Gravity: 0
-    JumpForce: 0
+    Amount: 50

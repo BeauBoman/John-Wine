@@ -75,7 +75,8 @@ public enum Tags
     Entity = 1 << 1,
     Invulnerable = 1 << 2,
     Obsticle = 1 << 3,
-    Hidden = 1 << 4
+    Hidden = 1 << 4,
+    Key = 1 << 5
 }
 public abstract class Controller : MonoBehaviour
 {
@@ -93,6 +94,7 @@ public class MovementState
     public float Yaw;
     public float Roll;
     public Vector3 MovementVelocity;
+    public Vector2 RotationalVelocity;
 }
 [Serializable]
 public class HealthState

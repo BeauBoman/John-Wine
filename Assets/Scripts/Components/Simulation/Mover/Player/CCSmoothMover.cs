@@ -16,7 +16,17 @@ public class CCSmoothMover : MoverSO
         UpdateSpeed(stats, unit.State.MoveState, hasInput, dt);
 
         Vector3 targetVelocity = hasInput ? unit.State.MoveState.CurrentMoveDirection * stats.MaxSpeed : Vector3.zero;
-        float rate = hasInput ? stats.Acceleration : stats.Deceleration;
+
+        float rate;
+
+        if (unit.Refs.CC.isGrounded == true)
+        {
+            rate = hasInput ? stats.Acceleration : stats.Deceleration;
+        } else
+        {
+            rate = hasInput ? stats.Acceleration : stats.AirDeceleration;
+        }
+        
 
         unit.State.MoveState.MovementVelocity = Vector3.MoveTowards(unit.State.MoveState.MovementVelocity, targetVelocity, rate * dt);
         Vector3 finalVelocity = unit.State.MoveState.MovementVelocity + unit.State.MoveState.ExternalForcesVelocity;

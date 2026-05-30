@@ -143,13 +143,6 @@ MonoBehaviour:
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
-  Stats:
-    HealthBuffs:
-      MaxHealth: 0
-      HealthOnStart: 0
-      Armor: 0
-      Regeneration: 0
-      RegenerationDelay: 0
   Owner: {fileID: 0}
 --- !u!114 &2166258142637763749
 MonoBehaviour:
