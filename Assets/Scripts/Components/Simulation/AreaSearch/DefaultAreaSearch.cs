@@ -35,7 +35,6 @@ public class DefaultAreaSearch : AreaSearchSO
 
             Stats.Components.Effect.Affect(u, efStats);
         }
-        Debug.Log(_detectedUnitsCache.Count);
         return _detectedUnitsCache;
     }
 }

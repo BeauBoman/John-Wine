@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayerMover
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMover
   <Stats>k__BackingField:
-    MaxSpeed: 8
+    MaxSpeed: 20
     Acceleration: 50
     Deceleration: 50
+    AirDeceleration: 10
     Gravity: -18
     JumpForce: 5

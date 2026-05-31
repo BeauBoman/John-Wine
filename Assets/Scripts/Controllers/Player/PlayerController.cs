@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public sealed class PlayerController : Controller, IUpdatable
@@ -8,6 +9,8 @@ public sealed class PlayerController : Controller, IUpdatable
     public Transform FirePoint;
     public float PushPower = 2;
 
+    public float CoyoteTime;
+    public float JumpBufferTime;
     private float _coyoteTime;
     private float _jumpBufferTime;
     private ModifiableStats<MovementStats> moveStats;
@@ -18,8 +21,15 @@ public sealed class PlayerController : Controller, IUpdatable
         Registerer.RegisterUpdatable(this);
         moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
         _unit.ChangeAbility(0);
-    }
 
+        //StartCoroutine(BuffTest());
+    }
+    private IEnumerator BuffTest()
+    {
+        yield return new WaitForSeconds(5);
+        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
+        Debug.Log("Buff applied. You're on ice now lol");
+    }
     public void OnUpdate(float dt)
     {
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -29,18 +39,10 @@ public sealed class PlayerController : Controller, IUpdatable
         HandleGravity(dt);
         HandleJump(dt);
         HandleWeapon();
-        HandleDeceleration();
 
         _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
 
         _unit.State.CurrentAbility.ReloadProgress(dt);
-    }
-    private void HandleDeceleration()
-    {
-        //if (_unit.Refs.CC.isGrounded == false)
-        //{
-        //    moveStats.BuffMultiply(0.5f); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //}
     }
     private void HandleGravity(float dt)
     {
@@ -53,13 +55,13 @@ public sealed class PlayerController : Controller, IUpdatable
     private void HandleJump(float dt)
     {
         if (_unit.Refs.CC.isGrounded == true)
-            _coyoteTime = 0.2f;
+            _coyoteTime = CoyoteTime;
         else
             _coyoteTime -= dt;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _jumpBufferTime = 0.2f;
+            _jumpBufferTime = JumpBufferTime;
         }
 
         if (_jumpBufferTime > 0)

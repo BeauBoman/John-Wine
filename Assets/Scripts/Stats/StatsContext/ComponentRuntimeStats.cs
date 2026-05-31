@@ -11,6 +11,7 @@ public class ComponentRuntimeStats
     Dictionary<EffectSO, ModifiableStats<EffectStats>> EffectStats = new();
     Dictionary<AreaSearchSO, ModifiableStats<AreaSearchStats>> AreaSearchStats = new();
     Dictionary<SensorSO, ModifiableStats<SensorStats>> SensorStats = new();
+    Dictionary<RaycasterSO, ModifiableStats<RaycastStats>> RaycasterStats = new();
     //Dictionary<TemporaryBehaviorSO, ModifiableStats<TemporaryBehaviorStats>> TemporaryBehaviorStats;
     //Dictionary<PeriodicBehaviorSO, ModifiableStats<PeriodicBehaviorStats>> PeriodicBehaviorStats;
 
@@ -24,6 +25,11 @@ public class ComponentRuntimeStats
         if (pack.Effect != null) AddStats(pack.Effect);
         if (pack.Sensor != null) AddStats(pack.Sensor);
 
+        if(pack.Raycaster != null)
+        {
+            AddStats(pack.Raycaster);
+        }
+
         if (pack.AreaSearcher != null)
         {
             AddStats(pack.AreaSearcher);
@@ -36,6 +42,7 @@ public class ComponentRuntimeStats
     public ref readonly EffectStats GetStats(EffectSO config) => ref EffectStats[config].Value;
     public ref readonly AreaSearchStats GetStats(AreaSearchSO config) => ref AreaSearchStats[config].Value;
     public ref readonly SensorStats GetStats(SensorSO config) => ref SensorStats[config].Value;
+    public ref readonly RaycastStats GetStats(RaycasterSO config) => ref RaycasterStats[config].Value;
     //public TemporaryBehaviorStats GetStats(TemporaryBehaviorSO config) => TemporaryBehaviorStats[config].Value;
     //public PeriodicBehaviorStats GetStats(PeriodicBehaviorSO config) => PeriodicBehaviorStats[config].Value;
     public ModifiableStats<AbilityStats> GetStatsModifiable(AbilitySO config) => AbilityStats[config];
@@ -70,6 +77,12 @@ public class ComponentRuntimeStats
         if (SensorStats.ContainsKey(config)) return;
 
         SensorStats.Add(config, new ModifiableStats<SensorStats>(config.Stats));
+    }
+    public void AddStats(RaycasterSO config)
+    {
+        if (RaycasterStats.ContainsKey(config)) return;
+
+        RaycasterStats.Add(config, new ModifiableStats<RaycastStats>(config.Stats));
     }
 
 }
