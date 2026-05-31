@@ -4,7 +4,7 @@ public abstract class Behavior
 {
     public bool Ended = false;
     protected Unit target;
-    protected ComponentRuntimeStats stats;
+    protected ComponentRuntimeStats statsCarrier;
 
     protected float durationProgress;
     public abstract void OnUpdate(float dt);
@@ -15,7 +15,7 @@ public abstract class Behavior
     public Behavior(Unit targetUnit, ComponentRuntimeStats statsCarrier)
     {
         target = targetUnit;
-        this.stats = statsCarrier;
+        this.statsCarrier = statsCarrier;
     }
 }
 public class TemporaryBehavior : Behavior
@@ -47,13 +47,15 @@ public class TemporaryBehavior : Behavior
     {
 
     }
-    public TemporaryBehavior(TemporaryBehaviorSO config, Unit targetUnit, ComponentRuntimeStats stats, SimulationComponentsPack startComponents, SimulationComponentsPack endCompoennts) : base(targetUnit, stats)
+    public TemporaryBehavior(TemporaryBehaviorSO config, Unit targetUnit, ComponentRuntimeStats statsCarrier, SimulationComponentsPack startComponents, SimulationComponentsPack endCompoennts) : base(targetUnit, statsCarrier)
     {
         this.config = config;
         StartComponents = startComponents;
         EndComponents = endCompoennts;
 
         Stats = new ModifiableStats<TemporaryBehaviorStats>(config.Stats);
+        statsCarrier.SetComponentsStats(StartComponents);
+        statsCarrier.SetComponentsStats(EndComponents);
     }
 }
 public class PeriodicBehavior : Behavior
@@ -99,11 +101,12 @@ public class PeriodicBehavior : Behavior
         PeriodTicked = false;
         _periodProgress = 0;
     }
-    public PeriodicBehavior(PeriodicBehaviorSO config, Unit targetUnit, ComponentRuntimeStats stats, SimulationComponentsPack periodicComponents) : base(targetUnit, stats)
+    public PeriodicBehavior(PeriodicBehaviorSO config, Unit targetUnit, ComponentRuntimeStats statsCarrier, SimulationComponentsPack periodicComponents) : base(targetUnit, statsCarrier)
     {
         this.config = config;
         PeriodicComponents = periodicComponents;
 
         Stats = new ModifiableStats<PeriodicBehaviorStats>(config.Stats);
+        base.statsCarrier.SetComponentsStats(PeriodicComponents);
     }
 }

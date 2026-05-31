@@ -898,7 +898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8af0f5ab6ea1c46bfcd42125c77525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraMovement
-  Unit: {fileID: 879862614}
+  _unit: {fileID: 879862614}
   playerCamera: {fileID: 327409916}
 --- !u!114 &879862614
 MonoBehaviour:
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5242806d11d57240bee5f6010dc15fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DummyController
-  Unit: {fileID: 1589428127}
+  _unit: {fileID: 1589428127}
 --- !u!1 &1816921518
 GameObject:
   m_ObjectHideFlags: 0

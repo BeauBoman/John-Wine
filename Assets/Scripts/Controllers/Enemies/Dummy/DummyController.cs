@@ -1,17 +1,23 @@
 using UnityEngine;
 
-public sealed class DummyController : Controller
+public sealed class DummyController : Controller, IUpdatable
 {
-    public Unit Unit;
-    private void Start() => Unit.OnSpawn();
+    [SerializeField] private Unit _unit;
+    private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {
-        Unit.OnHealthIsZero += Death;
-        Debug.Log(Unit.State.HealthState.CurrentHealth);
+        _unit.OnHealthIsZero += Death;
+        Registerer.RegisterUpdatable(this);
+    }
+    public void OnUpdate(float dt)
+    {
+        _unit.OnUpdate(dt);
     }
     public void Death()
     {
-        Unit.OnHealthIsZero -= Death;
+        _unit.OnHealthIsZero -= Death;
+        Registerer.UnregisterUpdatable(this);
+
         Destroy(gameObject);
     }
 }

@@ -27,13 +27,24 @@ public class DefaultAreaSearch : AreaSearchSO
             _colliderBuffer[i] = null;
         }
 
-
-        EffectStats efStats = statsCarrier.GetStats(Stats.Components.Effect);
-        for(int i = 0;i < _detectedUnitsCache.Count; i++)
+        if (Stats.Components.Effect != null)
         {
-            Unit u = _detectedUnitsCache[i];
+            EffectStats efStats = statsCarrier.GetStats(Stats.Components.Effect);
+            for (int i = 0; i < _detectedUnitsCache.Count; i++)
+            {
+                Unit u = _detectedUnitsCache[i];
 
-            Stats.Components.Effect.Affect(u, efStats);
+                Stats.Components.Effect.Affect(u, efStats);
+            }
+        }
+        if (Stats.Components.PeriodicBehaviour != null)
+        {
+            for (int i = 0; i < _detectedUnitsCache.Count; i++)
+            {
+                Unit u = _detectedUnitsCache[i];
+
+                Stats.Components.PeriodicBehaviour.ApplyBehavior(u);
+            }
         }
         return _detectedUnitsCache;
     }

@@ -20,5 +20,6 @@ public struct SimulationComponentsPack
     [SerializeReference] public List<AbilitySO> Abilities;
     [SerializeReference] public Spawner<Unit> UnitSpawner;
     [SerializeReference] public EffectSO Effect;
-    [SerializeReference] public BehaviorSO Behaviour;
+    [SerializeReference] public TemporaryBehaviorSO TemporaryBehaviour;
+    [SerializeReference] public PeriodicBehaviorSO PeriodicBehaviour;
 }

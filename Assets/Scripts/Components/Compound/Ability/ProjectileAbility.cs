@@ -11,7 +11,10 @@ public class ProjectileAbility : AbilitySO
     public override void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
     {
         if (hitUnit != null)
-            ImpactComponents.Effect.Affect(hitUnit, statsCarrier.GetStats(ImpactComponents.Effect));
+        {
+            if (ImpactComponents.Effect != null)
+                ImpactComponents.Effect.Affect(hitUnit, statsCarrier.GetStats(ImpactComponents.Effect));
+        }
         ImpactComponents.AreaSearcher.Search(statsCarrier, hitPos.position, Quaternion.identity, sourceUnit);
     }
 }

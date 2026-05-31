@@ -32,6 +32,8 @@ public sealed class PlayerController : Controller, IUpdatable
     }
     public void OnUpdate(float dt)
     {
+        _unit.OnUpdate(dt);
+
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         Vector3 moveDir = ConvertToCameraSpace(input);

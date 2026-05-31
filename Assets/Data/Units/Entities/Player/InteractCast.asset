@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2bbd2e3ad01db418c610b58a6b3de1, type: 3}
   m_Name: InteractCast
   m_EditorClassIdentifier: Assembly-CSharp::DefaultRaycaster
-  _layer:
-    serializedVersion: 2
-    m_Bits: 128
+  <Stats>k__BackingField:
+    Range: 3
+    Layer:
+      serializedVersion: 2
+      m_Bits: 128

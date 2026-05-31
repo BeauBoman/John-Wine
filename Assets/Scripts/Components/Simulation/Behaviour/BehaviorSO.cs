@@ -9,37 +9,23 @@ public abstract class BehaviorSO : ScriptableObject
 }
 public abstract class TemporaryBehaviorSO : BehaviorSO
 {
-    [SerializeField] public TemporaryBehaviorStats Stats;
+    [field: SerializeField] public TemporaryBehaviorStats Stats { get; private set; }
     [SerializeField] public SimulationComponentsPack StartComponents;
     [SerializeField] public SimulationComponentsPack EndComponents;
 }
 public abstract class PeriodicBehaviorSO : BehaviorSO
 {
-    [SerializeField] public PeriodicBehaviorStats Stats;
+    [field: SerializeField] public PeriodicBehaviorStats Stats { get; private set; }
     [SerializeField] public SimulationComponentsPack PeriodicComponents;
 }
 [Serializable]
 public struct TemporaryBehaviorStats
 {
     public float Duration;
-    public static TemporaryBehaviorStats operator +(TemporaryBehaviorStats a, TemporaryBehaviorStats b)
-    {
-        return new TemporaryBehaviorStats()
-        {
-            Duration = a.Duration + b.Duration
-        };
-    }
 }
+[Serializable]
 public struct PeriodicBehaviorStats
 {
     public float Duration;
     public float Period;
-    public static PeriodicBehaviorStats operator +(PeriodicBehaviorStats a, PeriodicBehaviorStats b)
-    {
-        return new PeriodicBehaviorStats()
-        {
-            Duration = a.Duration + b.Duration,
-            Period = a.Period + b.Period
-        };
-    }
 }

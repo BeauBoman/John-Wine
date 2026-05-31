@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using UnityEngine;
 public class BehaviorMachine : IUpdatable
 {
     private Unit _unit;
-    private List<PeriodicBehavior> PeriodicBehaviors;
-    private List<TemporaryBehavior> TemporaryBehaviors;
+    private List<PeriodicBehavior> PeriodicBehaviors = new();
+    private List<TemporaryBehavior> TemporaryBehaviors = new();
     public void ApplyBehavior(TemporaryBehavior b)
     {
         TemporaryBehaviors.Add(b);

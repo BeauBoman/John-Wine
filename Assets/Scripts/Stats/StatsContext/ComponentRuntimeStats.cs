@@ -12,8 +12,8 @@ public class ComponentRuntimeStats
     Dictionary<AreaSearchSO, ModifiableStats<AreaSearchStats>> AreaSearchStats = new();
     Dictionary<SensorSO, ModifiableStats<SensorStats>> SensorStats = new();
     Dictionary<RaycasterSO, ModifiableStats<RaycastStats>> RaycasterStats = new();
-    //Dictionary<TemporaryBehaviorSO, ModifiableStats<TemporaryBehaviorStats>> TemporaryBehaviorStats;
-    //Dictionary<PeriodicBehaviorSO, ModifiableStats<PeriodicBehaviorStats>> PeriodicBehaviorStats;
+    Dictionary<TemporaryBehaviorSO, ModifiableStats<TemporaryBehaviorStats>> TemporaryBehaviorStats = new();
+    Dictionary<PeriodicBehaviorSO, ModifiableStats<PeriodicBehaviorStats>> PeriodicBehaviorStats = new();
 
     public void SetComponentsStats(SimulationComponentsPack pack)
     {
@@ -24,10 +24,15 @@ public class ComponentRuntimeStats
         if (pack.Mover != null) AddStats(pack.Mover);
         if (pack.Effect != null) AddStats(pack.Effect);
         if (pack.Sensor != null) AddStats(pack.Sensor);
+        if(pack.Raycaster != null) AddStats(pack.Raycaster);
 
-        if(pack.Raycaster != null)
+        if(pack.TemporaryBehaviour != null)
         {
-            AddStats(pack.Raycaster);
+            AddStats(pack.TemporaryBehaviour);
+        }
+        if(pack.PeriodicBehaviour != null)
+        {
+            AddStats(pack.PeriodicBehaviour);
         }
 
         if (pack.AreaSearcher != null)
@@ -43,8 +48,8 @@ public class ComponentRuntimeStats
     public ref readonly AreaSearchStats GetStats(AreaSearchSO config) => ref AreaSearchStats[config].Value;
     public ref readonly SensorStats GetStats(SensorSO config) => ref SensorStats[config].Value;
     public ref readonly RaycastStats GetStats(RaycasterSO config) => ref RaycasterStats[config].Value;
-    //public TemporaryBehaviorStats GetStats(TemporaryBehaviorSO config) => TemporaryBehaviorStats[config].Value;
-    //public PeriodicBehaviorStats GetStats(PeriodicBehaviorSO config) => PeriodicBehaviorStats[config].Value;
+    public ref readonly TemporaryBehaviorStats GetStats(TemporaryBehaviorSO config) => ref TemporaryBehaviorStats[config].Value;
+    public ref readonly PeriodicBehaviorStats GetStats(PeriodicBehaviorSO config) => ref PeriodicBehaviorStats[config].Value;
     public ModifiableStats<AbilityStats> GetStatsModifiable(AbilitySO config) => AbilityStats[config];
     public ModifiableStats<MovementStats> GetStatsModifiable(MoverSO config) => MoverStats[config];
 
@@ -84,7 +89,18 @@ public class ComponentRuntimeStats
 
         RaycasterStats.Add(config, new ModifiableStats<RaycastStats>(config.Stats));
     }
+    public void AddStats(TemporaryBehaviorSO config)
+    {
+        if (TemporaryBehaviorStats.ContainsKey(config)) return;
 
+        TemporaryBehaviorStats.Add(config, new ModifiableStats<TemporaryBehaviorStats>(config.Stats));
+    }
+    public void AddStats(PeriodicBehaviorSO config)
+    {
+        if (PeriodicBehaviorStats.ContainsKey(config)) return;
+
+        PeriodicBehaviorStats.Add(config, new ModifiableStats<PeriodicBehaviorStats>(config.Stats));
+    }
 }
 
 public class ModifiableStats<T> where T : struct
