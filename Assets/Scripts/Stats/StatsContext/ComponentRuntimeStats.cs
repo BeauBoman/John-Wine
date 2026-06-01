@@ -24,13 +24,13 @@ public class ComponentRuntimeStats
         if (pack.Mover != null) AddStats(pack.Mover);
         if (pack.Effect != null) AddStats(pack.Effect);
         if (pack.Sensor != null) AddStats(pack.Sensor);
-        if(pack.Raycaster != null) AddStats(pack.Raycaster);
+        if (pack.Raycaster != null) AddStats(pack.Raycaster);
 
-        if(pack.TemporaryBehaviour != null)
+        if (pack.TemporaryBehaviour != null)
         {
             AddStats(pack.TemporaryBehaviour);
         }
-        if(pack.PeriodicBehaviour != null)
+        if (pack.PeriodicBehaviour != null)
         {
             AddStats(pack.PeriodicBehaviour);
         }

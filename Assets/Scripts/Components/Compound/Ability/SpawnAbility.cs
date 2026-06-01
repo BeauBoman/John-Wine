@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Default Weapon", menuName = "Components/Compound/Ability/Default Ability")]
-public class ProjectileAbility : AbilitySO
+public class SpawnAbility : AbilitySO
 {
-    public override void Fire(PositionArgs positionArgs, Unit owner)
+    public override void Fire(ComponentRuntimeStats statsCarrier, PositionArgs positionArgs, Unit owner)
     {
         Unit spawnedUnit = LaunchComponents.UnitSpawner.Spawn(positionArgs, owner);
     }

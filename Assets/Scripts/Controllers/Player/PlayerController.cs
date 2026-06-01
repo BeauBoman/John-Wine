@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public sealed class PlayerController : Controller, IUpdatable
@@ -13,13 +12,13 @@ public sealed class PlayerController : Controller, IUpdatable
     public float JumpBufferTime;
     private float _coyoteTime;
     private float _jumpBufferTime;
-    private ModifiableStats<MovementStats> moveStats;
+    private ModifiableStats<MovementStats> _moveStats;
     private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {
         _unit.OnHealthIsZero += Death;
         Registerer.RegisterUpdatable(this);
-        moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
+        _moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
         _unit.ChangeAbility(0);
 
         //StartCoroutine(BuffTest());
@@ -71,12 +70,12 @@ public sealed class PlayerController : Controller, IUpdatable
 
         if (_jumpBufferTime > 0 && _unit.Refs.CC.isGrounded == true)
         {
-            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(moveStats.Value.JumpForce * -2f * moveStats.Value.Gravity);
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_moveStats.Value.JumpForce * -2f * _moveStats.Value.Gravity);
             return;
         }
         if (Input.GetKeyDown(KeyCode.Space) && _coyoteTime > 0)
         {
-            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(moveStats.Value.JumpForce * -2f * moveStats.Value.Gravity);
+            _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_moveStats.Value.JumpForce * -2f * _moveStats.Value.Gravity);
         }
     }
     private void HandleWeapon()
@@ -85,7 +84,7 @@ public sealed class PlayerController : Controller, IUpdatable
         {
             if (_unit.State.CurrentAbility.CanShoot == false) return;
 
-            _unit.State.CurrentAbility.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation), _unit);
+            _unit.State.CurrentAbility.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), _unit);
             _unit.State.CurrentAbility.ResetReloadProgress();
         }
     }

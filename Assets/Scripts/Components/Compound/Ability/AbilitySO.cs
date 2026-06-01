@@ -8,7 +8,7 @@ public abstract class AbilitySO : ScriptableObject
     [SerializeField] internal SimulationComponentsPack LaunchComponents;
     [Header("Impact")]
     [SerializeField] internal SimulationComponentsPack ImpactComponents;
-    public abstract void Fire(PositionArgs positionArgs, Unit owner = null);
+    public abstract void Fire(ComponentRuntimeStats statsCarrier, PositionArgs positionArgs, Unit owner = null);
     public abstract void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit);
 }
 public class Ability
@@ -23,7 +23,7 @@ public class Ability
     private ModifiableStats<AbilityStats> _stats;
     public void Fire(PositionArgs firePoint, Unit whoFired)
     {
-        config.Fire(firePoint, whoFired);
+        config.Fire(RuntimeStats, firePoint, whoFired);
     }
     public void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
     {
@@ -52,6 +52,9 @@ public class Ability
         config = c;
         RuntimeStats = s;
 
+        RuntimeStats.SetComponentsStats(config.LaunchComponents);
+        RuntimeStats.SetComponentsStats(config.ImpactComponents);
+
         _stats = s.GetStatsModifiable(config);
     }
 }
@@ -59,13 +62,4 @@ public class Ability
 public struct AbilityStats
 {
     public float ReloadSpeed;
-    public float Range;
-    public static AbilityStats operator +(AbilityStats a, AbilityStats b)
-    {
-        return new AbilityStats()
-        {
-            ReloadSpeed = a.ReloadSpeed + b.ReloadSpeed,
-            Range = a.Range + b.Range,
-        };
-    }
 }

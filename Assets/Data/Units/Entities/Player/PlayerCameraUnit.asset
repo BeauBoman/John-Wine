@@ -21,5 +21,6 @@ MonoBehaviour:
     Abilities: []
     UnitSpawner: {fileID: 0}
     Effect: {fileID: 0}
-    Behaviour: {fileID: 0}
+    TemporaryBehaviour: {fileID: 0}
+    PeriodicBehaviour: {fileID: 0}
   Tags: 16

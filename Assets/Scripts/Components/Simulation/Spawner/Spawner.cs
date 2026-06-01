@@ -11,10 +11,12 @@ public struct PositionArgs
 {
     public Vector3 position;
     public Quaternion rotation;
+    public Vector3 direction;
 
-    public PositionArgs(Vector3 position, Quaternion rotation)
+    public PositionArgs(Vector3 position, Quaternion rotation, Vector3 direction = default)
     {
         this.position = position;
         this.rotation = rotation;
+        this.direction = direction;
     }
 }
