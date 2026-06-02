@@ -21,6 +21,6 @@ MonoBehaviour:
       AreaSearcher: {fileID: 0}
       Abilities: []
       UnitSpawner: {fileID: 0}
-      Effect: {fileID: 0}
+      Effect: {fileID: 11400000, guid: 7dd0d076d145ed94080baca48b3b656a, type: 2}
       TemporaryBehaviour: {fileID: 0}
-      PeriodicBehaviour: {fileID: 11400000, guid: fa8e7dffb6d5b8945a3bd4e117a09aa0, type: 2}
+      PeriodicBehaviour: {fileID: 0}
