@@ -9,7 +9,7 @@ public abstract class EffectSO : ScriptableObject
     /// <param name="targetUnit"></param>
     /// <returns></returns>
     [field: SerializeField] public EffectStats Stats { get; private set; }
-    public abstract Unit Affect(Unit targetUnit, ComponentRuntimeStats statsCarrier);
+    public abstract Unit Affect(Unit targetUnit, ComponentRuntimeStats statsCarrier, Unit sourceUnit = null);
 }
 [Serializable]
 public struct EffectStats

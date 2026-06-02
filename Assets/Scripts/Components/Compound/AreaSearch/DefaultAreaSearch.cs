@@ -6,13 +6,13 @@ public class DefaultAreaSearch : AreaSearchSO
 {
     private readonly Collider[] _colliderBuffer = new Collider[50];
     private readonly List<Unit> _detectedUnitsCache = new List<Unit>(50);
-    public override List<Unit> Search(ComponentRuntimeStats statsCarrier, Vector3 pos, Quaternion rotation, Unit sourceUnit)
+    public override List<Unit> Search(ComponentRuntimeStats statsCarrier, PositionArgs posArgs, Unit sourceUnit)
     {
         _detectedUnitsCache.Clear();
 
-        SensorStats _sensorStats = statsCarrier.GetStats(Stats.Components.Sensor);
         AreaSearchStats _areaSearchStats = statsCarrier.GetStats(this);
-        int _count = Physics.OverlapSphereNonAlloc(pos, _areaSearchStats.Size.x, _colliderBuffer, _sensorStats.LayerFilter);
+        SensorStats _sensorStats = statsCarrier.GetStats(Stats.Components.Sensor);
+        int _count = Physics.OverlapSphereNonAlloc(posArgs.position, _areaSearchStats.Size.x, _colliderBuffer, _sensorStats.LayerFilter);
 
         if (_count == 0)
             return _detectedUnitsCache;
@@ -46,11 +46,16 @@ public class DefaultAreaSearch : AreaSearchSO
                 };
                 for (int j = 0; j < _targetPoses.Length; j++)
                 {
-                    Vector3 _rayDir = (_targetPoses[j] - pos).normalized;
-                    RaycastHit _hit = Stats.Components.Raycaster.Raycast(statsCarrier, pos, _rayDir);
+                    Vector3 _rayDir = (_targetPoses[j] - posArgs.position).normalized;
+                    RaycastHit _hit = Stats.Components.Raycaster.Raycast(statsCarrier, posArgs.position, _rayDir);
                     if (_hit.collider != null && _hit.collider.transform == _foundUnit.transform)
                     {
-                        _detectedUnitsCache.Add(_foundUnit);
+                        Vector3 forward = posArgs.direction;
+                        Vector3 dirToTarget = (_hit.point - posArgs.position).normalized;
+                        float _dot = forward.x * dirToTarget.x + forward.y * dirToTarget.y + forward.z * dirToTarget.z;
+
+                        if (_dot > _areaSearchStats.CosCutOff)
+                            _detectedUnitsCache.Add(_foundUnit);
                         break;
                     }
                 }
@@ -67,6 +72,8 @@ public class DefaultAreaSearch : AreaSearchSO
         for (int i = 0; i < _detectedUnitsCache.Count; i++)
         {
             Unit _u = _detectedUnitsCache[i];
+            Vector3 dir = (_u.transform.position - posArgs.position).normalized;
+            Quaternion rot = dir != Vector3.zero ? Quaternion.LookRotation(dir) : Quaternion.identity;
 
             if (Stats.Components.Effect != null)
                 Stats.Components.Effect.Affect(_u, statsCarrier);
@@ -78,21 +85,18 @@ public class DefaultAreaSearch : AreaSearchSO
                 Stats.Components.TemporaryBehaviour.ApplyBehavior(_u);
 
             if (Stats.Components.AreaSearcher != null)
-                Stats.Components.AreaSearcher.Search(statsCarrier, _u.transform.position, Quaternion.identity, sourceUnit);
+                Stats.Components.AreaSearcher.Search(statsCarrier, new PositionArgs(_u.transform.position, rot, dir), sourceUnit);
 
             if (Stats.Components.Abilities != null)
             {
                 for (int j = 0; j < Stats.Components.Abilities.Count; j++)
                 {
-                    Vector3 direction = (_u.transform.position - pos).normalized;
-                    Quaternion rot = direction != Vector3.zero ? Quaternion.LookRotation(direction) : Quaternion.identity;
-
-                    Stats.Components.Abilities[j].Fire(statsCarrier, new PositionArgs (_u.transform.position, rot, direction), sourceUnit);
+                    Stats.Components.Abilities[j].Fire(statsCarrier, new PositionArgs(_u.transform.position, rot, dir), sourceUnit);
                 }
             }
 
             if (Stats.Components.UnitSpawner != null)
-                Stats.Components.UnitSpawner.Spawn(new PositionArgs(_u.transform.position, Quaternion.identity), sourceUnit);
+                Stats.Components.UnitSpawner.Spawn(new PositionArgs(_u.transform.position, rot, dir), sourceUnit);
         }
 
         return _detectedUnitsCache;

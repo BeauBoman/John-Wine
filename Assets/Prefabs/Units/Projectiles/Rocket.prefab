@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 260fbfbcdccd4964295f8348d80a4bf3, type: 2}
-  ControllerScript: {fileID: 2166258142637763749}
+  <ControllerScript>k__BackingField: {fileID: 2166258142637763749}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}

@@ -9,12 +9,14 @@ public abstract class AreaSearchSO : ScriptableObject
     /// Method searches for units in area and calls components for each one of them.
     /// </summary>
     /// <returns>List of found objects</returns>
-    public abstract List<Unit> Search(ComponentRuntimeStats statsCarrier, Vector3 pos, Quaternion rotation, Unit owner);
+    public abstract List<Unit> Search(ComponentRuntimeStats statsCarrier, PositionArgs posArgs, Unit owner);
 }
 [Serializable]
 public struct AreaSearchStats
 {
     public Vector3 Size;
-
+    [Range(0f, 360f)]
+    public float Angle;
+    public readonly float CosCutOff => Mathf.Cos((Angle * 0.5f) * Mathf.Deg2Rad);
     public SimulationComponentsPack Components;
 }
