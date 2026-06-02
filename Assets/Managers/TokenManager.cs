@@ -4,9 +4,11 @@ using UnityEngine;
 public class TokenManager : MonoBehaviour
 {
     public static TokenManager instance;
+    
 
     [SerializeField] private int _maxTokens;
-    private Dictionary<GameObject, float> _activeTokens = new();
+    [HideInInspector] public Dictionary<GameObject, float> _activeTokens = new();
+    private Dictionary <GameObject, EnemyPathfinding> _enemies = new();
     void Awake()
     {
         instance = this;
@@ -19,6 +21,10 @@ public class TokenManager : MonoBehaviour
         {
             _activeTokens[enemy] = priority;
             return true;
+        }
+        else
+        {
+            _enemies.Add(enemy, enemy.GetComponent<EnemyPathfinding>());
         }
         if (_activeTokens.Count < _maxTokens)
         {
@@ -40,17 +46,12 @@ public class TokenManager : MonoBehaviour
 
         if (priority > lowestPriority)
         {
-            lowestPriorityEnemy.GetComponent<EnemyController>().ReleaseToken();
+            _enemies.TryGetValue(lowestPriorityEnemy, out EnemyPathfinding enemyPathfinding);
+
+            enemyPathfinding.ReleaseToken();
             _activeTokens.Add(enemy, priority);
             return true;
         }
         return false;
-    }
-    public void RemoveToken(GameObject enemy)
-    {
-        if (_activeTokens.ContainsKey(enemy))
-        {
-            _activeTokens.Remove(enemy);
-        }
     }
 }

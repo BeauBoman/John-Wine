@@ -287,8 +287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _unit: {fileID: 175392125}
-  target: {fileID: 654515837}
-  _stopDistance: 10
 --- !u!114 &175392125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,8 +656,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _unit: {fileID: 446167697}
-  target: {fileID: 654515837}
-  _stopDistance: 10
 --- !u!114 &446167697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,8 +1287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _unit: {fileID: 835540400}
-  target: {fileID: 654515837}
-  _stopDistance: 10
 --- !u!114 &835540400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,8 +2293,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _unit: {fileID: 1483985561}
-  target: {fileID: 654515837}
-  _stopDistance: 10
 --- !u!114 &1483985561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3114,8 +3106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _unit: {fileID: 2019177094}
-  target: {fileID: 654515837}
-  _stopDistance: 10
 --- !u!1 &2024115900
 GameObject:
   m_ObjectHideFlags: 0
