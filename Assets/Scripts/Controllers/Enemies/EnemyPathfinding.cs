@@ -8,32 +8,41 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
 {
     [HideInInspector] public Unit unit;
     public Transform playerTarget;
-    public Transform flanks;
-    [SerializeField] private float _maxDistance;
+    [SerializeField] private float _maxDistanceSearch;
+    [SerializeField] private float _minDistanceFlank;
+    [SerializeField] private float _maxDistanceFlank;
 
-    private List<Transform> _flankTarget = new();
     private bool _token;
-    private int _targetIndex;
-    private float _ignoreFlank;
     private NavMeshAgent _agent;
+    private Vector3 _flank;
+    private Vector3 _modifier;
+    private float _threshold;
+    private Vector3 _groundedPlayerPos;
     void Start()
     {
-        foreach (Transform child in flanks)
-        {
-            _flankTarget.Add(child);
-        }
-
         unit = GetComponent<Unit>();
         Registerer.RegisterUpdatable(this);
         _agent = GetComponent<NavMeshAgent>();
-        _targetIndex = Random.Range(0, _flankTarget.Count);
-        _ignoreFlank = Vector3.Distance(playerTarget.position, _flankTarget[_targetIndex].position);
-
         TokenManager.instance._enemies.Add(gameObject, this);
+
+        Vector2 randomCircle = Random.insideUnitCircle.normalized;
+        _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_minDistanceFlank, _maxDistanceFlank);
+        _threshold = _modifier.magnitude;
     }
 
     public void OnUpdate(float deltaTime)
     {
+        if (NavMesh.SamplePosition(playerTarget.position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+        {
+            _groundedPlayerPos = hit.position;
+        }
+        else
+        {
+            _groundedPlayerPos = playerTarget.position;
+        }
+
+        _flank = new Vector3(playerTarget.position.x + _modifier.x, _groundedPlayerPos.y, playerTarget.position.z + _modifier.z);
+
         GetToken();
         CheckDistance();
     }
@@ -41,7 +50,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     {
         float distanceToPlayer = Vector3.Distance(transform.position, playerTarget.position);
 
-        if (distanceToPlayer <= _ignoreFlank)
+        if (distanceToPlayer <= _threshold + 0.5f)
         {
             if (!_token)
             {
@@ -49,22 +58,18 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
             }
             if (_token)
             {
-                if (distanceToPlayer <= _ignoreFlank)
-                {
-                    _agent.SetDestination(playerTarget.position);
-                } else
-                    _agent.SetDestination(_flankTarget[_targetIndex].position);
+                _agent.SetDestination(playerTarget.position);
             }
             else
             {
-                _agent.SetDestination(_flankTarget[_targetIndex].position);
+                _agent.SetDestination(_flank);
             }
         }
         else
         {
-            _agent.SetDestination(_flankTarget[_targetIndex].position);
+            _agent.SetDestination(_flank);
 
-            if (_token && distanceToPlayer > _ignoreFlank + 1f)
+            if (_token && distanceToPlayer > _threshold + 1f)
             {
                 ReleaseToken();
             }
@@ -78,7 +83,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         {
             _agent.SetDestination(transform.position);
         }
-        if (distance > _maxDistance)
+        if (distance > _maxDistanceSearch)
         {
             _agent.SetDestination(transform.position);
         }
