@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Default Weapon", menuName = "Components/Compound/Ability/Default Ability")]
+[CreateAssetMenu(fileName = "Default Spawn Ability", menuName = "Components/Compound/Ability/Default Spawn Ability")]
 public class SpawnAbility : AbilitySO
 {
     public override void Fire(ComponentRuntimeStats statsCarrier, PositionArgs positionArgs, Unit owner)

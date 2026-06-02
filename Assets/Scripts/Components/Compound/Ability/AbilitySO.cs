@@ -25,9 +25,9 @@ public class Ability
     {
         config.Fire(RuntimeStats, firePoint, whoFired);
     }
-    public void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
+    public void OnHit(PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
     {
-        config.OnHit(statsCarrier, hitPos, sourceUnit, hitUnit);
+        config.OnHit(RuntimeStats, hitPos, sourceUnit, hitUnit);
     }
     public void ReloadProgress(float dt)
     {
@@ -51,9 +51,6 @@ public class Ability
     {
         config = c;
         RuntimeStats = s;
-
-        RuntimeStats.SetComponentsStats(config.LaunchComponents);
-        RuntimeStats.SetComponentsStats(config.ImpactComponents);
 
         _stats = s.GetStatsModifiable(config);
     }

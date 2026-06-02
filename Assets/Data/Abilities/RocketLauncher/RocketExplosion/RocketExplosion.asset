@@ -19,7 +19,8 @@ MonoBehaviour:
       Sensor: {fileID: 11400000, guid: 475ddf4c659f1504d9120378fb1aa9bb, type: 2}
       Raycaster: {fileID: 11400000, guid: 3a9e719160767f04abc86329f6a0d873, type: 2}
       AreaSearcher: {fileID: 0}
-      Abilities: []
+      Abilities:
+      - {fileID: 11400000, guid: 48b1fb9d88bd9854c8b531332fd8f862, type: 2}
       UnitSpawner: {fileID: 0}
       Effect: {fileID: 11400000, guid: 7dd0d076d145ed94080baca48b3b656a, type: 2}
       TemporaryBehaviour: {fileID: 0}

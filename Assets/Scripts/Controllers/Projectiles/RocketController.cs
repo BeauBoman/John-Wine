@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class Rocket : Controller, IUpdatable
+public sealed class RocketController : Controller, IUpdatable
 {
     public Unit Unit;
 
@@ -31,7 +31,7 @@ public sealed class Rocket : Controller, IUpdatable
     }
     public void OnHit(Unit hitUnit)
     {
-        _ability.OnHit(Unit.Stats, new PositionArgs(transform.position, Quaternion.identity), Unit, hitUnit);
+        _ability.OnHit(new PositionArgs(transform.position, Quaternion.identity), Unit, hitUnit);
         Death();
     }
     public void Death()
