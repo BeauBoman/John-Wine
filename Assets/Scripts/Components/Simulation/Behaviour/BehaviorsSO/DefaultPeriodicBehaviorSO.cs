@@ -9,6 +9,6 @@ public sealed class DefaultPeriodicBehaviorSO : PeriodicBehaviorSO
     }
     protected override PeriodicBehavior CreatePeriodBehavior(Unit targetUnit)
     {
-        return new DefaultPeriodicBehavior(this, targetUnit, targetUnit.Stats, PeriodicComponents);
+        return new DefaultPeriodicBehavior(this, targetUnit, PeriodicComponents);
     }
 }

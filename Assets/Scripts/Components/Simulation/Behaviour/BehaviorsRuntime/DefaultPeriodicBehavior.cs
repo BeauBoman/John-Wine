@@ -5,7 +5,7 @@ public class DefaultPeriodicBehavior : PeriodicBehavior
     public override void OnPeriod()
     {
         if (PeriodicComponents.Effect != null)
-            PeriodicComponents.Effect.Affect(target, statsCarrier.GetStats(PeriodicComponents.Effect));
+            PeriodicComponents.Effect.Affect(target, statsCarrier);
     }
-    public DefaultPeriodicBehavior(PeriodicBehaviorSO config, Unit targetUnit, ComponentRuntimeStats statsCarrier, SimulationComponentsPack periodicComponents) : base(config, targetUnit, statsCarrier, periodicComponents) { }
+    public DefaultPeriodicBehavior(PeriodicBehaviorSO config, Unit targetUnit, SimulationComponentsPack periodicComponents) : base(config, targetUnit, periodicComponents) { }
 }

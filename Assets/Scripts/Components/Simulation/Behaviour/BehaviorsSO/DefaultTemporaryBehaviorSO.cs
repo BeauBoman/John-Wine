@@ -9,6 +9,6 @@ public sealed class DefaultTemporaryBehaviorSO : TemporaryBehaviorSO
     }
     protected override TemporaryBehavior CreateTempBehavior(Unit targetUnit)
     {
-        return new DefaultTemporaryBehavior(this, targetUnit, targetUnit.Stats, StartComponents, EndComponents);
+        return new DefaultTemporaryBehavior(this, targetUnit, StartComponents, EndComponents);
     }
 }

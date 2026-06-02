@@ -40,6 +40,7 @@ public class ComponentRuntimeStats
             AddStats(pack.AreaSearcher);
             if (pack.AreaSearcher.Stats.Components.Sensor != null) AddStats(pack.AreaSearcher.Stats.Components.Sensor);
             if (pack.AreaSearcher.Stats.Components.Effect != null) AddStats(pack.AreaSearcher.Stats.Components.Effect);
+            if (pack.AreaSearcher.Stats.Components.Raycaster != null) AddStats(pack.AreaSearcher.Stats.Components.Raycaster);
         }
     }
     public ref readonly AbilityStats GetStats(AbilitySO config) => ref AbilityStats[config].Value;
@@ -50,8 +51,10 @@ public class ComponentRuntimeStats
     public ref readonly RaycastStats GetStats(RaycasterSO config) => ref RaycasterStats[config].Value;
     public ref readonly TemporaryBehaviorStats GetStats(TemporaryBehaviorSO config) => ref TemporaryBehaviorStats[config].Value;
     public ref readonly PeriodicBehaviorStats GetStats(PeriodicBehaviorSO config) => ref PeriodicBehaviorStats[config].Value;
+
     public ModifiableStats<AbilityStats> GetStatsModifiable(AbilitySO config) => AbilityStats[config];
     public ModifiableStats<MovementStats> GetStatsModifiable(MoverSO config) => MoverStats[config];
+    public ModifiableStats<RaycastStats> GetStatsModifiable(RaycasterSO config) => RaycasterStats[config];
 
     public void AddStats(AbilitySO config)
     {
@@ -107,12 +110,12 @@ public class ModifiableStats<T> where T : struct
 {
     private readonly T _baseValue;
     private T _buffValue;
-    public ref readonly T Value => ref _value;
 
+    public ref readonly T Value => ref _value;
     private T _value;
 
     private static readonly Func<T, T, T> AddOperation;
-    private static readonly Func<T, float, T> MultiplyOperation;
+    private static readonly Func<T, T, T> MultiplyOperation;
 
     static ModifiableStats()
     {
@@ -143,34 +146,56 @@ public class ModifiableStats<T> where T : struct
         AddOperation = Expression.Lambda<Func<T, T, T>>(addMemberInit, paramAddA, paramAddB).Compile();
 
 
-        var paramStruct = Expression.Parameter(typeof(T), "s");
-        var paramFloat = Expression.Parameter(typeof(float), "f");
+
+        var paramStructBase = Expression.Parameter(typeof(T), "sBase");
+        var paramStructMult = Expression.Parameter(typeof(T), "sMult");
         MemberBinding[] multiplyBindings = new MemberBinding[fields.Length];
 
         for (int i = 0; i < fields.Length; i++)
         {
             FieldInfo field = fields[i];
-            var fieldAccess = Expression.Field(paramStruct, field);
+            var fieldBase = Expression.Field(paramStructBase, field);
+            var fieldMult = Expression.Field(paramStructMult, field);
 
             if (field.FieldType == typeof(float) || field.FieldType == typeof(double))
             {
-                var multiplyField = Expression.Multiply(fieldAccess, paramFloat);
+                var zero = Expression.Convert(Expression.Constant(0.0), field.FieldType);
+                var one = Expression.Convert(Expression.Constant(1.0), field.FieldType);
+
+                var actualMultiplier = Expression.Condition(
+                    Expression.Equal(fieldMult, zero),
+                    one,
+                    fieldMult
+                );
+
+                var subOne = Expression.Subtract(actualMultiplier, one);
+                var multiplyField = Expression.Multiply(fieldBase, subOne);
                 multiplyBindings[i] = Expression.Bind(field, multiplyField);
             }
             else if (field.FieldType == typeof(int))
             {
-                var multiplyField = Expression.Multiply(Expression.Convert(fieldAccess, typeof(float)), paramFloat);
+                var castBase = Expression.Convert(fieldBase, typeof(float));
+                var castMult = Expression.Convert(fieldMult, typeof(float));
+
+                var actualMultiplier = Expression.Condition(
+                    Expression.Equal(castMult, Expression.Constant(0f)),
+                    Expression.Constant(1f),
+                    castMult
+                );
+
+                var subOne = Expression.Subtract(actualMultiplier, Expression.Constant(1f));
+                var multiplyField = Expression.Multiply(castBase, subOne);
                 var castToInt = Expression.Convert(multiplyField, typeof(int));
                 multiplyBindings[i] = Expression.Bind(field, castToInt);
             }
             else
             {
-                multiplyBindings[i] = Expression.Bind(field, fieldAccess);
+                multiplyBindings[i] = Expression.Bind(field, Expression.Default(field.FieldType));
             }
         }
 
         var multiplyMemberInit = Expression.MemberInit(Expression.New(typeof(T)), multiplyBindings);
-        MultiplyOperation = Expression.Lambda<Func<T, float, T>>(multiplyMemberInit, paramStruct, paramFloat).Compile();
+        MultiplyOperation = Expression.Lambda<Func<T, T, T>>(multiplyMemberInit, paramStructBase, paramStructMult).Compile();
     }
 
     public ModifiableStats(T baseValue)
@@ -186,12 +211,15 @@ public class ModifiableStats<T> where T : struct
         UpdateValue();
     }
 
-    public void BuffMultiply(float multiplier)
+    public void BuffMultiply(T multipliers)
     {
-        T buffDelta = MultiplyOperation(_baseValue, multiplier - 1f);
+        T buffDelta = MultiplyOperation(_baseValue, multipliers);
         _buffValue = AddOperation(_buffValue, buffDelta);
         UpdateValue();
     }
 
-    private void UpdateValue() => _value = AddOperation(_baseValue, _buffValue);
+    private void UpdateValue()
+    {
+        _value = AddOperation(_baseValue, _buffValue);
+    }
 }
