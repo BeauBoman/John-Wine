@@ -13,7 +13,7 @@ public class SpawnAbility : AbilitySO
         if (hitUnit != null)
         {
             if (ImpactComponents.Effect != null)
-                ImpactComponents.Effect.Affect(hitUnit, statsCarrier.GetStats(ImpactComponents.Effect));
+                ImpactComponents.Effect.Affect(hitUnit, statsCarrier);
         }
         ImpactComponents.AreaSearcher.Search(statsCarrier, hitPos.position, Quaternion.identity, sourceUnit);
     }

@@ -23,7 +23,7 @@ public class RaycastAbility : AbilitySO
         if (hitUnit != null)
         {
             if (ImpactComponents.Effect != null)
-                ImpactComponents.Effect.Affect(hitUnit, statsCarrier.GetStats(ImpactComponents.Effect));
+                ImpactComponents.Effect.Affect(hitUnit, statsCarrier);
         }
         if (ImpactComponents.AreaSearcher != null)
             ImpactComponents.AreaSearcher.Search(statsCarrier, hitPos.position, Quaternion.identity, sourceUnit);

@@ -17,7 +17,7 @@ MonoBehaviour:
     Components:
       Mover: {fileID: 0}
       Sensor: {fileID: 11400000, guid: 475ddf4c659f1504d9120378fb1aa9bb, type: 2}
-      Raycaster: {fileID: 0}
+      Raycaster: {fileID: 11400000, guid: 3a9e719160767f04abc86329f6a0d873, type: 2}
       AreaSearcher: {fileID: 0}
       Abilities: []
       UnitSpawner: {fileID: 0}
