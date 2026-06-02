@@ -1,33 +1,47 @@
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyPathfinding : MonoBehaviour, IUpdatable
 {
-    public Transform target;
-    [SerializeField] private float _stopDistance;
+    [HideInInspector] public Unit unit;
+    public Transform playerTarget;
+    public Transform flanks;
     [SerializeField] private float _maxDistance;
 
+    private List<Transform> _flankTarget = new();
     private bool _token;
+    private int _targetIndex;
+    private float _ignoreFlank;
     private NavMeshAgent _agent;
-
     void Start()
     {
-        _stopDistance = _stopDistance + Random.Range(0, 5f);
+        foreach (Transform child in flanks)
+        {
+            _flankTarget.Add(child);
+        }
+
+        unit = GetComponent<Unit>();
+        Registerer.RegisterUpdatable(this);
         _agent = GetComponent<NavMeshAgent>();
+        _targetIndex = Random.Range(0, _flankTarget.Count);
+        _ignoreFlank = Vector3.Distance(playerTarget.position, _flankTarget[_targetIndex].position);
+
+        TokenManager.instance._enemies.Add(gameObject, this);
     }
 
     public void OnUpdate(float deltaTime)
     {
-        CheckDistance();
         GetToken();
+        CheckDistance();
     }
     private void GetToken()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTarget.position);
 
-        if (distanceToPlayer <= _stopDistance)
+        if (distanceToPlayer <= _ignoreFlank)
         {
             if (!_token)
             {
@@ -35,18 +49,22 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
             }
             if (_token)
             {
-                _agent.SetDestination(target.position);
+                if (distanceToPlayer <= _ignoreFlank)
+                {
+                    _agent.SetDestination(playerTarget.position);
+                } else
+                    _agent.SetDestination(_flankTarget[_targetIndex].position);
             }
             else
             {
-                _agent.SetDestination(transform.position);
+                _agent.SetDestination(_flankTarget[_targetIndex].position);
             }
         }
         else
         {
-            _agent.SetDestination(target.position);
+            _agent.SetDestination(_flankTarget[_targetIndex].position);
 
-            if (_token && distanceToPlayer > _stopDistance + 1f)
+            if (_token && distanceToPlayer > _ignoreFlank + 1f)
             {
                 ReleaseToken();
             }
@@ -54,7 +72,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     }
     private void CheckDistance()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(transform.position, playerTarget.position);
 
         if (distance < 2f)
         {
@@ -75,5 +93,10 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
                 _token = false;
             }
         }
+    }
+    public void Death()
+    {
+        ReleaseToken();
+        Registerer.UnregisterUpdatable(this);
     }
 }
