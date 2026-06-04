@@ -67,6 +67,11 @@ public class Unit : MonoBehaviour
             OnHealthIsZero?.Invoke();
         }
     }
+    public void Die()
+    {
+        ControllerScript.OnDeath();
+        Destroy(gameObject);
+    }
     public void KillCredit()
     {
         OnKillEvent?.Invoke();
@@ -98,7 +103,9 @@ public enum Tags
 }
 public abstract class Controller : MonoBehaviour
 {
+    [SerializeField] protected Unit _unit;
     public abstract void OnStart();
+    public virtual void OnDeath() { }
 }
 [Serializable]
 public class MovementState

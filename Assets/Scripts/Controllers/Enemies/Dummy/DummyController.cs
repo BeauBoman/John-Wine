@@ -2,7 +2,6 @@ using UnityEngine;
 
 public sealed class DummyController : Controller, IUpdatable
 {
-    [SerializeField] private Unit _unit;
     private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {

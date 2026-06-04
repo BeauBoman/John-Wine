@@ -3,7 +3,6 @@ using UnityEngine;
 
 public sealed class PlayerController : Controller, IUpdatable
 {
-    [SerializeField] private Unit _unit;
     public Unit Camera;
     public Transform FirePoint;
     public float PushPower = 2;
@@ -16,17 +15,18 @@ public sealed class PlayerController : Controller, IUpdatable
     private void Start() => _unit.OnSpawn();
     public override void OnStart()
     {
-        _unit.OnHealthIsZero += Death;
+        _unit.OnHealthIsZero += _unit.Die;
         Registerer.RegisterUpdatable(this);
         _moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
         _unit.ChangeAbility(0);
 
-        //StartCoroutine(BuffTest());
+        StartCoroutine(BuffTest());
     }
     private IEnumerator BuffTest()
     {
         yield return new WaitForSeconds(5);
-        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
+        //_unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
+        _unit.Die();
         Debug.Log("Buff applied. You're on ice now lol");
     }
     public void OnUpdate(float dt)
@@ -100,13 +100,12 @@ public sealed class PlayerController : Controller, IUpdatable
         return Vector3.ClampMagnitude(forward * input.z + right * input.x, 1f);
     }
 
-    public void Death()
+    public override void OnDeath()
     {
-        _unit.OnHealthIsZero -= Death;
-        Registerer.UnregisterUpdatable(Camera as IUpdatable); //kostyl
+        _unit.OnHealthIsZero -= _unit.Die;
+        Camera.Die();
+
         Registerer.UnregisterUpdatable(this);
-        Destroy(Camera.gameObject);
-        Destroy(gameObject);
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
