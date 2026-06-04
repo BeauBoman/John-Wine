@@ -87,7 +87,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         float distance = Vector3.Distance(transform.position, playerTarget.position);
         unit.UnitSO.SimComponents.Movers.RotationalMover.Move(unit, playerTarget.position, dt);
 
-        if (distance > 2f && distance < _stats.maxDistanceSearch)
+        if (distance > _stats.stoppingDistance && distance < _stats.maxDistanceSearch)
         {
             if (_agent.pathPending == false && _agent.remainingDistance < 0.2f)
             {
