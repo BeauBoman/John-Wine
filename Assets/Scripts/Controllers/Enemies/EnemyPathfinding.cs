@@ -52,6 +52,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
 
         GetToken();
         CheckDistance();
+        RotateTowardsPlayer(deltaTime);
     }
     private void GetToken()
     {
@@ -94,6 +95,11 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         {
             _agent.SetDestination(transform.position);
         }
+    }
+    private void RotateTowardsPlayer(float dt)
+    {
+        Vector3 direction = (playerTarget.position - transform.position).normalized;
+        unit.UnitSO.SimComponents.Mover.Move(unit, direction, dt);
     }
     public void ReleaseToken()
     {
