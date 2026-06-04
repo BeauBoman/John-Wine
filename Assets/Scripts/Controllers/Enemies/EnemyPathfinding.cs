@@ -17,6 +17,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     private Vector3 _modifier;
     private float _threshold;
     private Vector3 _groundedPlayerPos;
+    private float _distanceToPlayer;
     void Start()
     {
         unit = GetComponent<Unit>();
@@ -49,58 +50,79 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         }
 
         _flank = new Vector3(playerTarget.position.x + _modifier.x, _groundedPlayerPos.y, playerTarget.position.z + _modifier.z);
+        _distanceToPlayer = Vector3.Distance(transform.position, playerTarget.position);
 
         GetToken();
         Mover(deltaTime);
     }
     private void GetToken()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTarget.position);
+        Vector3 target;
 
-        if (distanceToPlayer <= _threshold + 0.5f)
+        if (_distanceToPlayer <= _threshold + 0.5f)
         {
             if (!_token)
             {
-                _token = TokenManager.instance.RequestToken(gameObject, distanceToPlayer + _stats.tokenPriority);
+                _token = TokenManager.instance.RequestToken(gameObject, _distanceToPlayer + _stats.tokenPriority);
             }
-            if (_token)
-            {
-                _agent.SetDestination(playerTarget.position);
-            }
-            else
-            {
-                _agent.SetDestination(_flank);
-            }
+
+            target = _token ? playerTarget.position : _flank;
         }
         else
         {
-            _agent.SetDestination(_flank);
+            target = _flank;
 
-            if (_token && distanceToPlayer > _threshold + 1f)
+            if (_token && _distanceToPlayer > _threshold + 1f)
             {
                 ReleaseToken();
             }
         }
+        if (Vector3.Distance(_agent.destination, target) > 0.5f)
+        {
+            _agent.SetDestination(target);
+        }
     }
     private void Mover(float dt)
     {
-        float distance = Vector3.Distance(transform.position, playerTarget.position);
         unit.UnitSO.SimComponents.Movers.RotationalMover.Move(unit, playerTarget.position, dt);
 
-        if (distance > _stats.stoppingDistance && distance < _stats.maxDistanceSearch)
+        if (_distanceToPlayer > _stats.maxDistanceSearch)
         {
-            if (_agent.pathPending == false && _agent.remainingDistance < 0.2f)
+            unit.UnitSO.SimComponents.Movers.Mover.Move(unit, Vector3.zero, dt);
+            return;
+        }
+
+        if (_token != false && _distanceToPlayer <= _threshold)
+        {
+            ChangeFlank();
+        }
+
+        if (_agent.pathPending == false && _agent.remainingDistance < 0.2f)
+        {
+            unit.UnitSO.SimComponents.Movers.Mover.Move(unit, Vector3.zero, dt);
+
+            if (_token == false)
+            {
+                ChangeFlank();
+            }
+        }
+        else
+        {
+            if(_token == true && _distanceToPlayer <= _stats.stoppingDistance)
             {
                 unit.UnitSO.SimComponents.Movers.Mover.Move(unit, Vector3.zero, dt);
             }
             else
             {
-                unit.UnitSO.SimComponents.Movers.Mover.Move(unit, _agent.desiredVelocity.normalized, dt);
+                unit.UnitSO.SimComponents.Movers.Mover.Move(unit, new Vector3(_agent.desiredVelocity.x, 0, _agent.desiredVelocity.z).normalized, dt);
             }
-        } else
-        {
-            unit.UnitSO.SimComponents.Movers.Mover.Move(unit, Vector3.zero, dt);
         }
+    }
+    private void ChangeFlank()
+    {
+        Vector2 randomCircle = Random.insideUnitCircle.normalized;
+        _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_stats.minDistanceFlank, _stats.maxDistanceFlank);
+        _threshold = _modifier.magnitude;
     }
     public void ReleaseToken()
     {

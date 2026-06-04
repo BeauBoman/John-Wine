@@ -20,21 +20,17 @@ public sealed class EnemyController : Controller, IUpdatable
     {
         _unit.OnUpdate(dt);
         _unit.State.CurrentAbility.ReloadProgress(dt);
-        HandleWeapon();
+        //HandleWeapon();
     }
     private void HandleWeapon()
     {
         if (_pf._token == true)
         {
-            Debug.Log("token aquired");
             if (_unit.State.CurrentAbility.CanShoot == false) return;
 
-            Debug.Log("fired enemy");
             _unit.State.CurrentAbility.Fire(new PositionArgs(_unit.Turret.position, _unit.Turret.rotation, _unit.Turret.forward), new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), _unit);
             _unit.State.CurrentAbility.ResetReloadProgress();
         }
-        else
-            Debug.Log("Token denied");
     }
     public void Death()
     {
