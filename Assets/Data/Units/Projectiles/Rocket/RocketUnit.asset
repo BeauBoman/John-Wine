@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   StatsTemplate: {fileID: 11400000, guid: 6171dde949a3e894ead674cb939f8790, type: 2}
   SimComponents:
-    Mover: {fileID: 11400000, guid: 126dd149032c63a4ba9b95dc4ac97300, type: 2}
-    Effect: {fileID: 0}
-    Behaviour: {fileID: 0}
-    UnitSpawner: {fileID: 0}
     Sensor: {fileID: 11400000, guid: dae1611428821424c8df70302fa31edf, type: 2}
-    AreaSearcher: {fileID: 0}
     Raycaster: {fileID: 0}
-  Ability: {fileID: 0}
+    AreaSearcher: {fileID: 0}
+    Movers:
+      Mover: {fileID: 11400000, guid: 126dd149032c63a4ba9b95dc4ac97300, type: 2}
+      RotationalMover: {fileID: 0}
+    Abilities: []
+    UnitSpawner: {fileID: 0}
+    Effect: {fileID: 0}
+    TemporaryBehaviour: {fileID: 0}
+    PeriodicBehaviour: {fileID: 0}
   Tags: 1

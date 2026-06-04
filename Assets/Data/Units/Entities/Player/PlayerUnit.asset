@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   StatsTemplate: {fileID: 11400000, guid: 5d4b616ab7208a242a3e33e1d72919fe, type: 2}
   SimComponents:
-    Mover: {fileID: 11400000, guid: ab5bb72bb7a6a3642b6809ca72b97e83, type: 2}
     Sensor: {fileID: 0}
     Raycaster: {fileID: 0}
     AreaSearcher: {fileID: 0}
+    Movers:
+      Mover: {fileID: 11400000, guid: ab5bb72bb7a6a3642b6809ca72b97e83, type: 2}
+      RotationalMover: {fileID: 0}
     Abilities:
     - {fileID: 11400000, guid: 4f75e9e2e7296eb4a96e641653e1f913, type: 2}
     UnitSpawner: {fileID: 0}

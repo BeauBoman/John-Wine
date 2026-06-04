@@ -17,7 +17,7 @@ public sealed class PlayerController : Controller, IUpdatable
     {
         _unit.OnHealthIsZero += _unit.Die;
         Registerer.RegisterUpdatable(this);
-        _moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
+        _moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Movers.Mover);
         _unit.ChangeAbility(0);
 
         //StartCoroutine(BuffTest());
@@ -25,7 +25,7 @@ public sealed class PlayerController : Controller, IUpdatable
     private IEnumerator BuffTest()
     {
         yield return new WaitForSeconds(5);
-        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
+        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Movers.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
         _unit.Die();
         Debug.Log("Buff applied. You're on ice now lol");
     }
@@ -41,7 +41,7 @@ public sealed class PlayerController : Controller, IUpdatable
         HandleJump(dt);
         HandleWeapon();
 
-        _unit.UnitSO.SimComponents.Mover.Move(_unit, moveDir, dt);
+        _unit.UnitSO.SimComponents.Movers.Mover.Move(_unit, moveDir, dt);
 
         _unit.State.CurrentAbility.ReloadProgress(dt);
     }
@@ -51,7 +51,7 @@ public sealed class PlayerController : Controller, IUpdatable
         {
             _unit.State.MoveState.ExternalForcesVelocity.y = -2f;
         }
-        _unit.State.MoveState.ExternalForcesVelocity.y += _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Mover).Gravity * dt;
+        _unit.State.MoveState.ExternalForcesVelocity.y += _unit.Stats.GetStats(_unit.UnitSO.SimComponents.Movers.Mover).Gravity * dt;
     }
     private void HandleJump(float dt)
     {

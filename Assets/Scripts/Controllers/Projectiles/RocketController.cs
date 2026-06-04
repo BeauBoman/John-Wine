@@ -13,7 +13,7 @@ public sealed class RocketController : Controller, IUpdatable, IAbilityConfigCar
     }
     public void OnUpdate(float deltaTime)
     {
-        Unit.UnitSO.SimComponents.Mover.Move(Unit, transform.forward, deltaTime);
+        Unit.UnitSO.SimComponents.Movers.Mover.Move(Unit, transform.forward, deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {

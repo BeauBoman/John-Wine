@@ -18,7 +18,7 @@ public sealed class PlayerCameraController : Controller, IUpdatable
 
         Vector3 cameraInput = new Vector3(mouseX, mouseY, 0f);
 
-        _unit.UnitSO.SimComponents.Mover.Move(_unit, cameraInput, deltaTime);
+        _unit.UnitSO.SimComponents.Movers.RotationalMover.Move(_unit, cameraInput, deltaTime);
 
         HandleInteraction();
     }

@@ -6,20 +6,26 @@ using UnityEngine;
 public class UnitSO : ScriptableObject
 {
     [Header("General")]
-    [SerializeReference] public StatsTemplate StatsTemplate;
+    public StatsTemplate StatsTemplate;
     [SerializeField] public SimulationComponentsPack SimComponents;
-    [SerializeReference] public Tags Tags;
+    public Tags Tags;
 }
 [Serializable]
 public struct SimulationComponentsPack
 {
-    [SerializeReference] public MoverSO Mover;
-    [SerializeReference] public SensorSO Sensor;
-    [SerializeReference] public RaycasterSO Raycaster;
-    [SerializeReference] public AreaSearchSO AreaSearcher;
-    [SerializeReference] public List<AbilitySO> Abilities;
-    [SerializeReference] public Spawner<Unit> UnitSpawner;
-    [SerializeReference] public EffectSO Effect;
-    [SerializeReference] public TemporaryBehaviorSO TemporaryBehaviour;
-    [SerializeReference] public PeriodicBehaviorSO PeriodicBehaviour;
+    public SensorSO Sensor;
+    public RaycasterSO Raycaster;
+    public AreaSearchSO AreaSearcher;
+    public Movers Movers;
+    public List<AbilitySO> Abilities;
+    public Spawner<Unit> UnitSpawner;
+    public EffectSO Effect;
+    public TemporaryBehaviorSO TemporaryBehaviour;
+    public PeriodicBehaviorSO PeriodicBehaviour;
+}
+[Serializable]
+public struct Movers
+{
+    public MoverSO Mover;
+    public MoverSO RotationalMover;
 }
