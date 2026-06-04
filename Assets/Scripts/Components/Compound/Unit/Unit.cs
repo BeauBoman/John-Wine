@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour
     private List<Ability> Abilities = new List<Ability>();
     public ComponentRuntimeStats Stats = new();
     public ModifiableStats<HealthStats> Health;
-    public UnitState State = new();
+    public UnitState State;
 
     public event Action OnTakeDamageEvent;
     public event Action OnHealthIsZero;
@@ -27,7 +27,10 @@ public class Unit : MonoBehaviour
     private void OnStart()
     {
         if (UnitSO.StatsTemplate != null)
+        {
             Health = new(UnitSO.StatsTemplate.Health);
+            State = new(UnitSO.StatsTemplate);
+        }
         BehaviorMachine = new BehaviorMachine(this);
 
         Stats.SetComponentsStats(UnitSO.SimComponents);
@@ -81,8 +84,13 @@ public class Unit : MonoBehaviour
 public class UnitState
 {
     public Ability CurrentAbility;
-    public HealthState HealthState = new();
+    public HealthState HealthState;
     public MovementState MoveState = new();
+
+    public UnitState(StatsTemplate stats)
+    {
+        HealthState = new(stats);
+    }
 }
 [Serializable]
 public struct References
@@ -126,6 +134,13 @@ public class MovementState
 public class HealthState
 {
     public float CurrentHealth;
+    public float HealthDelta => CurrentHealth / _statsRef.Health.MaxHealth;
+
+    private StatsTemplate _statsRef;
+    public HealthState(StatsTemplate stats)
+    {
+        _statsRef = stats;
+    }
 }
 public interface IAbilityConfigCarrier
 {

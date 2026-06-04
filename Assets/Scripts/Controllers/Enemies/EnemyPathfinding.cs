@@ -24,6 +24,8 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         Registerer.RegisterUpdatable(this);
         _agent = GetComponent<NavMeshAgent>();
         _agent.updatePosition = false;
+        unit.OnTakeDamageEvent += OnDamage;
+        unit.OnHealthIsZero += Death;
 
         TokenManager.instance._enemies.Add(gameObject, this);
 
@@ -139,5 +141,16 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     {
         ReleaseToken();
         Registerer.UnregisterUpdatable(this);
+
+        unit.OnHealthIsZero -= Death;
+        unit.OnTakeDamageEvent -= OnDamage;
+    }
+    public void OnDamage()
+    {
+        if (unit.State.HealthState.HealthDelta <= 0.5f)
+        {
+        ReleaseToken();
+        ChangeFlank();
+        }
     }
 }

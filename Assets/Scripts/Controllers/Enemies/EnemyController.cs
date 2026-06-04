@@ -37,7 +37,6 @@ public sealed class EnemyController : Controller, IUpdatable
         _unit.OnHealthIsZero -= Death;
         Registerer.UnregisterUpdatable(this);
 
-        gameObject.GetComponent<EnemyPathfinding>().Death();
         Destroy(gameObject);
     }
 }
