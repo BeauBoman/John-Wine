@@ -10,11 +10,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     public Transform playerTarget;
     [HideInInspector] public bool _token;
 
-    [SerializeField] private float _maxDistanceSearch;
-    [SerializeField] private float _minDistanceFlank;
-    [SerializeField] private float _maxDistanceFlank;
-    [Tooltip("Default: 0")]
-    [SerializeField] private float _tokenAdditionalPriority;
+    [SerializeField] private PathfindingStats _stats;
 
     private NavMeshAgent _agent;
     private Vector3 _flank;
@@ -31,17 +27,15 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         TokenManager.instance._enemies.Add(gameObject, this);
 
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
-        _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_minDistanceFlank, _maxDistanceFlank);
+        _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_stats.minDistanceFlank, _stats.maxDistanceFlank);
         _threshold = _modifier.magnitude;
-
-        if (_tokenAdditionalPriority != 0)
-            _tokenAdditionalPriority = _tokenAdditionalPriority * -1f;
     }
 
     public void OnUpdate(float deltaTime)
     {
         if (playerTarget == null) return;
         if (_agent == null) return;
+        if (!_agent.isActiveAndEnabled || !_agent.isOnNavMesh) return;
 
         _agent.nextPosition = transform.position;
 
@@ -57,8 +51,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         _flank = new Vector3(playerTarget.position.x + _modifier.x, _groundedPlayerPos.y, playerTarget.position.z + _modifier.z);
 
         GetToken();
-        CheckDistance();
-        RotateTowardsPlayer(deltaTime);
+        Mover(deltaTime);
     }
     private void GetToken()
     {
@@ -68,7 +61,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         {
             if (!_token)
             {
-                _token = TokenManager.instance.RequestToken(gameObject, distanceToPlayer + _tokenAdditionalPriority);
+                _token = TokenManager.instance.RequestToken(gameObject, distanceToPlayer + _stats.tokenPriority);
             }
             if (_token)
             {
@@ -89,22 +82,25 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
             }
         }
     }
-    private void CheckDistance()
+    private void Mover(float dt)
     {
         float distance = Vector3.Distance(transform.position, playerTarget.position);
+        unit.UnitSO.SimComponents.Movers.RotationalMover.Move(unit, playerTarget.position, dt);
 
-        if (distance < 2f)
+        if (distance > 2f && distance < _stats.maxDistanceSearch)
         {
-            _agent.SetDestination(transform.position);
-        }
-        if (distance > _maxDistanceSearch)
+            if (_agent.pathPending == false && _agent.remainingDistance < 0.2f)
+            {
+                unit.UnitSO.SimComponents.Movers.Mover.Move(unit, Vector3.zero, dt);
+            }
+            else
+            {
+                unit.UnitSO.SimComponents.Movers.Mover.Move(unit, _agent.desiredVelocity.normalized, dt);
+            }
+        } else
         {
-            _agent.SetDestination(transform.position);
+            unit.UnitSO.SimComponents.Movers.Mover.Move(unit, Vector3.zero, dt);
         }
-    }
-    private void RotateTowardsPlayer(float dt)
-    {
-        unit.UnitSO.SimComponents.Mover.Move(unit, playerTarget.position, dt);
     }
     public void ReleaseToken()
     {
