@@ -4,10 +4,10 @@ public class Registerer : MonoBehaviour
 {
     public static void RegisterUpdatable(IUpdatable upd)
     {
-        UpdateManager.RegisterUpdate(upd);
+        UpdateManager.Instance.RegisterUpdate(upd);
     }    
     public static void UnregisterUpdatable(IUpdatable upd)
     {
-        UpdateManager.UnregisterUpdate(upd);
+        UpdateManager.Instance.UnregisterUpdate(upd);
     }
 }

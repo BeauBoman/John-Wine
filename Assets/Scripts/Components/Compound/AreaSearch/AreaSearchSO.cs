@@ -17,6 +17,7 @@ public struct AreaSearchStats
     public Vector3 Size;
     [Range(0f, 360f)]
     public float Angle;
+    public int MaximumTargetCount;
     public readonly float CosCutOff => Mathf.Cos((Angle * 0.5f) * Mathf.Deg2Rad);
     public SimulationComponentsPack Components;
 }

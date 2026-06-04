@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Sphere Unit AreaSearcher", menuName = "Components/Compound/AreaSearcher/Sphere Unit AreaSearcher")]
@@ -22,49 +22,65 @@ public class DefaultAreaSearch : AreaSearchSO
         {
             if (_colliderBuffer[i].TryGetComponent(out Unit _foundUnit) == false) continue;
 
-            bool _canBeAdded = true;
             if (Stats.Components.Sensor != null)
             {
-                _canBeAdded = Stats.Components.Sensor.IsDetectionViable(statsCarrier, _foundUnit, sourceUnit);
+                if (Stats.Components.Sensor.IsDetectionViable(statsCarrier, _foundUnit, sourceUnit) == false)
+                {
+                    _colliderBuffer[i] = null;
+                    continue;
+                }
             }
 
             if (Stats.Components.Raycaster != null)
             {
-                if (_canBeAdded == false) continue;
-
                 ModifiableStats<RaycastStats> s = statsCarrier.GetStatsModifiable(Stats.Components.Raycaster);
-                s.BuffAdd(new RaycastStats { Range = _areaSearchStats.Size.x });
+
+                float neededLenght = Vector3.Distance(posArgs.position, _foundUnit.transform.position);
+                s.BuffAdd(new RaycastStats { Range = neededLenght });
 
                 Vector3 _middle = _foundUnit.transform.position;
                 Vector3[] _targetPoses = new Vector3[5]
                 {
-                            _middle,
-                            _middle + Vector3.up,
-                            _middle + Vector3.down,
-                            _middle + Vector3.left,
-                            _middle + Vector3.right
+        _middle,
+        _middle + Vector3.up,
+        _middle + Vector3.down,
+        _middle + Vector3.left,
+        _middle + Vector3.right
                 };
+
+                bool _hitValidTarget = false;
+                Vector3 forward = posArgs.direction.normalized;
+
                 for (int j = 0; j < _targetPoses.Length; j++)
                 {
-                    Vector3 _rayDir = (_targetPoses[j] - posArgs.position).normalized;
+                    Vector3 toTargetOffset = _targetPoses[j] - posArgs.position;
+                    float targetDistance = toTargetOffset.magnitude;
+                    Vector3 _rayDir = targetDistance > 0.001f ? toTargetOffset / targetDistance : Vector3.zero;
                     RaycastHit _hit = Stats.Components.Raycaster.Raycast(statsCarrier, posArgs.position, _rayDir);
-                    if (_hit.collider != null && _hit.collider.transform == _foundUnit.transform)
-                    {
-                        Vector3 forward = posArgs.direction;
-                        Vector3 dirToTarget = (_hit.point - posArgs.position).normalized;
-                        float _dot = forward.x * dirToTarget.x + forward.y * dirToTarget.y + forward.z * dirToTarget.z;
 
+                    bool isClearView = _hit.collider == null ||
+                                       _hit.distance >= targetDistance ||
+                                       _hit.collider.transform == _foundUnit.transform;
+
+                    if (isClearView)
+                    {
+                        float _dot = Vector3.Dot(forward, _rayDir);
                         if (_dot > _areaSearchStats.CosCutOff)
+                        {
                             _detectedUnitsCache.Add(_foundUnit);
+                            _hitValidTarget = true;
+                        }
                         break;
                     }
                 }
+                if (_hitValidTarget == false)
+                {
+                    _colliderBuffer[i] = null;
+                    continue;
+                }
+                s.BuffAdd(new RaycastStats { Range = -neededLenght });
+            }
 
-            }
-            else
-            {
-                _detectedUnitsCache.Add(_foundUnit);
-            }
             _colliderBuffer[i] = null;
         }
 

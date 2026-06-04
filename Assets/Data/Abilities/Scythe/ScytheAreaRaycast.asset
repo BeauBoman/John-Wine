@@ -16,4 +16,4 @@ MonoBehaviour:
     Range: 0
     Layer:
       serializedVersion: 2
-      m_Bits: 65
+      m_Bits: 1
