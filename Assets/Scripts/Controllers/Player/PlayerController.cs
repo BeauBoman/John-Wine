@@ -19,15 +19,6 @@ public sealed class PlayerController : Controller, IUpdatable
         Registerer.RegisterUpdatable(this);
         _moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
         _unit.ChangeAbility(0);
-
-        StartCoroutine(BuffTest());
-    }
-    private IEnumerator BuffTest()
-    {
-        yield return new WaitForSeconds(5);
-        //_unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
-        _unit.Die();
-        Debug.Log("Buff applied. You're on ice now lol");
     }
     public void OnUpdate(float dt)
     {

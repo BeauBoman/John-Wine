@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
   StatsTemplate: {fileID: 11400000, guid: 21835b16ed884144388176af1fa6085f, type: 2}
   SimComponents:
-    Mover: {fileID: 0}
+    Mover: {fileID: 11400000, guid: a5cc0f5ae6f60f145881b46d6c57e384, type: 2}
     Sensor: {fileID: 0}
     Raycaster: {fileID: 0}
     AreaSearcher: {fileID: 0}

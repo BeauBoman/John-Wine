@@ -39,6 +39,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     public void OnUpdate(float deltaTime)
     {
         if (playerTarget == null) return;
+        if (_agent == null) return;
         if (NavMesh.SamplePosition(playerTarget.position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
         {
             _groundedPlayerPos = hit.position;
@@ -98,8 +99,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     }
     private void RotateTowardsPlayer(float dt)
     {
-        Vector3 direction = (playerTarget.position - transform.position).normalized;
-        unit.UnitSO.SimComponents.Mover.Move(unit, direction, dt);
+        unit.UnitSO.SimComponents.Mover.Move(unit, playerTarget.position, dt);
     }
     public void ReleaseToken()
     {
