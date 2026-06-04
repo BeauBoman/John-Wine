@@ -20,12 +20,12 @@ public sealed class PlayerController : Controller, IUpdatable
         _moveStats = _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover);
         _unit.ChangeAbility(0);
 
-        StartCoroutine(BuffTest());
+        //StartCoroutine(BuffTest());
     }
     private IEnumerator BuffTest()
     {
         yield return new WaitForSeconds(5);
-        //_unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
+        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
         _unit.Die();
         Debug.Log("Buff applied. You're on ice now lol");
     }
@@ -84,7 +84,7 @@ public sealed class PlayerController : Controller, IUpdatable
         {
             if (_unit.State.CurrentAbility.CanShoot == false) return;
 
-            _unit.State.CurrentAbility.Fire(new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), _unit);
+            _unit.State.CurrentAbility.Fire(new PositionArgs(_unit.Turret.position, _unit.Turret.rotation, _unit.Turret.forward), _unit);
             _unit.State.CurrentAbility.ResetReloadProgress();
         }
     }

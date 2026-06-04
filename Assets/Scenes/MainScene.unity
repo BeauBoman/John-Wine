@@ -625,6 +625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 341934586}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -993,6 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 1ec9649f03d00cf48b643d9b5a687f58, type: 2}
   <ControllerScript>k__BackingField: {fileID: 654515838}
+  <Turret>k__BackingField: {fileID: 1023082441}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 654515834}
@@ -1225,6 +1227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 680876382}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -1601,6 +1604,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 327409916}
+  - {fileID: 1023082441}
   - {fileID: 1159256593}
   m_Father: {fileID: 654515837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1632,6 +1636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: cb4144af54420ff46a521ffe061715ee, type: 2}
   <ControllerScript>k__BackingField: {fileID: 879862613}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -1723,6 +1728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 911829618}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -1977,6 +1983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 997561967}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -2156,6 +2163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1004465588}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -2175,6 +2183,37 @@ Transform:
   m_Children:
   - {fileID: 89029002}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1023082440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023082441}
+  m_Layer: 0
+  m_Name: Turret
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023082441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023082440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879862612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1114294989
 GameObject:
@@ -2328,7 +2367,7 @@ Transform:
   m_GameObject: {fileID: 1159256592}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.255, y: 0, z: 0.6}
+  m_LocalPosition: {x: 0.371, y: -0.122, z: 0.583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2827,6 +2866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1307980665}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -2916,6 +2956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1342729974}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -3067,6 +3108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1431438232}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -3246,6 +3288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1529476635}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -3450,6 +3493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1589428128}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -3659,6 +3703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1739678271}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -3748,6 +3793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1793958594}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -4046,6 +4092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 1917252568}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -4386,6 +4433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 843f8d5d2718c894493e7c389246e7fd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 0}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -4549,6 +4597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
   <ControllerScript>k__BackingField: {fileID: 2044698590}
+  <Turret>k__BackingField: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
