@@ -38,9 +38,7 @@ public class ComponentRuntimeStats
         if (pack.AreaSearcher != null)
         {
             AddStats(pack.AreaSearcher);
-            if (pack.AreaSearcher.Stats.Components.Sensor != null) AddStats(pack.AreaSearcher.Stats.Components.Sensor);
-            if (pack.AreaSearcher.Stats.Components.Effect != null) AddStats(pack.AreaSearcher.Stats.Components.Effect);
-            if (pack.AreaSearcher.Stats.Components.Raycaster != null) AddStats(pack.AreaSearcher.Stats.Components.Raycaster);
+            SetComponentsStats(pack.AreaSearcher.Stats.Components);
         }
     }
     public ref readonly AbilityStats GetStats(AbilitySO config) => ref AbilityStats[config].Value;
@@ -61,6 +59,9 @@ public class ComponentRuntimeStats
         if (AbilityStats.ContainsKey(config)) return;
 
         AbilityStats.Add(config, new ModifiableStats<AbilityStats>(config.Stats));
+
+        SetComponentsStats(config.LaunchComponents);
+        SetComponentsStats(config.ImpactComponents);
     }
     public void AddStats(MoverSO config)
     {

@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 1ec9649f03d00cf48b643d9b5a687f58, type: 2}
-  <ControllerScript>k__BackingField: {fileID: 654515838}
+  ControllerScript: {fileID: 654515838}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 654515834}
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: cb4144af54420ff46a521ffe061715ee, type: 2}
-  <ControllerScript>k__BackingField: {fileID: 879862613}
+  ControllerScript: {fileID: 879862613}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -1162,7 +1162,7 @@ Transform:
   m_GameObject: {fileID: 1159256592}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.255, y: 0, z: 0.6}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1657,7 +1657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 0ccd19c1c1315f046831f0f4b0e979cd, type: 2}
-  <ControllerScript>k__BackingField: {fileID: 1589428128}
+  ControllerScript: {fileID: 1589428128}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}
@@ -2146,7 +2146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   UnitSO: {fileID: 11400000, guid: 843f8d5d2718c894493e7c389246e7fd, type: 2}
-  <ControllerScript>k__BackingField: {fileID: 0}
+  ControllerScript: {fileID: 0}
   Refs:
     RB: {fileID: 0}
     CC: {fileID: 0}

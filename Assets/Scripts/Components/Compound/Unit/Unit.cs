@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField] public UnitSO UnitSO;
-    [SerializeField] private Controller ControllerScript;
+    [field: SerializeField] public Controller ControllerScript { get; private set; }
     [SerializeField] internal References Refs;
     [HideInInspector] public Unit Owner;
     [HideInInspector] public BehaviorMachine BehaviorMachine;
@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour
 
     public event Action OnTakeDamageEvent;
     public event Action OnHealthIsZero;
+    public event Action OnKillEvent;
 
     public void OnSpawn(Unit owner = null)
     {
@@ -66,6 +67,10 @@ public class Unit : MonoBehaviour
             OnHealthIsZero?.Invoke();
         }
     }
+    public void KillCredit()
+    {
+        OnKillEvent?.Invoke();
+    }
 }
 public class UnitState
 {
@@ -113,4 +118,8 @@ public class MovementState
 public class HealthState
 {
     public float CurrentHealth;
+}
+public interface IAbilityConfigCarrier
+{
+    public AbilitySO abilitySO { get; set; }
 }

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public sealed class Rocket : Controller, IUpdatable
+public sealed class RocketController : Controller, IUpdatable, IAbilityConfigCarrier
 {
     public Unit Unit;
 
-    private Ability _ability;
+    public AbilitySO abilitySO { get; set; }
     public sealed override void OnStart()
     {
-        _ability = Unit.Owner.State.CurrentAbility;
-        Unit.Stats.SetComponentsStats(_ability.config.ImpactComponents);
+        Unit.Stats.SetComponentsStats(abilitySO.ImpactComponents);
+
         Registerer.RegisterUpdatable(this);
     }
     public void OnUpdate(float deltaTime)
@@ -31,7 +31,7 @@ public sealed class Rocket : Controller, IUpdatable
     }
     public void OnHit(Unit hitUnit)
     {
-        _ability.OnHit(Unit.Stats, new PositionArgs(transform.position, Quaternion.identity), Unit, hitUnit);
+        abilitySO.OnHit(Unit.Stats, new PositionArgs(transform.position, transform.rotation, transform.forward), Unit.Owner, hitUnit);
         Death();
     }
     public void Death()

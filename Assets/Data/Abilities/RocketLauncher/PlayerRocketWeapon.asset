@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultWeapon
   <Stats>k__BackingField:
     ReloadSpeed: 0.2
-    Range: 0
   LaunchComponents:
     Mover: {fileID: 0}
     Sensor: {fileID: 0}
