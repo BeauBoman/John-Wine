@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public sealed class EnemyController : Controller, IUpdatable
 {
-    [SerializeField] private Unit _unit;
     private EnemyPathfinding _pf;
     private void Start()
     {

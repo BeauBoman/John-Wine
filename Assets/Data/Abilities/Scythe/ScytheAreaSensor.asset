@@ -17,4 +17,4 @@ MonoBehaviour:
     LayerFilter:
       serializedVersion: 2
       m_Bits: 64
-    DetectOwner: 0
+    DetectOwner: 1

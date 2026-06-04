@@ -2,7 +2,6 @@ using UnityEngine;
 
 public sealed class PlayerCameraController : Controller, IUpdatable
 {
-    [SerializeField] private Unit _unit;
     [SerializeField] private Transform playerCamera;
     private ItemSys itemSys;
     private void Start() => _unit.OnSpawn();
@@ -51,5 +50,9 @@ public sealed class PlayerCameraController : Controller, IUpdatable
                 
             }          
         }
+    }
+    public override void OnDeath()
+    {
+        Registerer.UnregisterUpdatable(this);
     }
 }
