@@ -21,7 +21,8 @@ public class ComponentRuntimeStats
         {
             if (pack.Abilities[i] != null) AddStats(pack.Abilities[i]);
         }
-        if (pack.Mover != null) AddStats(pack.Mover);
+        if (pack.Movers.Mover != null) AddStats(pack.Movers.Mover);
+        if (pack.Movers.RotationalMover != null) AddStats(pack.Movers.RotationalMover);
         if (pack.Effect != null) AddStats(pack.Effect);
         if (pack.Sensor != null) AddStats(pack.Sensor);
         if (pack.Raycaster != null) AddStats(pack.Raycaster);

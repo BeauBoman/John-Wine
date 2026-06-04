@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] public UnitSO UnitSO;
     [field: SerializeField] public Controller ControllerScript { get; private set; }
+    [field: SerializeField] public Transform Turret { get; private set; }
     [SerializeField] internal References Refs;
     [HideInInspector] public Unit Owner;
     [HideInInspector] public BehaviorMachine BehaviorMachine;
