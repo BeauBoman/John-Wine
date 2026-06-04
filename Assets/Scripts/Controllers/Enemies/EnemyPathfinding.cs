@@ -8,11 +8,14 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
 {
     [HideInInspector] public Unit unit;
     public Transform playerTarget;
+    [HideInInspector] public bool _token;
+
     [SerializeField] private float _maxDistanceSearch;
     [SerializeField] private float _minDistanceFlank;
     [SerializeField] private float _maxDistanceFlank;
+    [Tooltip("Default: 0")]
+    [SerializeField] private float _tokenAdditionalPriority;
 
-    private bool _token;
     private NavMeshAgent _agent;
     private Vector3 _flank;
     private Vector3 _modifier;
@@ -28,10 +31,14 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
         _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_minDistanceFlank, _maxDistanceFlank);
         _threshold = _modifier.magnitude;
+
+        if (_tokenAdditionalPriority != 0)
+            _tokenAdditionalPriority = _tokenAdditionalPriority * -1f;
     }
 
     public void OnUpdate(float deltaTime)
     {
+        if (playerTarget == null) return;
         if (NavMesh.SamplePosition(playerTarget.position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
         {
             _groundedPlayerPos = hit.position;
@@ -54,7 +61,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         {
             if (!_token)
             {
-                _token = TokenManager.instance.RequestToken(gameObject, distanceToPlayer);
+                _token = TokenManager.instance.RequestToken(gameObject, distanceToPlayer + _tokenAdditionalPriority);
             }
             if (_token)
             {

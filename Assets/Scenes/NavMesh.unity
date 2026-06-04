@@ -212,9 +212,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 98175120}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &98175120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,9 +344,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 104041963}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &104041963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,9 +566,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 0}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &167334549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,9 +822,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 175392125}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!1 &188650354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,9 +1391,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 446167697}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!1 &458254020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,7 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _unit: {fileID: 654515839}
-  CameraTransform: {fileID: 879862612}
+  Camera: {fileID: 879862614}
   FirePoint: {fileID: 1159256593}
   PushPower: 2
   CoyoteTime: 0.3
@@ -2302,9 +2312,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 0}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!1 &857339363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,9 +2410,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 857339368}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &857339368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2778,9 +2792,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 1097137304}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &1097137304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3732,9 +3748,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 0}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &1475833656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3896,9 +3914,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 0}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!1 &1540123284
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,9 +4303,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 1654200776}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &1654200776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4413,9 +4435,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 0}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &1705586999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4919,9 +4943,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 0}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &1988594832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5083,9 +5109,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 2019177094}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!1 &2024115900
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,9 +5518,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   unit: {fileID: 2037313645}
   playerTarget: {fileID: 654515837}
+  _token: 0
   _maxDistanceSearch: 100
   _minDistanceFlank: 3
   _maxDistanceFlank: 6
+  _tokenAdditionalPriority: 0
 --- !u!114 &2037313645
 MonoBehaviour:
   m_ObjectHideFlags: 0

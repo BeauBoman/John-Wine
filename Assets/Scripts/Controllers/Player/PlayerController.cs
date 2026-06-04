@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class PlayerController : Controller, IUpdatable
 {
     [SerializeField] private Unit _unit;
-    public Transform CameraTransform;
+    public Unit Camera;
     public Transform FirePoint;
     public float PushPower = 2;
 
@@ -90,8 +90,8 @@ public sealed class PlayerController : Controller, IUpdatable
     }
     private Vector3 ConvertToCameraSpace(Vector3 input)
     {
-        Vector3 forward = CameraTransform.forward;
-        Vector3 right = CameraTransform.right;
+        Vector3 forward = Camera.transform.forward;
+        Vector3 right = Camera.transform.right;
         forward.y = 0; right.y = 0;
 
         forward.Normalize();
@@ -103,7 +103,9 @@ public sealed class PlayerController : Controller, IUpdatable
     public void Death()
     {
         _unit.OnHealthIsZero -= Death;
+        Registerer.UnregisterUpdatable(Camera as IUpdatable); //kostyl
         Registerer.UnregisterUpdatable(this);
+        Destroy(Camera.gameObject);
         Destroy(gameObject);
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
