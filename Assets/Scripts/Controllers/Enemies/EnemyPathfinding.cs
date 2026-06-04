@@ -26,6 +26,8 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         unit = GetComponent<Unit>();
         Registerer.RegisterUpdatable(this);
         _agent = GetComponent<NavMeshAgent>();
+        _agent.updatePosition = false;
+
         TokenManager.instance._enemies.Add(gameObject, this);
 
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
@@ -40,6 +42,9 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     {
         if (playerTarget == null) return;
         if (_agent == null) return;
+
+        _agent.nextPosition = transform.position;
+
         if (NavMesh.SamplePosition(playerTarget.position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
         {
             _groundedPlayerPos = hit.position;
