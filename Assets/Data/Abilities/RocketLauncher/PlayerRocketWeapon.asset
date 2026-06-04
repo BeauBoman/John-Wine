@@ -15,20 +15,24 @@ MonoBehaviour:
   <Stats>k__BackingField:
     ReloadSpeed: 0.2
   LaunchComponents:
-    Mover: {fileID: 0}
     Sensor: {fileID: 0}
-    Raycaster: {fileID: 0}
+    Raycaster: {fileID: 11400000, guid: 74f7da0b6a378274183c08485fcc0211, type: 2}
     AreaSearcher: {fileID: 0}
+    Movers:
+      Mover: {fileID: 0}
+      RotationalMover: {fileID: 0}
     Abilities: []
     UnitSpawner: {fileID: 11400000, guid: cbc1fdc40e983a149820bd0d5d208c0d, type: 2}
     Effect: {fileID: 0}
     TemporaryBehaviour: {fileID: 0}
     PeriodicBehaviour: {fileID: 0}
   ImpactComponents:
-    Mover: {fileID: 0}
     Sensor: {fileID: 0}
     Raycaster: {fileID: 0}
     AreaSearcher: {fileID: 11400000, guid: 7a1a504a1d23cf441bc1f8126ada3ecb, type: 2}
+    Movers:
+      Mover: {fileID: 0}
+      RotationalMover: {fileID: 0}
     Abilities: []
     UnitSpawner: {fileID: 0}
     Effect: {fileID: 0}

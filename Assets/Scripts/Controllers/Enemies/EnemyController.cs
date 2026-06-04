@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public sealed class EnemyController : Controller, IUpdatable
 {
+    public Transform FirePoint;
     private EnemyPathfinding _pf;
     private void Start()
     {
@@ -29,7 +30,7 @@ public sealed class EnemyController : Controller, IUpdatable
             if (_unit.State.CurrentAbility.CanShoot == false) return;
 
             Debug.Log("fired enemy");
-            _unit.State.CurrentAbility.Fire(new PositionArgs(transform.position, transform.rotation, transform.forward), _unit);
+            _unit.State.CurrentAbility.Fire(new PositionArgs(_unit.Turret.position, _unit.Turret.rotation, _unit.Turret.forward), new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), _unit);
             _unit.State.CurrentAbility.ResetReloadProgress();
         }
         else

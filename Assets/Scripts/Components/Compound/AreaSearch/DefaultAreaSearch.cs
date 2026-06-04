@@ -107,7 +107,7 @@ public class DefaultAreaSearch : AreaSearchSO
             {
                 for (int j = 0; j < Stats.Components.Abilities.Count; j++)
                 {
-                    Stats.Components.Abilities[j].Fire(statsCarrier, new PositionArgs(_u.transform.position, rot, dir), sourceUnit);
+                    Stats.Components.Abilities[j].Fire(statsCarrier, new PositionArgs(_u.transform.position, rot, dir), new PositionArgs(_u.transform.position, rot, dir), sourceUnit);
                 }
             }
 
