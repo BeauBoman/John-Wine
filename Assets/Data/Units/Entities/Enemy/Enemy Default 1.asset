@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Enemy Default 1
   m_EditorClassIdentifier: Assembly-CSharp::StatsTemplate
   Health:
-    MaxHealth: 50
-    HealthOnStart: 50
+    MaxHealth: 100
+    HealthOnStart: 100
     Armor: 0
     Regeneration: 0
     RegenerationDelay: 0
