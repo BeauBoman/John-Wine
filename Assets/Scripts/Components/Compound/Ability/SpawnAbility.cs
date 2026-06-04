@@ -53,7 +53,29 @@ public class SpawnAbility : AbilitySO
         {
             if (ImpactComponents.Effect != null)
                 ImpactComponents.Effect.Affect(hitUnit, statsCarrier);
+
+            if (ImpactComponents.PeriodicBehaviour != null)
+                ImpactComponents.PeriodicBehaviour.ApplyBehavior(hitUnit);
+
+            if (ImpactComponents.TemporaryBehaviour != null)
+                ImpactComponents.TemporaryBehaviour.ApplyBehavior(hitUnit);
         }
-        ImpactComponents.AreaSearcher.Search(statsCarrier, hitPos, sourceUnit);
+
+        if (ImpactComponents.AreaSearcher != null)
+            ImpactComponents.AreaSearcher.Search(statsCarrier, hitPos, sourceUnit);
+
+        if (ImpactComponents.Abilities != null)
+        {
+            for (int j = 0; j < ImpactComponents.Abilities.Count; j++)
+            {
+                ImpactComponents.Abilities[j].Fire(statsCarrier, new PositionArgs(hitPos.position, hitPos.rotation, hitPos.direction), new PositionArgs(hitPos.position, hitPos.rotation, hitPos.direction), sourceUnit);
+            }
+        }
+
+        if (ImpactComponents.UnitSpawner != null)
+        {
+            Unit spawned = ImpactComponents.UnitSpawner.Spawn(new PositionArgs(hitPos.position, Quaternion.identity), sourceUnit);
+            spawned.OnSpawn(sourceUnit);
+        }
     }
 }

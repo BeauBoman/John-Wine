@@ -35,15 +35,15 @@ public class RaycastAbility : AbilitySO
             spawned.OnSpawn(sourceUnit);
         }
 
-        RaycastHit hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
-        if (hit.collider != null)
-            Debug.DrawLine(raycastPos.position, hit.point, Color.red, 0.05f);
+        RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
+        if (_hit.collider != null)
+            Debug.DrawLine(raycastPos.position, _hit.point, Color.red, 0.05f);
         else
             Debug.DrawLine(raycastPos.position, raycastPos.position + raycastPos.direction * statsCarrier.GetStats(LaunchComponents.Raycaster).Range, Color.red, 0.05f);
-        if (hit.collider != null)
+        if (_hit.collider != null)
         {
-            hit.collider.TryGetComponent(out Unit hitUnit);
-            OnHit(statsCarrier, new PositionArgs(hit.point, raycastPos.rotation, raycastPos.direction), sourceUnit, hitUnit);
+            _hit.collider.TryGetComponent(out Unit hitUnit);
+            OnHit(statsCarrier, new PositionArgs(_hit.point, raycastPos.rotation, raycastPos.direction), sourceUnit, hitUnit);
         }
     }
     public override void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)

@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72b1639224953fe48a1d885c7c0fb4c2, type: 3}
-  m_Name: RocketExplosion
+  m_Name: RocketExplosionShards
   m_EditorClassIdentifier: Assembly-CSharp::DefaultAreaSearch
   <Stats>k__BackingField:
     Size: {x: 10, y: 0, z: 0}
     Angle: 360
     MaximumTargetCount: 2
     Components:
-      Sensor: {fileID: 11400000, guid: 475ddf4c659f1504d9120378fb1aa9bb, type: 2}
-      Raycaster: {fileID: 11400000, guid: 3a9e719160767f04abc86329f6a0d873, type: 2}
+      Sensor: {fileID: 11400000, guid: 85899e2298d097a419fb1ff2457dae11, type: 2}
+      Raycaster: {fileID: 11400000, guid: 9a80767b091891a458fe13b54aae4858, type: 2}
       AreaSearcher: {fileID: 0}
       Movers:
         Mover: {fileID: 0}
         RotationalMover: {fileID: 0}
       Abilities: []
       UnitSpawner: {fileID: 0}
-      Effect: {fileID: 11400000, guid: 7dd0d076d145ed94080baca48b3b656a, type: 2}
+      Effect: {fileID: 11400000, guid: aab8daaa4b504f041b1166918f4c204c, type: 2}
       TemporaryBehaviour: {fileID: 0}
       PeriodicBehaviour: {fileID: 0}

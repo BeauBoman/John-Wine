@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class AreaSearchSO : ScriptableObject
 {
-    [field: SerializeField] public AreaSearchStats Stats { get; private set; }
+    [field: SerializeField] public AreaSearchStats Stats { get; private set; } = AreaSearchStats.Default;
     /// <summary>
     /// Method searches for units in area and calls components for each one of them.
     /// </summary>
@@ -20,4 +20,11 @@ public struct AreaSearchStats
     public int MaximumTargetCount;
     public readonly float CosCutOff => Mathf.Cos((Angle * 0.5f) * Mathf.Deg2Rad);
     public SimulationComponentsPack Components;
+
+    public static AreaSearchStats Default => new AreaSearchStats
+    {
+        Size = Vector3.one,
+        Angle = 360f,
+        MaximumTargetCount = 50
+    };
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Sphere Unit AreaSearcher", menuName = "Components/Compound/AreaSearcher/Sphere Unit AreaSearcher")]
@@ -22,6 +23,7 @@ public class DefaultAreaSearch : AreaSearchSO
         {
             if (_colliderBuffer[i].TryGetComponent(out Unit _foundUnit) == false) continue;
 
+            // Sensor filter
             if (Stats.Components.Sensor != null)
             {
                 if (Stats.Components.Sensor.IsDetectionViable(statsCarrier, _foundUnit, sourceUnit) == false)
@@ -31,12 +33,13 @@ public class DefaultAreaSearch : AreaSearchSO
                 }
             }
 
+            // Raycast filter if referenced
             if (Stats.Components.Raycaster != null)
             {
                 ModifiableStats<RaycastStats> s = statsCarrier.GetStatsModifiable(Stats.Components.Raycaster);
+                float distanceToTarget = Vector3.Distance(_foundUnit.transform.position, posArgs.position);
 
-                float neededLenght = Vector3.Distance(posArgs.position, _foundUnit.transform.position);
-                s.BuffAdd(new RaycastStats { Range = neededLenght });
+                s.BuffAdd(new RaycastStats { Range = distanceToTarget });
 
                 Vector3 _middle = _foundUnit.transform.position;
                 Vector3[] _targetPoses = new Vector3[5]
@@ -78,10 +81,36 @@ public class DefaultAreaSearch : AreaSearchSO
                     _colliderBuffer[i] = null;
                     continue;
                 }
-                s.BuffAdd(new RaycastStats { Range = -neededLenght });
+                s.BuffAdd(new RaycastStats { Range = -distanceToTarget });
             }
-
+            else
+            {
+                _detectedUnitsCache.Add(_foundUnit);
+            }
             _colliderBuffer[i] = null;
+        }
+
+        // Filtering by maximum cound
+        int detectedCount = _detectedUnitsCache.Count;
+        int maxAllowed = _areaSearchStats.MaximumTargetCount;
+
+        if (detectedCount > maxAllowed)
+        {
+            for (int i = 1; i < detectedCount; i++)
+            {
+                Unit key = _detectedUnitsCache[i];
+                float keyDistSqr = Vector3.SqrMagnitude(key.transform.position - posArgs.position);
+                int j = i - 1;
+
+                while (j >= 0 && Vector3.SqrMagnitude(_detectedUnitsCache[j].transform.position - posArgs.position) > keyDistSqr)
+                {
+                    _detectedUnitsCache[j + 1] = _detectedUnitsCache[j];
+                    j--;
+                }
+                _detectedUnitsCache[j + 1] = key;
+            }
+            int countsToRemove = detectedCount - maxAllowed;
+            _detectedUnitsCache.RemoveRange(maxAllowed, countsToRemove);
         }
 
         // Applying components for each filtered
