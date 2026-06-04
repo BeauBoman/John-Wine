@@ -8,7 +8,7 @@ public abstract class AbilitySO : ScriptableObject
     [SerializeField] internal SimulationComponentsPack LaunchComponents;
     [Header("Impact")]
     [SerializeField] internal SimulationComponentsPack ImpactComponents;
-    public abstract void Fire(ComponentRuntimeStats statsCarrier, PositionArgs positionArgs, Unit owner = null);
+    public abstract void Fire(ComponentRuntimeStats statsCarrier, PositionArgs raycastPos, PositionArgs firePointPos, Unit owner = null);
     public abstract void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit);
 }
 public class Ability
@@ -21,9 +21,9 @@ public class Ability
 
     private float _reloadProgress = 0;
     private ModifiableStats<AbilityStats> _stats;
-    public void Fire(PositionArgs firePoint, Unit whoFired)
+    public void Fire(PositionArgs raycastPos, PositionArgs firePointPos, Unit whoFired)
     {
-        config.Fire(RuntimeStats, firePoint, whoFired);
+        config.Fire(RuntimeStats, raycastPos, firePointPos, whoFired);
     }
     public void OnHit(PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
     {
