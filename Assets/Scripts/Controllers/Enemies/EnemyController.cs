@@ -20,7 +20,7 @@ public sealed class EnemyController : Controller, IUpdatable
     {
         _unit.OnUpdate(dt);
         _unit.State.CurrentAbility.ReloadProgress(dt);
-        //HandleWeapon();
+        HandleWeapon();
     }
     private void HandleWeapon()
     {
