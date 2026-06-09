@@ -16,8 +16,6 @@ public class RaycastAbility : AbilitySO
 
         if (LaunchComponents.AreaSearcher != null)
             LaunchComponents.AreaSearcher.Search(statsCarrier, raycastPos, sourceUnit);
-        if (LaunchComponents.AreaSearcher != null)
-            LaunchComponents.AreaSearcher.Search(statsCarrier, raycastPos, sourceUnit);
 
         if (LaunchComponents.Abilities != null)
         {
@@ -37,14 +35,13 @@ public class RaycastAbility : AbilitySO
 
         RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
         if (_hit.collider != null)
-            Debug.DrawLine(raycastPos.position, _hit.point, Color.red, 0.05f);
-        else
-            Debug.DrawLine(raycastPos.position, raycastPos.position + raycastPos.direction * statsCarrier.GetStats(LaunchComponents.Raycaster).Range, Color.red, 0.05f);
-        if (_hit.collider != null)
         {
             _hit.collider.TryGetComponent(out Unit hitUnit);
             OnHit(statsCarrier, new PositionArgs(_hit.point, raycastPos.rotation, raycastPos.direction), sourceUnit, hitUnit);
+            Debug.DrawLine(raycastPos.position, _hit.point, Color.red, 0.05f);
         }
+        else
+            Debug.DrawLine(raycastPos.position, raycastPos.position + raycastPos.direction * statsCarrier.GetStats(LaunchComponents.Raycaster).Range, Color.red, 0.05f);
     }
     public override void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
     {

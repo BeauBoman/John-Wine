@@ -15,7 +15,7 @@ MonoBehaviour:
   <Stats>k__BackingField:
     Size: {x: 10, y: 0, z: 0}
     Angle: 360
-    MaximumTargetCount: 2
+    MaximumTargetCount: 50
     Components:
       Sensor: {fileID: 11400000, guid: 85899e2298d097a419fb1ff2457dae11, type: 2}
       Raycaster: {fileID: 11400000, guid: 9a80767b091891a458fe13b54aae4858, type: 2}
