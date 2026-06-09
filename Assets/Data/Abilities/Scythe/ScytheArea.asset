@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultAreaSearch
   <Stats>k__BackingField:
     Size: {x: 3, y: 0, z: 0}
-    Angle: 216
-    MaximumTargetCount: 0
+    Angle: 161
+    MaximumTargetCount: 50
     Components:
       Sensor: {fileID: 11400000, guid: a533660427509ab4c80ba14c43f7af85, type: 2}
       Raycaster: {fileID: 11400000, guid: 30a0e23c431a3f84d8a4a1da6a92ed37, type: 2}
