@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class InteractiveBaseEnviroment : MonoBehaviour
 {
     [SerializeField] private UnityEvent onInteract;
-    public GameObject key;
-    public Transform keyPos;
+    public UnitSO key;
 
     [Header("Rotation")]
     [SerializeField] private Vector3[] targetRotation;
@@ -24,8 +23,12 @@ public class InteractiveBaseEnviroment : MonoBehaviour
 
     [Header("Effects")]
     [SerializeField] private ParticleSystem effect;
+
+    private bool isInteractable = true;
     public void Interact()
     {
+        if (isInteractable == false) return;
+
         onInteract.Invoke();
     }
     public void Rotate()
@@ -100,34 +103,33 @@ public class InteractiveBaseEnviroment : MonoBehaviour
         }
         isChangingPosition = false;
     }
-    public void KeyPositionChange()
-    {
-        if (key != null)
-        {
-            if (keyPos != null)
-            {
-                key.SetActive(true);
-                key.transform.position = keyPos.position;
-                key.transform.rotation = keyPos.rotation;
-            } else
-            {
-                Destroy(key);
-            }
-        }
-    }
-    public bool CheckKey(GameObject playerKey)
+    public bool CheckKey(UnitSO playerKey)
     {
         if (key == null)
+        {
             return true;
-        else if (playerKey == key)
+        }  
+        else if (playerKey.Tags == key.Tags)
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
     }
     public void TriggerEffect()
     {
         if (effect == null) return;
         effect.Play();
+    }
+    public void DisableInteract()
+    {
+        isInteractable = false;
+    }
+    public void SendKey()
+    {
+        Multikeychecker.instance.AddKey();
     }
     public void Destroy()
     {
