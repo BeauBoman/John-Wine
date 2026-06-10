@@ -26,3 +26,4 @@ MonoBehaviour:
     TemporaryBehaviour: {fileID: 0}
     PeriodicBehaviour: {fileID: 0}
   Tags: 1
+  Team: 1

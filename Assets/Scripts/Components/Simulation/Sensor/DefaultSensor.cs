@@ -9,6 +9,10 @@ public sealed class DefaultSensor : SensorSO
         SensorStats s = statsCarrier.GetStats(this);
         if (s.DetectOwner == false)
         {
+            TeamsFilter relation = CompositionManager.Instance.GetRelation(sourceUnit.UnitSO.Team, hitUnit.UnitSO.Team);
+
+            if ((s.TeamsFilter & relation) == 0) return false;
+
             if (sourceUnit != null && sourceUnit.Owner != null)
             {
                 if (sourceUnit.Owner == hitUnit) return false;

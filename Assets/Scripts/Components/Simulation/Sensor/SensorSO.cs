@@ -11,5 +11,6 @@ public struct SensorStats
 {
     public Tags TagFilter;
     public LayerMask LayerFilter;
+    public TeamsFilter TeamsFilter;
     public bool DetectOwner;
 }

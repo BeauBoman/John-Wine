@@ -33,8 +33,7 @@ MonoBehaviour:
     Movers:
       Mover: {fileID: 0}
       RotationalMover: {fileID: 0}
-    Abilities:
-    - {fileID: 11400000, guid: ca7a963609d70554bb2a75a43dfec466, type: 2}
+    Abilities: []
     UnitSpawner: {fileID: 0}
     Effect: {fileID: 0}
     TemporaryBehaviour: {fileID: 0}

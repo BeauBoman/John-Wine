@@ -9,6 +9,7 @@ public class UnitSO : ScriptableObject
     public StatsTemplate StatsTemplate;
     [SerializeField] public SimulationComponentsPack SimComponents;
     public Tags Tags;
+    public Team Team;
 }
 [Serializable]
 public struct SimulationComponentsPack
