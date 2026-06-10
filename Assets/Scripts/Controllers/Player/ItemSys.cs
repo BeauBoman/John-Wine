@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ItemSys : Controller, IUpdatable
 {
-    public GameObject[] heldItems;
-    public GameObject[] itemsDisplayed;
+    public List<GameObject> heldItems = new();
+    public List<GameObject> itemsDisplayed = new();
 
     public GameObject imagePrefab;
     public Transform itemDisplay;
@@ -14,18 +15,18 @@ public class ItemSys : Controller, IUpdatable
     }
     public void OnUpdate(float dt)
     {
-        ItemDisplay();
+
     }
     public bool GetKey(InteractiveBaseEnviroment target)
     {
         if (target == null) return false;
-        if (heldItems == null || heldItems.Length == 0) return false;
+        if (heldItems == null || heldItems.Count == 0) return false;
 
-        for (int i = 0; i < heldItems.Length; i++)
+        for (int i = 0; i < heldItems.Count; i++)
         {
-            if (heldItems[i] != null && target.CheckKey(heldItems[i]))
+            if (heldItems[i] != null && heldItems[i].TryGetComponent(out Unit unit) && target.CheckKey(unit.UnitSO))
             {
-                heldItems[i] = null;
+                heldItems.RemoveAt(i);
                 Destroy(itemDisplay.GetChild(0).gameObject);
                 return true;
             }
@@ -34,16 +35,10 @@ public class ItemSys : Controller, IUpdatable
     }
     public void AddItem(GameObject item)
     {
-        for (int i = 0; i < heldItems.Length; i++)
-        {
-            if (heldItems[i] == null)
-            {
-                heldItems[i] = item;
-                item.SetActive(false);
-                ItemDisplay();
-                return;
-            }
-        }
+        heldItems.Add(item);
+        item.SetActive(false);
+
+        ItemDisplay();
     }
     private void ItemDisplay()
     {

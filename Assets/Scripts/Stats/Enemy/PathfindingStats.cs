@@ -8,6 +8,5 @@ public class PathfindingStats : ScriptableObject
     public float maxDistanceFlank;
     public float stoppingDistance;
 
-    [Header("Priority is negative")]
     public float tokenPriority;
 }
