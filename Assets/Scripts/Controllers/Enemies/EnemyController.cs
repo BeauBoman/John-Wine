@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,6 +46,7 @@ public sealed class EnemyController : Controller, IUpdatable
     {
         _unit.OnHealthIsZero -= Death;
         Registerer.UnregisterUpdatable(this);
+        WaveSpawner.instance.EnemyDied(gameObject);
 
         Destroy(gameObject);
     }

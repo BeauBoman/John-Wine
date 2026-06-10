@@ -140,6 +140,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     public void Death()
     {
         ReleaseToken();
+        TokenManager.instance._enemies.Remove(gameObject);
         Registerer.UnregisterUpdatable(this);
 
         unit.OnHealthIsZero -= Death;
@@ -149,8 +150,8 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     {
         if (unit.State.HealthState.HealthDelta <= 0.5f)
         {
-        ReleaseToken();
-        ChangeFlank();
+            ReleaseToken();
+            ChangeFlank();
         }
     }
 }

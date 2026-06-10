@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractiveBaseEnviroment : MonoBehaviour, IUpdatable
+public class InteractiveBaseEnviroment : MonoBehaviour
 {
     [SerializeField] private UnityEvent onInteract;
     public GameObject key;
@@ -22,10 +22,8 @@ public class InteractiveBaseEnviroment : MonoBehaviour, IUpdatable
     private int positionIndex = 0;
     private bool isChangingPosition = false;
 
-    public void OnUpdate(float deltaTime)
-    {
-        
-    }
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem effect;
     public void Interact()
     {
         onInteract.Invoke();
@@ -125,6 +123,11 @@ public class InteractiveBaseEnviroment : MonoBehaviour, IUpdatable
             return true;
         else
             return false;
+    }
+    public void TriggerEffect()
+    {
+        if (effect == null) return;
+        effect.Play();
     }
     public void Destroy()
     {
