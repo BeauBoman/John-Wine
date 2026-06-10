@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager istance;
+    public static GameManager instance;
 
     public GameObject player;
-    void Start()
+    void Awake()
     {
-        
+        instance = this;
     }
 }
