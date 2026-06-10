@@ -19,7 +19,10 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     private Vector3 _groundedPlayerPos;
     private float _distanceToPlayer;
 
-    [SerializeField] private bool isMoving;
+    [SerializeField] private bool isNotMoving;
+    private float maxSpeed;
+
+    [SerializeField] private bool ignoreFlank;
     void Start()
     {
         playerTarget = GameManager.instance.player.transform;
@@ -36,9 +39,10 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_stats.minDistanceFlank, _stats.maxDistanceFlank);
         _threshold = _modifier.magnitude;
 
-        if (isMoving == false)
+        if (isNotMoving)
         {
-            //unit.UnitSO.st
+            float maxSpeed = unit.Stats.GetStats(unit.UnitSO.SimComponents.Movers.Mover).MaxSpeed;
+            unit.Stats.GetStatsModifiable(unit.UnitSO.SimComponents.Movers.Mover).BuffMultiply(new MovementStats() {MaxSpeed = 0});
         }
     }
 
@@ -130,6 +134,8 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     }
     private void ChangeFlank()
     {
+        if (ignoreFlank == true) return;
+
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
         _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_stats.minDistanceFlank, _stats.maxDistanceFlank);
         _threshold = _modifier.magnitude;
@@ -161,5 +167,9 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
             ReleaseToken();
             ChangeFlank();
         }
+    }
+    public void ReturnSpeedToNormal()
+    {
+        unit.Stats.GetStatsModifiable(unit.UnitSO.SimComponents.Movers.Mover).BuffAdd(new MovementStats() { MaxSpeed = maxSpeed });
     }
 }

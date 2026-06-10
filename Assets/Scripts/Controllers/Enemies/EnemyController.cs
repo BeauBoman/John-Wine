@@ -34,11 +34,9 @@ public sealed class EnemyController : Controller, IUpdatable
     private void HandleWeapon()
     {
         if (_pf._token == true)
-        {
-            Debug.Log("token");
+        {   
             if (_unit.State.CurrentAbility.CanShoot == false) return;
 
-            Debug.Log("enemy fired");
             _anim.SetTrigger("Attack");
             _unit.State.CurrentAbility.Fire(new PositionArgs(_unit.Turret.position, _unit.Turret.rotation, _unit.Turret.forward), new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), _unit);
             _unit.State.CurrentAbility.ResetReloadProgress();

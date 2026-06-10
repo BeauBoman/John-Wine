@@ -147,6 +147,14 @@ PrefabInstance:
       propertyPath: _stats
       value: 
       objectReference: {fileID: 11400000, guid: 3361b7ef8748c7e4fa2b3f5bc6e7c484, type: 2}
+    - target: {fileID: 6260847258584973979, guid: b930bd7eb68f866469875999d6e17b95, type: 3}
+      propertyPath: ignoreFlank
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260847258584973979, guid: b930bd7eb68f866469875999d6e17b95, type: 3}
+      propertyPath: isNotMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6319302436688645158, guid: b930bd7eb68f866469875999d6e17b95, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -11423,10 +11431,10 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 915391924}
   - {fileID: 1220577635}
   - {fileID: 487318184}
   - {fileID: 1349717208}
-  - {fileID: 915391924}
   - {fileID: 30683017}
   - {fileID: 2058062383}
   - {fileID: 675049384}
