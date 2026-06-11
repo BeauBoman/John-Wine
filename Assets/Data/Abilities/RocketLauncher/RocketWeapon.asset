@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5909d6c7051297147bd4bef3672e183f, type: 3}
-  m_Name: PlayerRocketWeapon
+  m_Name: RocketWeapon
   m_EditorClassIdentifier: Assembly-CSharp::DefaultWeapon
   <Stats>k__BackingField:
     ReloadSpeed: 0.2
@@ -33,8 +33,7 @@ MonoBehaviour:
     Movers:
       Mover: {fileID: 0}
       RotationalMover: {fileID: 0}
-    Abilities:
-    - {fileID: 11400000, guid: ca7a963609d70554bb2a75a43dfec466, type: 2}
+    Abilities: []
     UnitSpawner: {fileID: 0}
     Effect: {fileID: 0}
     TemporaryBehaviour: {fileID: 0}

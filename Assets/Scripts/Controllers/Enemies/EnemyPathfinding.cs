@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyPathfinding : MonoBehaviour, IUpdatable
 {
     [HideInInspector] public Unit unit;
-    public Transform playerTarget;
+    [HideInInspector] public Transform playerTarget;
     [HideInInspector] public bool _token;
 
     [SerializeField] private PathfindingStats _stats;
@@ -18,8 +18,14 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     private float _threshold;
     private Vector3 _groundedPlayerPos;
     private float _distanceToPlayer;
+
+    [SerializeField] private bool isNotMoving;
+    private float maxSpeed;
+
+    [SerializeField] private bool ignoreFlank;
     void Start()
     {
+        playerTarget = GameManager.instance.player.transform;
         unit = GetComponent<Unit>();
         Registerer.RegisterUpdatable(this);
         _agent = GetComponent<NavMeshAgent>();
@@ -32,6 +38,12 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
         _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_stats.minDistanceFlank, _stats.maxDistanceFlank);
         _threshold = _modifier.magnitude;
+
+        if (isNotMoving)
+        {
+            float maxSpeed = unit.Stats.GetStats(unit.UnitSO.SimComponents.Movers.Mover).MaxSpeed;
+            unit.Stats.GetStatsModifiable(unit.UnitSO.SimComponents.Movers.Mover).BuffAdd(new MovementStats() {MaxSpeed = -maxSpeed });
+        }
     }
 
     public void OnUpdate(float deltaTime)
@@ -65,7 +77,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         {
             if (!_token)
             {
-                _token = TokenManager.instance.RequestToken(gameObject, _distanceToPlayer + _stats.tokenPriority);
+                _token = TokenManager.instance.RequestToken(gameObject, _distanceToPlayer + (_stats.tokenPriority * -1f));
             }
 
             target = _token ? playerTarget.position : _flank;
@@ -122,6 +134,8 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     }
     private void ChangeFlank()
     {
+        if (ignoreFlank == true) return;
+
         Vector2 randomCircle = Random.insideUnitCircle.normalized;
         _modifier = new Vector3(randomCircle.x, 0, randomCircle.y) * Random.Range(_stats.minDistanceFlank, _stats.maxDistanceFlank);
         _threshold = _modifier.magnitude;
@@ -140,6 +154,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     public void Death()
     {
         ReleaseToken();
+        TokenManager.instance._enemies.Remove(gameObject);
         Registerer.UnregisterUpdatable(this);
 
         unit.OnHealthIsZero -= Death;
@@ -149,8 +164,12 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
     {
         if (unit.State.HealthState.HealthDelta <= 0.5f)
         {
-        ReleaseToken();
-        ChangeFlank();
+            ReleaseToken();
+            ChangeFlank();
         }
+    }
+    public void ReturnSpeedToNormal()
+    {
+        unit.Stats.GetStatsModifiable(unit.UnitSO.SimComponents.Movers.Mover).BuffAdd(new MovementStats() { MaxSpeed = maxSpeed });
     }
 }
