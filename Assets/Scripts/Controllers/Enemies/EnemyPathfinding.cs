@@ -42,7 +42,7 @@ public class EnemyPathfinding : MonoBehaviour, IUpdatable
         if (isNotMoving)
         {
             float maxSpeed = unit.Stats.GetStats(unit.UnitSO.SimComponents.Movers.Mover).MaxSpeed;
-            unit.Stats.GetStatsModifiable(unit.UnitSO.SimComponents.Movers.Mover).BuffMultiply(new MovementStats() {MaxSpeed = 0});
+            unit.Stats.GetStatsModifiable(unit.UnitSO.SimComponents.Movers.Mover).BuffAdd(new MovementStats() {MaxSpeed = -maxSpeed });
         }
     }
 

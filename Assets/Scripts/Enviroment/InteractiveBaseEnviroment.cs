@@ -131,6 +131,10 @@ public class InteractiveBaseEnviroment : MonoBehaviour
     {
         Multikeychecker.instance.AddKey();
     }
+    public void EnableObject(GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+    }
     public void Destroy()
     {
         Destroy(gameObject);
