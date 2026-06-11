@@ -30,7 +30,7 @@ public sealed class RocketController : Controller, IUpdatable, IAbilityConfigCar
     }
     public void OnHit(Unit hitUnit)
     {
-        abilitySO.OnHit(_unit.Stats, new PositionArgs(transform.position, transform.rotation, transform.forward), _unit.Owner, hitUnit);
+        abilitySO.OnHit(_unit.Stats, new PositionArgs(transform.position, transform.rotation, transform.forward), _unit, hitUnit);
         _unit.Die();
     }
     public override void OnDeath()

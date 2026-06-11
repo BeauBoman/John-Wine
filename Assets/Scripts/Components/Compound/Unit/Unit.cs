@@ -80,6 +80,11 @@ public class Unit : MonoBehaviour
     {
         OnKillEvent?.Invoke();
     }
+
+    public void AddAbility(Ability ability)
+    {
+        Abilities.Add(ability);
+    }
 }
 public class UnitState
 {
