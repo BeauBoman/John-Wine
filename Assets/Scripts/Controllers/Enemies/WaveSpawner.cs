@@ -22,7 +22,7 @@ public class WaveSpawner : MonoBehaviour
 
     [HideInInspector] public List<GameObject> wave = new();
 
-    private bool infiniteSpawn;
+    private bool infiniteSpawn = false;
     private void Start()
     {
         instance = this;
@@ -74,5 +74,13 @@ public class WaveSpawner : MonoBehaviour
                 }
             }      
         }
+    }
+    public void EnableInfiniteWaves()
+    {
+        infiniteSpawn = true;
+    }
+    public void DisableInfiniteWaves()
+    {
+        infiniteSpawn = false;
     }
 }
