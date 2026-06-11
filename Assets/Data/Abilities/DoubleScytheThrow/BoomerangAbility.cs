@@ -2,10 +2,12 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public sealed class DoubleScytheAbility : Ability
+public sealed class BoomerangAbility : Ability
 {
     public override void Fire(PositionArgs raycastPos, PositionArgs firePointPos, Unit whoFired)
     {
+        if (IsBlocked == true) return;
+
         base.Fire(raycastPos, firePointPos, whoFired);
         IsBlocked = true;
     }
@@ -32,5 +34,5 @@ public sealed class DoubleScytheAbility : Ability
     {
         IsBlocked = false;
     }
-    public DoubleScytheAbility(AbilitySO so, ComponentRuntimeStats statsCarrier) : base(so, statsCarrier) { }
+    public BoomerangAbility(AbilitySO so, ComponentRuntimeStats statsCarrier) : base(so, statsCarrier) { }
 }

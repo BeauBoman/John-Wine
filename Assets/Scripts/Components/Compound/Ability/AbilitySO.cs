@@ -18,11 +18,11 @@ public class Ability
 {
     public bool CanShoot;
     public bool IsBlocked;
-    public List<Unit> Spawned;
+    public List<Unit> Spawned = new();
 
 
-    private HashSet<Unit> _spawnedRegistered;
     public AbilitySO config;
+    private HashSet<Unit> _spawnedRegistered = new();
     protected ComponentRuntimeStats RuntimeStats;
     protected Unit owner;
 
@@ -33,11 +33,9 @@ public class Ability
     {
         Unit spawned = config.Fire(RuntimeStats, raycastPos, firePointPos, whoFired);
 
-        if (_spawnedRegistered.Contains(spawned) == false)
-        {
-            Spawned.Add(spawned);
-            _spawnedRegistered.Add(spawned);
-        }
+
+        _spawnedRegistered.Add(spawned);
+        Spawned.Add(spawned);
     }
     public virtual void Hold(PositionArgs raycastPos, PositionArgs firePointPos, float dt) { }
     public virtual void Release() { }
@@ -45,9 +43,9 @@ public class Ability
     {
         config.OnHit(RuntimeStats, hitPos, whoHit.Owner, hitUnit);
 
-        if(_spawnedRegistered.Contains(whoHit))
+        if (_spawnedRegistered.Contains(whoHit))
         {
-            Spawned.Remove(whoHit); 
+            Spawned.Remove(whoHit);
             _spawnedRegistered.Remove(whoHit);
         }
     }

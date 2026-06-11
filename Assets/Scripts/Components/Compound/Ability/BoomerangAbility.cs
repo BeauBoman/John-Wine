@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Boomerang Ability", menuName = "Components/Compound/Ability/Boomerang Ability")]
-public class BoomerangAbility : AbilitySO
+public class BoomerangAbilitySO : AbilitySO
 {
     public override Unit Fire(ComponentRuntimeStats statsCarrier, PositionArgs raycastPos, PositionArgs firePointPos, Unit sourceUnit)
     {
@@ -92,6 +92,6 @@ public class BoomerangAbility : AbilitySO
     }
     public override Ability CreateAbility(ComponentRuntimeStats statsCarrier)
     {
-        return new DoubleScytheAbility(this, statsCarrier);
+        return new BoomerangAbility(this, statsCarrier);
     }
 }
