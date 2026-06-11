@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     [HideInInspector] public Unit Owner;
     [HideInInspector] public BehaviorMachine BehaviorMachine;
     public ComponentRuntimeStats Stats = new();
+    public List<Ability> Abilities = new List<Ability>();
     public ModifiableStats<HealthStats> Health;
     public UnitState State;
 
@@ -36,7 +37,7 @@ public class Unit : MonoBehaviour
 
         for (int i = 0; i < UnitSO.SimComponents.Abilities.Count; i++)
         {
-            InventoryManager.instance.Abilities.Add(new Ability(UnitSO.SimComponents.Abilities[i], Stats));
+            Abilities.Add(new Ability(UnitSO.SimComponents.Abilities[i], Stats));
         }
 
 
@@ -49,13 +50,6 @@ public class Unit : MonoBehaviour
     public void OnUpdate(float dt)
     {
         BehaviorMachine.OnUpdate(dt);
-    }
-    public void ChangeAbility(int abilityIndex)
-    {
-        if (InventoryManager.instance.Abilities[abilityIndex] == null) return;
-
-        State.CurrentAbility = InventoryManager.instance.Abilities[abilityIndex];
-        Debug.Log("Current ability: " + State.CurrentAbility.GetType());
     }
     public void TakeDamage(float amount)
     {
@@ -83,9 +77,16 @@ public class Unit : MonoBehaviour
         OnKillEvent?.Invoke();
     }
 
+    public void ChangeAbility(int abilityIndex)
+    {
+        if (Abilities[abilityIndex] == null) return;
+
+        State.CurrentAbility = Abilities[abilityIndex];
+        Debug.Log("Current ability: " + State.CurrentAbility.GetType());
+    }
     public void AddAbility(Ability ability)
     {
-        InventoryManager.instance.Abilities.Add(ability);
+        Abilities.Add(ability);
     }
 }
 public class UnitState

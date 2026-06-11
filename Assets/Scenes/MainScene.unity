@@ -630,6 +630,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &341934588
 Transform:
   m_ObjectHideFlags: 0
@@ -731,7 +732,7 @@ Transform:
   m_GameObject: {fileID: 476400053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.23, y: -0.79068, z: 14.71}
+  m_LocalPosition: {x: 7.08, y: -0.79068, z: 12.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -756,6 +757,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!135 &476400057
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1086,6 +1088,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 654515834}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!1 &678222694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1322,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &680876384
 Transform:
   m_ObjectHideFlags: 0
@@ -1728,6 +1732,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!114 &879862615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1741,9 +1746,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSys
   _unit: {fileID: 0}
-  heldItems:
-  - {fileID: 0}
-  itemsDisplayed: []
   imagePrefab: {fileID: 4823961851833257503, guid: 4b1385b76c6b99f4898eff09907cfe69, type: 3}
   itemDisplay: {fileID: 1179313460}
 --- !u!1 &911829616
@@ -1820,6 +1822,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &911829620
 Transform:
   m_ObjectHideFlags: 0
@@ -2001,6 +2004,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956501111}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &996047058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 996047060}
+  - component: {fileID: 996047059}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &996047059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996047058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47d0bb0cada09148af58f90736fc39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  heldItems: []
+  itemsDisplayed: []
+--- !u!4 &996047060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996047058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.38779, y: -0.4352, z: 18.24789}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &997561965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2124,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &997561969
 Transform:
   m_ObjectHideFlags: 0
@@ -2255,6 +2305,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1004465590
 Transform:
   m_ObjectHideFlags: 0
@@ -2958,6 +3009,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1307980667
 Transform:
   m_ObjectHideFlags: 0
@@ -3048,6 +3100,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1342729976
 Transform:
   m_ObjectHideFlags: 0
@@ -3200,6 +3253,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1431438234
 Transform:
   m_ObjectHideFlags: 0
@@ -3380,6 +3434,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1529476637
 Transform:
   m_ObjectHideFlags: 0
@@ -3633,6 +3688,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!114 &1589428128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3843,6 +3899,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1739678273
 Transform:
   m_ObjectHideFlags: 0
@@ -3933,6 +3990,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1793958596
 Transform:
   m_ObjectHideFlags: 0
@@ -4232,6 +4290,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &1917252570
 Transform:
   m_ObjectHideFlags: 0
@@ -4573,6 +4632,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!1 &2034698853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4737,6 +4797,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!4 &2044698592
 Transform:
   m_ObjectHideFlags: 0
@@ -4823,6 +4884,7 @@ SceneRoots:
   - {fileID: 521168824}
   - {fileID: 470661250}
   - {fileID: 1585830899}
+  - {fileID: 996047060}
   - {fileID: 1426531078}
   - {fileID: 476400055}
   - {fileID: 654515837}

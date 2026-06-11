@@ -7,7 +7,6 @@ public class InventoryManager : MonoBehaviour
 
     public List<GameObject> heldItems = new();
     public List<GameObject> itemsDisplayed = new();
-    public List<Ability> Abilities = new List<Ability>();
     void Awake()
     {
         if (instance == null)
