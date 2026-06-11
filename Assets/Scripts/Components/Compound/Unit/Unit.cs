@@ -10,7 +10,6 @@ public class Unit : MonoBehaviour
     [SerializeField] internal References Refs;
     [HideInInspector] public Unit Owner;
     [HideInInspector] public BehaviorMachine BehaviorMachine;
-    private List<Ability> Abilities = new List<Ability>();
     public ComponentRuntimeStats Stats = new();
     public ModifiableStats<HealthStats> Health;
     public UnitState State;
@@ -37,7 +36,7 @@ public class Unit : MonoBehaviour
 
         for (int i = 0; i < UnitSO.SimComponents.Abilities.Count; i++)
         {
-            Abilities.Add(new Ability(UnitSO.SimComponents.Abilities[i], Stats));
+            InventoryManager.instance.Abilities.Add(new Ability(UnitSO.SimComponents.Abilities[i], Stats));
         }
 
 
@@ -53,7 +52,10 @@ public class Unit : MonoBehaviour
     }
     public void ChangeAbility(int abilityIndex)
     {
-        State.CurrentAbility = Abilities[abilityIndex];
+        if (InventoryManager.instance.Abilities[abilityIndex] == null) return;
+
+        State.CurrentAbility = InventoryManager.instance.Abilities[abilityIndex];
+        Debug.Log("Current ability: " + State.CurrentAbility.GetType());
     }
     public void TakeDamage(float amount)
     {
@@ -83,7 +85,7 @@ public class Unit : MonoBehaviour
 
     public void AddAbility(Ability ability)
     {
-        Abilities.Add(ability);
+        InventoryManager.instance.Abilities.Add(ability);
     }
 }
 public class UnitState
