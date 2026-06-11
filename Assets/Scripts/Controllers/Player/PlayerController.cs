@@ -38,7 +38,7 @@ public sealed class PlayerController : Controller, IUpdatable
 
         HandleGravity(dt);
         HandleJump(dt);
-        HandleWeapon();
+        HandleWeapon(dt);
 
         _unit.UnitSO.SimComponents.Movers.Mover.Move(_unit, moveDir, dt);
 
@@ -77,11 +77,13 @@ public sealed class PlayerController : Controller, IUpdatable
             _unit.State.MoveState.ExternalForcesVelocity.y = Mathf.Sqrt(_moveStats.Value.JumpForce * -2f * _moveStats.Value.Gravity);
         }
     }
-    private void HandleWeapon()
+    private void HandleWeapon(float dt)
     {
         if (Input.GetMouseButton(0))
         {
-            if (_unit.State.CurrentAbility.CanShoot == false) return;
+            _unit.State.CurrentAbility.Hold(new PositionArgs(_unit.Turret.position, _unit.Turret.rotation, _unit.Turret.forward), new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), dt);
+
+            if (_unit.State.CurrentAbility.CanShoot == false || _unit.State.CurrentAbility.IsBlocked) return;
 
             _unit.State.CurrentAbility.Fire(new PositionArgs(_unit.Turret.position, _unit.Turret.rotation, _unit.Turret.forward), new PositionArgs(FirePoint.position, FirePoint.rotation, FirePoint.forward), _unit);
             _unit.State.CurrentAbility.ResetReloadProgress();
