@@ -56,7 +56,13 @@ public class WaveSpawner : MonoBehaviour
             onInteract[OnInteractIndex].Invoke();
 
             if (OnInteractIndex < onInteract.Length - 1)
-                OnInteractIndex++; 
+            {
+                OnInteractIndex++;
+            } else
+            {
+                return;
+            }
+                
         }
     }
 }

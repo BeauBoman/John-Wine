@@ -4,8 +4,16 @@ using UnityEngine.Events;
 public class TriggerZone : MonoBehaviour
 {
     [SerializeField] private UnityEvent onInteract;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private bool isActived = false;
+    private void OnTriggerEnter(Collider collision)
     {
-        onInteract.Invoke();
+        if (isActived == false)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                onInteract.Invoke();
+                isActived = true;
+            }
+        }
     }
 }
