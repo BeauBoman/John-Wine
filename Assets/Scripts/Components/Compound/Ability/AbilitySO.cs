@@ -5,9 +5,9 @@ public abstract class AbilitySO : ScriptableObject
 {
     [field: SerializeField] public AbilityStats Stats { get; set; }
     [Header("Launch")]
-    [SerializeField] internal SimulationComponentsPack LaunchComponents;
+    [SerializeField] internal ComponentsPack LaunchComponents;
     [Header("Impact")]
-    [SerializeField] internal SimulationComponentsPack ImpactComponents;
+    [SerializeField] internal ComponentsPack ImpactComponents;
     public abstract void Fire(ComponentRuntimeStats statsCarrier, PositionArgs raycastPos, PositionArgs firePointPos, Unit owner = null);
     public abstract void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit);
 }

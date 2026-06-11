@@ -24,10 +24,9 @@ public sealed class PlayerController : Controller, IUpdatable
     }
     private IEnumerator BuffTest()
     {
-        yield return new WaitForSeconds(5);
-        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Movers.Mover).BuffAdd(new MovementStats() { Acceleration = -35, Deceleration = -35 });
-        _unit.Die();
-        Debug.Log("Buff applied. You're on ice now lol");
+        yield return new WaitForSeconds(2);
+        _unit.Stats.GetStatsModifiable(_unit.UnitSO.SimComponents.Movers.Mover).BuffMultiply(new MovementStats() { Deceleration = 0.1f });
+        Debug.Log("Buff applied.");
     }
     public void OnUpdate(float dt)
     {
