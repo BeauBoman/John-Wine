@@ -46,6 +46,11 @@ public class SpawnAbility : AbilitySO
                 abilityCarrier.abilitySO = this;
             spawned.OnSpawn(sourceUnit);
         }
+
+        if (LaunchComponents.Emitter != null)
+        {
+            LaunchComponents.Emitter.Emit(new PositionArgs(firePointPos.position, firePointPos.rotation));
+        }
     }
     public override void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
     {
@@ -76,6 +81,11 @@ public class SpawnAbility : AbilitySO
         {
             Unit spawned = ImpactComponents.UnitSpawner.Spawn(new PositionArgs(hitPos.position, Quaternion.identity), sourceUnit);
             spawned.OnSpawn(sourceUnit);
+        }
+
+        if(ImpactComponents.Emitter != null)
+        {
+            ImpactComponents.Emitter.Emit(new PositionArgs(hitPos.position, Quaternion.identity));
         }
     }
 }

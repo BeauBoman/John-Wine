@@ -7,5 +7,5 @@ public class DefaultPeriodicBehavior : PeriodicBehavior
         if (PeriodicComponents.Effect != null)
             PeriodicComponents.Effect.Affect(target, statsCarrier);
     }
-    public DefaultPeriodicBehavior(PeriodicBehaviorSO config, Unit targetUnit, SimulationComponentsPack periodicComponents) : base(config, targetUnit, periodicComponents) { }
+    public DefaultPeriodicBehavior(PeriodicBehaviorSO config, Unit targetUnit, ComponentsPack periodicComponents) : base(config, targetUnit, periodicComponents) { }
 }
