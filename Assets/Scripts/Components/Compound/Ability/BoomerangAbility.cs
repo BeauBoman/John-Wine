@@ -1,97 +1,38 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Boomerang Ability", menuName = "Components/Compound/Ability/Boomerang Ability")]
-public class BoomerangAbilitySO : AbilitySO
+[Serializable]
+public sealed class BoomerangAbility : Ability
 {
-    public override Unit Fire(ComponentRuntimeStats statsCarrier, PositionArgs raycastPos, PositionArgs firePointPos, Unit sourceUnit)
+    public override void Fire(PositionArgs raycastPos, PositionArgs firePointPos, Unit whoFired)
     {
-        Unit spawned = null;
-        Debug.Log("Fire!");
-        if (LaunchComponents.Effect != null)
-            LaunchComponents.Effect.Affect(sourceUnit, statsCarrier);
+        if (IsBlocked == true) return;
 
-        if (LaunchComponents.PeriodicBehaviour != null)
-            LaunchComponents.PeriodicBehaviour.ApplyBehavior(sourceUnit);
-
-        if (LaunchComponents.TemporaryBehaviour != null)
-            LaunchComponents.TemporaryBehaviour.ApplyBehavior(sourceUnit);
-
-        if (LaunchComponents.AreaSearcher != null)
-            LaunchComponents.AreaSearcher.Search(statsCarrier, raycastPos, sourceUnit);
-
-        if (LaunchComponents.Raycaster != null)
-        {
-            RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
-
-            if (_hit.point != default && _hit.distance > 1)
-            {
-                Vector3 _desiredFireDirection = (_hit.point - firePointPos.position).normalized;
-
-                firePointPos = new PositionArgs(firePointPos.position, Quaternion.LookRotation(_desiredFireDirection), firePointPos.direction);
-            }
-        }
-
-        if (LaunchComponents.Abilities != null)
-        {
-            for (int j = 0; j < LaunchComponents.Abilities.Count; j++)
-            {
-                LaunchComponents.Abilities[j].Fire(statsCarrier, raycastPos, firePointPos, sourceUnit);
-            }
-        }
-
-        if (LaunchComponents.UnitSpawner != null)
-        {
-            spawned = LaunchComponents.UnitSpawner.Spawn(firePointPos, sourceUnit);
-            if (spawned != null && spawned.ControllerScript is IAbilityConfigCarrier abilityCarrier)
-                abilityCarrier.abilitySO = this;
-            spawned.OnSpawn(sourceUnit);
-        }
-
-        if (LaunchComponents.Emitter != null)
-        {
-            LaunchComponents.Emitter.Emit(new PositionArgs(firePointPos.position, firePointPos.rotation));
-        }
-
-        return spawned;
+        IsBlocked = true;
+        base.Fire(raycastPos, firePointPos, whoFired);
     }
-    public override void OnHit(ComponentRuntimeStats statsCarrier, PositionArgs hitPos, Unit sourceUnit, Unit hitUnit)
+    public override void Hold(PositionArgs raycastPos, PositionArgs firePointPos, float dt)
     {
-        if (hitUnit != null)
+        if (Spawned.Count == 0) return;
+
+        RaycastHit hit = config.LaunchComponents.Raycaster.Raycast(RuntimeStats, raycastPos.position, raycastPos.direction);
+        Vector3 dir = Vector3.zero;
+        for (int i = 0; i < Spawned.Count; i++)
         {
-            if (ImpactComponents.Effect != null)
-                ImpactComponents.Effect.Affect(hitUnit, statsCarrier);
-
-            if (ImpactComponents.PeriodicBehaviour != null)
-                ImpactComponents.PeriodicBehaviour.ApplyBehavior(hitUnit);
-
-            if (ImpactComponents.TemporaryBehaviour != null)
-                ImpactComponents.TemporaryBehaviour.ApplyBehavior(hitUnit);
-        }
-
-        if (ImpactComponents.AreaSearcher != null)
-            ImpactComponents.AreaSearcher.Search(statsCarrier, hitPos, sourceUnit);
-
-        if (ImpactComponents.Abilities != null)
-        {
-            for (int j = 0; j < ImpactComponents.Abilities.Count; j++)
+            if (hit.collider != null)
             {
-                ImpactComponents.Abilities[j].Fire(statsCarrier, new PositionArgs(hitPos.position, hitPos.rotation, hitPos.direction), new PositionArgs(hitPos.position, hitPos.rotation, hitPos.direction), sourceUnit);
+                dir = hit.point - Spawned[i].transform.position;
             }
-        }
-
-        if (ImpactComponents.UnitSpawner != null)
-        {
-            Unit spawned = ImpactComponents.UnitSpawner.Spawn(new PositionArgs(hitPos.position, Quaternion.identity), sourceUnit);
-            spawned.OnSpawn(sourceUnit);
-        }
-
-        if (ImpactComponents.Emitter != null)
-        {
-            ImpactComponents.Emitter.Emit(new PositionArgs(hitPos.position, Quaternion.identity));
+            else
+            {
+                dir = raycastPos.position + (raycastPos.direction * RuntimeStats.GetStats(config.LaunchComponents.Raycaster).Range);
+            }
+            Spawned[i].UnitSO.SimComponents.Movers.Mover.Move(Spawned[i], dir, dt);
         }
     }
-    public override Ability CreateAbility(ComponentRuntimeStats statsCarrier)
+    public override void Release()
     {
-        return new BoomerangAbility(this, statsCarrier);
+        IsBlocked = false;
     }
+    public BoomerangAbility(AbilitySO so, ComponentRuntimeStats statsCarrier) : base(so, statsCarrier) { }
 }

@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 2166258142637763749}
   - component: {fileID: 516533205399026729}
   - component: {fileID: 6808836295548481269}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!114 &2166258142637763749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rocket
   _unit: {fileID: 6442516753997952154}
-  Unit: {fileID: 6442516753997952154}
 --- !u!136 &516533205399026729
 CapsuleCollider:
   m_ObjectHideFlags: 0

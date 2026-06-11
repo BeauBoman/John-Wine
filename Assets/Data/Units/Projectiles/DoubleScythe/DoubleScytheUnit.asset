@@ -18,7 +18,7 @@ MonoBehaviour:
     Raycaster: {fileID: 0}
     AreaSearcher: {fileID: 0}
     Movers:
-      Mover: {fileID: 0}
+      Mover: {fileID: 11400000, guid: 109d324353de6e64aa1dee5553ac2456, type: 2}
       RotationalMover: {fileID: 0}
     Abilities: []
     UnitSpawner: {fileID: 0}

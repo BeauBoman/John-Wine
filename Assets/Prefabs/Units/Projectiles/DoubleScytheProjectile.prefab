@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6294419900656697053}
   - component: {fileID: 1348679959482006106}
   - component: {fileID: 715975999155848150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoubleScytheProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!136 &715975999155848150
 CapsuleCollider:
   m_ObjectHideFlags: 0

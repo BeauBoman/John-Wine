@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour
 
         for (int i = 0; i < UnitSO.SimComponents.Abilities.Count; i++)
         {
-            Abilities.Add(new Ability(UnitSO.SimComponents.Abilities[i], Stats));
+            Abilities.Add(UnitSO.SimComponents.Abilities[i].CreateAbility(Stats));
         }
 
 
