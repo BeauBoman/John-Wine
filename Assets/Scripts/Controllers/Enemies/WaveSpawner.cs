@@ -21,6 +21,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private GameObject[] spawnPoints;
 
     [HideInInspector] public List<GameObject> wave = new();
+
+    private bool infiniteSpawn;
     private void Start()
     {
         instance = this;
@@ -55,8 +57,22 @@ public class WaveSpawner : MonoBehaviour
         {
             onInteract[OnInteractIndex].Invoke();
 
-            if (OnInteractIndex < onInteract.Length - 1)
-                OnInteractIndex++; 
+            if (infiniteSpawn == true)
+            {
+                StartWave();
+                return;
+            }
+            else
+            {
+                if (OnInteractIndex < onInteract.Length - 1)
+                {
+                    OnInteractIndex++;
+                }
+                else
+                {
+                    return;
+                }
+            }      
         }
     }
 }

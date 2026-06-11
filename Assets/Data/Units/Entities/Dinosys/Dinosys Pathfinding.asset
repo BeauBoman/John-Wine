@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dinosys Pathfinding
   m_EditorClassIdentifier: Assembly-CSharp::PathfindingStats
   maxDistanceSearch: 500
-  minDistanceFlank: 20
-  maxDistanceFlank: 20
+  minDistanceFlank: 1
+  maxDistanceFlank: 500
   stoppingDistance: 20
   tokenPriority: 1000
