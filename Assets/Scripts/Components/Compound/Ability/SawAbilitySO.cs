@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Boomerang Ability", menuName = "Components/Compound/Ability/Boomerang Ability")]
-public class BoomerangAbilitySO : AbilitySO
+[CreateAssetMenu(fileName = "Saw Ability", menuName = "Components/Compound/Ability/Saw Ability")]
+public class SawAbilitySO : AbilitySO
 {
     public override Unit Fire(ComponentRuntimeStats statsCarrier, PositionArgs raycastPos, PositionArgs firePointPos, Unit sourceUnit)
     {
@@ -19,17 +19,17 @@ public class BoomerangAbilitySO : AbilitySO
         if (LaunchComponents.AreaSearcher != null)
             LaunchComponents.AreaSearcher.Search(statsCarrier, raycastPos, sourceUnit);
 
-        if (LaunchComponents.Raycaster != null)
-        {
-            RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
+        //if (LaunchComponents.Raycaster != null)
+        //{
+        //    RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
 
-            if (_hit.point != default && _hit.distance > 1)
-            {
-                Vector3 _desiredFireDirection = (_hit.point - firePointPos.position).normalized;
+        //    if (_hit.point != default && _hit.distance > 1)
+        //    {
+        //        Vector3 _desiredFireDirection = (_hit.point - firePointPos.position).normalized;
 
-                firePointPos = new PositionArgs(firePointPos.position, Quaternion.LookRotation(_desiredFireDirection), firePointPos.direction);
-            }
-        }
+        //        firePointPos = new PositionArgs(firePointPos.position, Quaternion.LookRotation(_desiredFireDirection), firePointPos.direction);
+        //    }
+        //}
 
         if (LaunchComponents.Abilities != null)
         {
@@ -92,6 +92,6 @@ public class BoomerangAbilitySO : AbilitySO
     }
     public override Ability CreateAbility(ComponentRuntimeStats statsCarrier)
     {
-        return new BoomerangAbility(this, statsCarrier);
+        return new SawAbility(this, statsCarrier);
     }
 }

@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public sealed class BoomerangAbility : Ability
+public sealed class SawAbility : Ability
 {
     public override void Fire(PositionArgs raycastPos, PositionArgs firePointPos, Unit whoFired)
     {
@@ -17,6 +16,7 @@ public sealed class BoomerangAbility : Ability
 
         RaycastHit hit = config.LaunchComponents.Raycaster.Raycast(RuntimeStats, raycastPos.position, raycastPos.direction);
         Vector3 dir = Vector3.zero;
+        RaycastStats raycastStats = RuntimeStats.GetStats(config.LaunchComponents.Raycaster);
         for (int i = 0; i < Spawned.Count; i++)
         {
             if (hit.collider != null)
@@ -25,14 +25,21 @@ public sealed class BoomerangAbility : Ability
             }
             else
             {
-                dir = raycastPos.position + (raycastPos.direction * RuntimeStats.GetStats(config.LaunchComponents.Raycaster).Range);
+                Vector3 targetPoint = raycastPos.position + (raycastPos.direction * raycastStats.Range);
+                dir = targetPoint - Spawned[i].transform.position;
             }
             Spawned[i].UnitSO.SimComponents.Movers.Mover.Move(Spawned[i], dir, dt);
         }
     }
     public override void Release()
     {
+        for (int i = 0;i < Spawned.Count;i++)
+        {
+            Unit spawned = Spawned[i];
+            Spawned.Remove(spawned);
+            spawned.Die();
+        }
         IsBlocked = false;
     }
-    public BoomerangAbility(AbilitySO so, ComponentRuntimeStats statsCarrier) : base(so, statsCarrier) { }
+    public SawAbility(AbilitySO so, ComponentRuntimeStats statsCarrier) : base(so, statsCarrier) { }
 }

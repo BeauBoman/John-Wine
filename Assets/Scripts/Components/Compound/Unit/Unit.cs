@@ -40,8 +40,12 @@ public class Unit : MonoBehaviour
             Abilities.Add(UnitSO.SimComponents.Abilities[i].CreateAbility(Stats));
         }
 
-
         State.HealthState.CurrentHealth = Health.Value.HealthOnStart;
+
+        if (UnitSO.SimComponents.TemporaryBehaviour != null)
+            UnitSO.SimComponents.TemporaryBehaviour.ApplyBehavior(this);
+        if (UnitSO.SimComponents.PeriodicBehaviour != null)
+            UnitSO.SimComponents.PeriodicBehaviour.ApplyBehavior(this);
 
         if (ControllerScript != null)
             ControllerScript.OnStart();
