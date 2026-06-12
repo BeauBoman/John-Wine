@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72b1639224953fe48a1d885c7c0fb4c2, type: 3}
-  m_Name: RocketExplosion
+  m_Name: DoubleScytheAreaSearcher
   m_EditorClassIdentifier: Assembly-CSharp::DefaultAreaSearch
   <Stats>k__BackingField:
-    Size: {x: 3, y: 0, z: 0}
+    Size: {x: 1, y: 0, z: 0}
     Angle: 360
-    MaximumTargetCount: 100
+    MaximumTargetCount: 50
     Components:
-      Sensor: {fileID: 11400000, guid: 475ddf4c659f1504d9120378fb1aa9bb, type: 2}
-      Raycaster: {fileID: 11400000, guid: 3a9e719160767f04abc86329f6a0d873, type: 2}
+      Sensor: {fileID: 11400000, guid: fce26917dbc4c62488b51828a7765d2f, type: 2}
+      Raycaster: {fileID: 0}
       AreaSearcher: {fileID: 0}
       Movers:
         Mover: {fileID: 0}
         RotationalMover: {fileID: 0}
       Abilities: []
       UnitSpawner: {fileID: 0}
-      Effect: {fileID: 11400000, guid: 7dd0d076d145ed94080baca48b3b656a, type: 2}
+      Effect: {fileID: 11400000, guid: c968711e053a1e940bc09c34465bd9be, type: 2}
       TemporaryBehaviour: {fileID: 0}
       PeriodicBehaviour: {fileID: 0}
-      Emitter: {fileID: 0}
+      Emitter: {fileID: 11400000, guid: 78cfa5865cb616b4eaad992420de9568, type: 2}

@@ -19,17 +19,17 @@ public class SawAbilitySO : AbilitySO
         if (LaunchComponents.AreaSearcher != null)
             LaunchComponents.AreaSearcher.Search(statsCarrier, raycastPos, sourceUnit);
 
-        //if (LaunchComponents.Raycaster != null)
-        //{
-        //    RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
+        if (LaunchComponents.Raycaster != null)
+        {
+            RaycastHit _hit = LaunchComponents.Raycaster.Raycast(statsCarrier, raycastPos.position, raycastPos.direction);
 
-        //    if (_hit.point != default && _hit.distance > 1)
-        //    {
-        //        Vector3 _desiredFireDirection = (_hit.point - firePointPos.position).normalized;
+            if (_hit.point != default && _hit.distance > 1)
+            {
+                Vector3 _desiredFireDirection = (_hit.point - firePointPos.position).normalized;
 
-        //        firePointPos = new PositionArgs(firePointPos.position, Quaternion.LookRotation(_desiredFireDirection), firePointPos.direction);
-        //    }
-        //}
+                firePointPos = new PositionArgs(firePointPos.position, Quaternion.LookRotation(_desiredFireDirection), firePointPos.direction);
+            }
+        }
 
         if (LaunchComponents.Abilities != null)
         {

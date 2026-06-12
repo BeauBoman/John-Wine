@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DoubleScytheMover
   m_EditorClassIdentifier: Assembly-CSharp::DefaultMover
   <Stats>k__BackingField:
-    MaxSpeed: 10
-    Acceleration: 50
-    Deceleration: 10
+    MaxSpeed: 5
+    Acceleration: 25
+    Deceleration: 0
     AirDeceleration: 0
     Gravity: 0
     JumpForce: 0

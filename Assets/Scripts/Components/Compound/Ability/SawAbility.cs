@@ -28,6 +28,9 @@ public sealed class SawAbility : Ability
                 Vector3 targetPoint = raycastPos.position + (raycastPos.direction * raycastStats.Range);
                 dir = targetPoint - Spawned[i].transform.position;
             }
+
+            //Spawned[i].State.MoveState.CurrentMoveDirection = dir * Spawned[i].Stats.GetStats(Spawned[i].UnitSO.SimComponents.Movers.Mover).Acceleration;
+
             Spawned[i].UnitSO.SimComponents.Movers.Mover.Move(Spawned[i], dir, dt);
         }
     }

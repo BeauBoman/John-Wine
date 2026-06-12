@@ -11,9 +11,12 @@ public class DoubleScytheController : Controller, IUpdatable, IAbilityConfigCarr
         Registerer.RegisterUpdatable(this);
     }
 
-    public void OnUpdate(float deltaTime)
+    public void OnUpdate(float dt)
     {
-        if (this == null) return;
-        _unit.UnitSO.SimComponents.Movers.Mover.Move(_unit, transform.forward, deltaTime);
+        _unit.OnUpdate(dt);
+    }
+    public override void OnDeath()
+    {
+        Registerer.UnregisterUpdatable(this);
     }
 }
