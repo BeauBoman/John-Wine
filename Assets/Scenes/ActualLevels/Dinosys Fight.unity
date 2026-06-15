@@ -4107,6 +4107,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &312442555
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4603,6 +4604,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &372506176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5435,6 +5437,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &440745207
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7558,6 +7561,9 @@ MonoBehaviour:
   - sourceTeam: 0
     allyTowards: 0
     enemyTowards: 14
+  - sourceTeam: 1
+    allyTowards: 0
+    enemyTowards: 13
 --- !u!1001 &634435188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8485,6 +8491,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &676392842
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9379,6 +9386,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &793193559
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9504,6 +9512,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!1 &803510167
 GameObject:
   m_ObjectHideFlags: 0
@@ -13009,6 +13018,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1153711894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13340,6 +13350,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1172740327
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13523,6 +13534,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1178923165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14290,6 +14302,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1228493011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14718,6 +14731,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1298782470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14791,6 +14805,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1301275555
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18610,6 +18625,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1737293146
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20343,6 +20359,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &1874931352
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21324,6 +21341,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &2002063252
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21397,6 +21415,7 @@ MonoBehaviour:
     RB: {fileID: 0}
     CC: {fileID: 0}
   Owner: {fileID: 0}
+  Abilities: []
 --- !u!65 &2009528162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23621,7 +23640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: spawnPoints.Array.size
@@ -23641,7 +23660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: 'waveSize.Array.data[3]'
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: 'waveSize.Array.data[4]'
@@ -23685,7 +23704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: 'waveDelay.Array.data[3]'
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: 'waveDelay.Array.data[4]'
@@ -23761,11 +23780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[3].m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -23785,6 +23804,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
@@ -23805,6 +23828,10 @@ PrefabInstance:
       objectReference: {fileID: 6469985846531393447}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6469985846531393449}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 6469985846531393447}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
@@ -23836,6 +23863,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -23853,7 +23884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartWave
+      value: EnableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: EnableInfiniteWaves
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -23873,6 +23908,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InteractiveBaseEnviroment, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: WaveSpawner, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
@@ -23887,6 +23926,10 @@ PrefabInstance:
       propertyPath: onInteract.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1487202817}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
@@ -23909,6 +23952,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
       propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
+      propertyPath: onInteract.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1582341369705070494, guid: 49cbad24e89875a44a95130c37f84319, type: 3}
