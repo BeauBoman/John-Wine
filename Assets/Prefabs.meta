@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Prefabs.meta
 guid: 33a50fc4962536149b1efd88cd6b24e9
 folderAsset: yes
+=======
+guid: 5091f7211f201cb49aee97944b8623f5
+>>>>>>> Stashed changes:Assets/Scenes/Colleseum.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
